@@ -41,4 +41,6 @@ $ cat q2.txt | grep -v Mordor                   // Retorna todas as linhas do fi
 $ wc [-l -w -c] q2.txt                          // Retorna o número de linhas, colunas e caracteres do ficheiro
 $ sed "s/half/two\ thirds/g" < f1.txt > f2.txt  // Apanha o conteúdo de f1 e retorna f2 com o resultado
 $ diff f1.txt f2.txt                            // Mostra as linhas diferentes entre os dois ficheiros
+$ sort -n < numbers1.txt > numbers2.txt         // Ordena os números por ordem crescente no ficheiro
+$ sort -d < words1.txt > words2.txt             // Ordena as palavras por ordem alfabética no ficheiro
 ```

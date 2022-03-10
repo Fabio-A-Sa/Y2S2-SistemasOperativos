@@ -30,5 +30,9 @@ $ chmod go-rx doit         // remove as permissçoes r e x do grupo e others
 ## 3 - Manipulação do conteúdo de Ficheiros
 
 ```bash
-
+cat > trees.txt                           // cria um ficheiro e permite inputs vários. Terminar com ^D
+cat trees.txt                             // mostra o conteúdo de todo o ficheiro
+cat trees.txt | cut -d ':' -f 1,4         // mostra o conteúdo da primeira e quartas colunas quando separadas por ':'
+cat trees.txt | cut -d ':' -f 1,4 | sort  // além disso, ordena por ordem alfabética as linhas do output
 ```
+

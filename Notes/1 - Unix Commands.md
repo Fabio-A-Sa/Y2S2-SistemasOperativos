@@ -39,4 +39,6 @@ $ cat q1.txt | sed "s/Ring/Sword/g" > q2.txt    // search editor - procura a pal
 $ cat q2.txt | grep Mordor                      // Retorna todas as linhas do ficheiro que contém "Mordor"
 $ cat q2.txt | grep -v Mordor                   // Retorna todas as linhas do ficheiro que não contém "Mordor"
 $ wc [-l -w -c] q2.txt                          // Retorna o número de linhas, colunas e caracteres do ficheiro
+$ sed "s/half/two\ thirds/g" < f1.txt > f2.txt  // Apanha o conteúdo de f1 e retorna f2 com o resultado
+$ diff f1.txt f2.txt                            // Mostra as linhas diferentes entre os dois ficheiros
 ```

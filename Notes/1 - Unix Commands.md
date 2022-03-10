@@ -5,6 +5,7 @@
 1. Manipulação de Diretórios
 2. Manipulação de Ficheiros
 3. Manipulação do conteúdo de Ficheiros
+4. Processos
 
 # Comandos
 
@@ -44,3 +45,9 @@ $ diff f1.txt f2.txt                            // Mostra as linhas diferentes e
 $ sort -n < numbers1.txt > numbers2.txt         // Ordena os números por ordem crescente no ficheiro
 $ sort -d < words1.txt > words2.txt             // Ordena as palavras por ordem alfabética no ficheiro
 ```
+
+## 4 - Processos
+
+````shell
+
+````

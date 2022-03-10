@@ -49,5 +49,7 @@ $ sort -d < words1.txt > words2.txt             // Ordena as palavras por ordem 
 ## 4 - Processos
 
 ````shell
-
+$ ps -A | wc -l                                 // Retorna quantos processos estão ativos no processador
+$ ps -A | grep clion                            // Retorna quantos processos de clion estão ativos
+$ kill -9 [number]                              // Elimina o processo de número a ver no comando acima
 ````

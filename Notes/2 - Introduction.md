@@ -5,6 +5,7 @@
 1. O Sistema Operativo
 2. Estrutura de um computador
 3. Funcionamento do computador
+4. Estruturas de memória
 
 ## 1 - O Sistema Operativo
 
@@ -33,5 +34,26 @@ Um computador pode ser dividido em quatro partes:
 
 Quando ligamos, a primeira coisa que inicia é o `bootstrap program`. Este programa está normalmente no ROM, também conhecido como `firmware`, e inicializa todos os aspectos do sistema incluindo o kernel. <br>
 A memória é ligada ao CPU e a todos os controladores (de disco, USB e graphics adapter). Todos estes dispositivos competem por ciclos de memória e de CPU. <br>
-Cada controlador tem o seu `buffer` e o CPU move os dados da memória para os buffers de cada dispositivo, atendendo aos ciclos de relógio e aos `interrups`.
+Cada controlador tem o seu `buffer` e o CPU move os dados da memória para os buffers de cada dispositivo, atendendo aos ciclos de relógio e aos `interrups` gerados quando o dispositivo acaba a tarefa. <br>
+Um `vector de interrupção` contém todos os endereços das rotinas, que são geradas por excepções (derivadas do pedido do utilizador  ou por um erro). Assim, o sistema operativo é acionado por interrupção.
 
+## 4 - Estruturas de memória
+
+`Memória principal`: a única porção grande de memória que o CPU pode acessar diretamente. É de random access e tipicamente volátil. <br>
+`Armazenamento secundário`: a extensão da memória principal, que é não volátil. <br>
+`HD`: Hard Disk. Disco coberto por uma superfície magnética, com controlador, pistas (tracks) e setores. <br>
+`SSD`: Solid-State Disk. Mais rápido que o HD, também não volátil. <br>
+
+### Memória cache
+
+Copia informação para um sistema mais rápido para o CPU.
+
+### Hierarquia de serviços de armazenamento:
+
+1. Registos
+2. Cache
+3. Memória principal
+4. SSD
+5. HD
+6. Optical Disk
+7. Magnetic Tapes

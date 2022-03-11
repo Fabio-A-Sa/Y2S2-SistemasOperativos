@@ -55,7 +55,7 @@ Outros exemplos mais comuns:
 `HD`: Hard Disk. Disco coberto por uma superfície magnética, com controlador, pistas (tracks) e setores. <br>
 `SSD`: Solid-State Disk. Mais rápido que o HD, também não volátil. <br>
 
-### Memória cache
+### Cache
 
 Copia informação para um sistema temporário mais rápido para acesso do CPU. Se a informação está em cache, é mostrada diretamente, senão é transferida da memória principal para a cache e aí é mostrada. A manipulação da memória cache tem de atender a diversos critérios, como a repetição, o espaço temporal e de ocupação.
 

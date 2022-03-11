@@ -55,7 +55,7 @@ $ ps -A | grep clion                            // Retorna quantos processos de 
 $ kill -9 [number]                              // Elimina o processo de número a ver no comando acima
 ````
 
-## 5 - Compilação de programas em C
+## 5 - Compilação de Programas em C
 
 ````bash
 $ gcc -E hello.c                                // Pré-processador de C
@@ -63,4 +63,5 @@ $ gcc -S hello.c                                // Gera o código assembly do c�
 $ gcc hello.c                                   // Compila para um ficheiro a.out
 $ gcc -o hello hello.c                          // O ficheiro compilado passa a ter o nome hello
 $ gcc -Wall -o hello hello.c                    // Permite ativar todos os warnings da consola
+$ gdb hello                                     // Para obter o debugger
 ````

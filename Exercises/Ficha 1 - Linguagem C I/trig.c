@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 
 #define START     0
 #define ONE_TURN  360

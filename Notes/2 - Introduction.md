@@ -1,10 +1,10 @@
 # 2 - Introduction
 
-## Topicos
+## Tópicos
 
 1. Definição de sistema operativo
 2. Estrutura de um computador
-3. f
+3. Funções do sistema operativo
 4. d
 5. d
 6. d
@@ -20,8 +20,10 @@ Programa que é um intermediário entre o hardware do computador e do utilizador
 
 Um computador pode ser dividido em quatro partes:
 
-1. Hardware: recursos básicos, como CPU, memória e dispositivos I/O
-2. Operating System: controla e cordena a utilização do hardware entre várias aplicações do utilizador
-3. Aplicações e programas: define o meio em que o sustema é usado para computar problemas, como compiladores, browsers, DBs e jogos
-4. Utilizadores: pessoas, máquinas, outros computadores
+1. Hardware: recursos básicos, como CPU, memória e dispositivos I/O;
+2. Operating System: controla e cordena a utilização do hardware entre várias aplicações do utilizador;
+3. Aplicações e programas: define o meio em que o sistema é usado, como compiladores, browsers, DBs e jogos;
+4. Utilizadores: pessoas, máquinas, outros computadores;
+
+### 3 - Funções do sistema operativo
 

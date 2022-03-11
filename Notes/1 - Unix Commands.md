@@ -6,6 +6,7 @@
 2. Manipulação de Ficheiros
 3. Manipulação do conteúdo de Ficheiros
 4. Processos
+5. Compilação de Programas em C
 
 # Comandos
 
@@ -52,4 +53,14 @@ $ sort -d < words1.txt > words2.txt             // Ordena as palavras por ordem 
 $ ps -A | wc -l                                 // Retorna quantos processos estão ativos no processador
 $ ps -A | grep clion                            // Retorna quantos processos de clion estão ativos
 $ kill -9 [number]                              // Elimina o processo de número a ver no comando acima
+````
+
+## 5 - Compilação de programas em C
+
+````bash
+$ gcc -E hello.c                                // Pré-processador de C
+$ gcc -S hello.c                                // Gera o código assembly do código
+$ gcc hello.c                                   // Compila para um ficheiro a.out
+$ gcc -o hello hello.c                          // O ficheiro compilado passa a ter o nome hello
+$ gcc -Wall -o hello hello.c                    // Permite ativar todos os warnings da consola
 ````

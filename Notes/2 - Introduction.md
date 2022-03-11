@@ -116,12 +116,24 @@ Nos Tablets, smartphones, que têm algumas funções extra do que os tradicionai
 
 ### 8.3 - Distributed
 
-Funcionam com Networks, comunicações entre diversos dispositivos através de protocolos (IP / TCP)
+Funcionam com Networks, comunicações entre diversos dispositivos através de protocolos (IP / TCP). O Network Operating System providencia uma ilusão de um simples sistema.
 
 ### 8.4 - Client Server
 
+Os sistemas são agora servidores que respondem às exigências do utilizador. Providencia uma interface para o cliente, como por exemplo uma base de dados, e uma interface para retirar e colocar arquivos.
+
 ### 8.5 - Peer-to-Peer
+
+Sistema distribuído em que não há distinção entre clientes e servidores. Registam o serviço centralmente através do protocolo discovery.
 
 ### 8.6 - Virtualization
 
+Emulação quando o CPU age de forma diferente conforme o objectivo e Virtualização quando o OS está nativamente dentro de outro OS, ambos compilados (tal como acontece nas Virtual Machines, que usam um kernel para cada processo de sistema operativo).
+
 ### 8.7 - Cloud Computing
+
+Existem clouds públicas (acessíveis via Internet e gratuitas), privadas (para uma empresa usar em específico) e híbridas.
+
+### 8.8 - Real Time Embedded Systems
+
+Sistemas embarcados, alguns executam tarefas sem terem mesmo um sistema operativo. Contém restrições e tempo bem delimitado para cada tarefa.

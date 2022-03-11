@@ -21,6 +21,7 @@ Depende do ponto de vista. Por um lado, a maioria dos utilizadores preferem a fa
 O OS é:
 1. Um `alocador de recursos`: monitora todos os recursos de hardware e software e garante a minimização de conflitos para uma melhor performence;
 2. Um `controlador de programas`: controla a execução de programas para prevenir erros e utilizações impróprias;
+3. Um `manipulador de dados`: tanto com ficheiros, como diretórios ou memória;
 
 ## 2 - Estrutura do computador
 
@@ -39,9 +40,12 @@ Cada controlador tem o seu `buffer` e o CPU move os dados da memória para os bu
 Um `vector de interrupção` contém todos os endereços das rotinas, que são geradas por excepções (derivadas do pedido do utilizador  ou por um erro). Assim, o sistema operativo é acionado por interrupção.
 <br>
 
-Para executar um programa este precisa de estar em memória, assim como parte dos dados a manipular
+Para executar um programa este precisa de estar em memória, assim como parte (ou todos) os dados a manipular.
 
 ## 4 - Estruturas de memória
+
+Nem todas as memórias têm de ser rápidas. Exemplos: `WORM` (write-once, read-many-times) e `RM` (read-write), que são acedidas somente por aplicações do sistema operativo. <br>
+Outros exemplos mais comuns:
 
 `Memória principal`: a única porção grande de memória que o CPU pode acessar diretamente. É de random access e tipicamente volátil. <br>
 `Armazenamento secundário`: a extensão da memória principal, que é não volátil. <br>
@@ -57,6 +61,8 @@ Copia informação para um sistema temporário mais rápido para acesso do CPU. 
 Um controlador que permite manter a utilização de dispositivos I/O sem necessitar da intervenção do CPU no processo (somente para iniciar e terminar a tarefa, usando interrupts - um por bloco em vez de um por byte).
 
 ### Hierarquia de serviços de armazenamento:
+
+Por ordem crescente de tempo de acesso e de tamanho, por ordem decrescente de banda:
 
 1. Registos
 2. Cache

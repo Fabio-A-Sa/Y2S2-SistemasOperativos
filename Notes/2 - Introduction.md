@@ -6,6 +6,7 @@
 2. Estrutura de um computador
 3. Funcionamento do computador
 4. Estruturas de memória
+5. Processamento
 
 ## 1 - O Sistema Operativo
 
@@ -36,6 +37,9 @@ Quando ligamos, a primeira coisa que inicia é o `bootstrap program`. Este progr
 A memória é ligada ao CPU e a todos os controladores (de disco, USB e graphics adapter). Todos estes dispositivos competem por ciclos de memória e de CPU. <br>
 Cada controlador tem o seu `buffer` e o CPU move os dados da memória para os buffers de cada dispositivo, atendendo aos ciclos de relógio e aos `interrups` gerados quando o dispositivo acaba a tarefa. <br>
 Um `vector de interrupção` contém todos os endereços das rotinas, que são geradas por excepções (derivadas do pedido do utilizador  ou por um erro). Assim, o sistema operativo é acionado por interrupção.
+<br>
+
+Para executar um programa este precisa de estar em memória, assim como parte dos dados a manipular
 
 ## 4 - Estruturas de memória
 
@@ -46,7 +50,11 @@ Um `vector de interrupção` contém todos os endereços das rotinas, que são g
 
 ### Memória cache
 
-Copia informação para um sistema mais rápido para o CPU.
+Copia informação para um sistema temporário mais rápido para acesso do CPU. Se a informação está em cache, é mostrada diretamente, senão é transferida da memória principal para a cache e aí é mostrada. A manipulação da memória cache tem de atender a diversos critérios, como a repetição, o espaço temporal e de ocupação.
+
+### DMA - Direct Memory Access
+
+Um controlador que permite manter a utilização de dispositivos I/O sem necessitar da intervenção do CPU no processo (somente para iniciar e terminar a tarefa, usando interrupts - um por bloco em vez de um por byte).
 
 ### Hierarquia de serviços de armazenamento:
 
@@ -57,3 +65,16 @@ Copia informação para um sistema mais rápido para o CPU.
 5. HD
 6. Optical Disk
 7. Magnetic Tapes
+
+## 5 - Processamento
+
+Há sistemas com um ou mais processadores. Com mais processadores (cores/núcleos) aumenta a rapidez, confiabilidade e tolerância a erros. Existem dois tipos de processamento paralelo:
+1. Processamento assimétrico - quando cada processador/core executa uma tarefa em específico;
+2. Processamento simétrico - quando cada processador/core executa todas as tarefas;
+
+Os sistemas de redes de computadores também podem adoptar esta técnica de multiprocessamento, usando uma SAN (Storage-Area Network) para manipular programas que foram já escritos para processamento paralelo e um DLM (Distributed Lock Manager) para evitar conflitos em operações concorrentes. Existem dois processos principais:
+1. Clustering assimétrico - uma máquina em modo de espera ativa;
+2. Clustering simétrico - tem várias máquinas em execução, monitorando-se mutuamente;
+
+Cada vez mais os processadores permitem um dual-mode entre o `user mode` (mode bit = 1) e o `kernel mode` (mode bit = 0) para proteção do sistema, como por exemplo loops infinitos. <br>
+O sistema operativo é responsável por criar, eliminar, suspender, sincronizar e comunicar com todos os processos.

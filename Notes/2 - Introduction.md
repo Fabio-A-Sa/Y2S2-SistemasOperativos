@@ -7,6 +7,9 @@
 3. Funcionamento do computador
 4. Estruturas de memória
 5. Processamento
+6. Proteção e Segurança
+7. Estruturas de dados do Kernel
+8. Ambientes de computação
 
 ## 1 - O Sistema Operativo
 
@@ -84,3 +87,35 @@ Os sistemas de redes de computadores também podem adoptar esta técnica de mult
 
 Cada vez mais os processadores permitem um dual-mode entre o `user mode` (mode bit = 1) e o `kernel mode` (mode bit = 0) para proteção do sistema, como por exemplo loops infinitos. <br>
 O sistema operativo é responsável por criar, eliminar, suspender, sincronizar e comunicar com todos os processos.
+
+## 6 - Proteção e Segurança
+
+Mecanismos de controlo de acesso aos processos, dados ou recursos através do sistema operativo. Utilização de IDs únicos para cada utilizador, grupo, com permissões definidas entre ficheiros por questões de segurança.
+
+## 7 - Estruturas de dados do Kernel
+
+- [x] Lists
+  - Simples
+  - Dupla
+  - Circular
+- [x] Balanced Binary Seach Trees
+  - Red Black Trees
+- [x] Hash Functions
+  - Hash Tables
+  - Bitmap
+
+## 8 - Ambientes de computação
+
+### 8.1 - Tradicional
+
+### 8.2 - Mobile
+
+### 8.3 - Distributed
+
+### 8.4 - Client Server
+
+### 8.5 - Peer-to-Peer
+
+### 8.6 - Virtualization
+
+### 8.7 - Cloud Computing

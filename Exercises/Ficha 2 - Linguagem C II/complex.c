@@ -18,7 +18,7 @@ complex* complex_add(complex* z, complex* w){
 }
 
 complex* complex_sub(complex* z, complex* w){
-    /* to complete ... */
+    return complex_new(z->x - w->x, z->y - w->y);
 }
 
 complex* complex_mul(complex* z, complex* w){
@@ -27,15 +27,16 @@ complex* complex_mul(complex* z, complex* w){
 }
 
 complex* complex_div(complex* z, complex* w){
-    /* to complete ... */
+    return complex_new(z->x / w->x - z->y / w->y,
+                       z->x / w->y + z->y / w->x);
 }
 
 complex* complex_conj(complex* z){
-    /* to complete ... */
+    return complex_new(z->x , z->y);
 }
 
 double   complex_mod(complex* z){
-    /* to complete ... */
+    return fabs(z->x);
 }
 
 double   complex_arg(complex* z){
@@ -47,5 +48,5 @@ double   complex_re(complex* z){
 }
 
 double   complex_im(complex* z){
-    /* to complete ... */
+    return z->y;
 }

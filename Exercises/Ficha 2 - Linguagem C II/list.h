@@ -1,11 +1,11 @@
 /* definition of new type list */
 
-typedef struct anode {
+typedef struct {
     int val;
     struct anode* next;
 } node;
 
-typedef struct  {
+typedef struct {
     int size;
     node* first;
 } list;

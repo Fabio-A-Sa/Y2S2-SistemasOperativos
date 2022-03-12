@@ -27,7 +27,9 @@ list* list_new_random(int size, int range) {
 }
 
 void  list_add_first(int val, list *l) {
-    /* to complete ... */
+    node* p = node_new(val, l->first);
+    l->first = p;
+    l->size++;
 }
 
 void  list_add_last(int val, list *l) {
@@ -43,13 +45,17 @@ void  list_add_last(int val, list *l) {
     l->size++;
 }
 
-int   list_get_first(list *l) {
+int list_get_first(list *l) {
     /* assumes list l is not empty */
     return l->first->val;
 }
 
-int  list_get_last(list *l) {
-    /* to complete ... */
+int list_get_last(list *l) {
+    node *q = l->first;
+    while (q->next != NULL) {
+        q = q->next;
+    }
+    return q->val;
 }
 
 void  list_remove_first(list *l) {
@@ -61,14 +67,25 @@ void  list_remove_first(list *l) {
     free(p);
 }
 
-void  list_remove_last(list *l) {
-    /* to complete ... */
+void list_remove_last(list *l) {
+    node *q = l->first;
+    node *qq = q->next;
+    while (qq->next- != NULL) {
+        q = q->next;
+        qq = qq->next;
+    }
+    q->next = NULL;
+    free(qq);
+    l->size--;
 }
 
-int   list_size(list *l) {
-    /* to complete ... */
+int list_size(list *l) {
+    return l->size;
 }
 
 void list_print(list* l) {
-    /* to complete ... */
+    node *q = l->first;
+    while (q->next != NULL) {
+        printf("%d", q->val);
+    }
 }

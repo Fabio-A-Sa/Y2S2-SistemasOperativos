@@ -70,7 +70,7 @@ void  list_remove_first(list *l) {
 void list_remove_last(list *l) {
     node *q = l->first;
     node *qq = q->next;
-    while (qq->next- != NULL) {
+    while (qq->next != NULL) {
         q = q->next;
         qq = qq->next;
     }
@@ -86,6 +86,8 @@ int list_size(list *l) {
 void list_print(list* l) {
     node *q = l->first;
     while (q->next != NULL) {
-        printf("%d", q->val);
+        printf("%d ", q->val);
+        q = q->next;
     }
+    printf("\n");
 }

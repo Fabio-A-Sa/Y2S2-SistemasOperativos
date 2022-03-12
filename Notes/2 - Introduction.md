@@ -9,7 +9,7 @@
 5. Processamento
 6. Proteção e Segurança
 7. Estruturas de dados do Kernel
-8. Ambientes de computação
+8. Ambientes de Computação
 
 ## 1 - O Sistema Operativo
 
@@ -104,13 +104,19 @@ Mecanismos de controlo de acesso aos processos, dados ou recursos através do si
   - Hash Tables
   - Bitmap
 
-## 8 - Ambientes de computação
+## 8 - Ambientes de Computação
 
-### 8.1 - Tradicional
+### 8.1 - Traditional
+
+Máquinas de uso geral. Com a internet, portais, e computadores em rede é necessário existirem firewalls que protegem os computadores de ataques externos
 
 ### 8.2 - Mobile
 
+Nos Tablets, smartphones, que têm algumas funções extra do que os tradicionais portáteis (exemplo: GPS, giroscópio e realidade aumentada). Apple iOS e Google Android.
+
 ### 8.3 - Distributed
+
+Funcionam com Networks, comunicações entre diversos dispositivos através de protocolos (IP / TCP)
 
 ### 8.4 - Client Server
 

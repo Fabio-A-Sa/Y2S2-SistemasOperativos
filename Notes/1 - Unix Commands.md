@@ -65,4 +65,12 @@ $ gcc -o hello hello.c                          // O ficheiro compilado passa a 
 $ gcc -Wall -o hello hello.c                    // Permite ativar todos os warnings da consola
 $ gcc -w -o hello hello.c                       // Permite desativar todos os warnings da consola
 $ gdb hello                                     // Para obter o debugger na linha de comandos
+
+$ ar -rc libcomplex.a complex.o                 // gera uma biblioteca
+$ ar -t  libcomplex.a                           // gera uma biblioteca
+$ gcc -Wall use_complex.c -L. -lcomplex         // compila o ficheiro com base na biblioteca complex
+
+$ gcc -c -Wall -fPIC -o complex.o complex.c     // para gerar código binário para qualquer posição de memória
+                                                // isto garante que as instruções de salto usam endereços relativos
+$ $ gcc -shared -o libcomplex.so complex.o      // a bilioteca vai ser shared com todo o sistema
 ````

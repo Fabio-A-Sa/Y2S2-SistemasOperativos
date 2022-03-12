@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "complex.h"
+#include "complex2.h"
 
 char complex_buf[100];
 

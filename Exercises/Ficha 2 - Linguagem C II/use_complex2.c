@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "complex.h"
+#include "complex2.h"
 
 int main(int argc, char** argv) {
     complex z1 = complex_new(-2.16793, 5.23394);

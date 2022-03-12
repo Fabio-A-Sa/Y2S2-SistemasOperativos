@@ -11,3 +11,16 @@ int main() {
     printf("integer = %d\n", *p);
     return 0;
 }
+
+/* Alguns erros frequentes na utilização de apontadores
+ *
+ * char *p1 = NULL;
+ * char c1 = *p1;               --> O apontador NULL não é válido em runtime
+ *
+ * char *p2;
+ * char c2 = *p2;               --> O apontador não inicializado não é válido em runtime
+ *
+ * char *p3 = (char*) malloc (sizeof(int));
+ * free(p3);
+ * char c3 = *p3;               --> O apontador já vazio não é válido em runtime
+ */

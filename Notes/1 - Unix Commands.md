@@ -72,5 +72,5 @@ $ gcc -Wall use_complex.c -L. -lcomplex         // compila o ficheiro com base n
 
 $ gcc -c -Wall -fPIC -o complex.o complex.c     // para gerar código binário para qualquer posição de memória
                                                 // isto garante que as instruções de salto usam endereços relativos
-$ $ gcc -shared -o libcomplex.so complex.o      // a bilioteca vai ser shared com todo o sistema
+$ gcc -shared -o libcomplex.so complex.o        // a bilioteca vai ser shared com todo o sistema
 ````

@@ -28,7 +28,12 @@ matrix* matrix_new_random(int n, int m, double min, double max) {
 }
 
 void matrix_print(matrix* u) {
-    
+    for (int i = 0 ; i < u->m ; i++) {
+        for (int j = 0 ; j < u->n ; j++) {
+            printf("%f", matrix_get(i, j, u));
+        }
+        printf("\n");
+    }
 }
 
 double matrix_get(int i, int j, matrix* u){
@@ -36,7 +41,7 @@ double matrix_get(int i, int j, matrix* u){
 }
 
 void matrix_set(int i, int j, double val, matrix* u){
-    /* to complete ... */
+    *(u->vals + i * u->m + j) = val;
 }
 
 matrix* matrix_add(matrix* u, matrix* v){
@@ -49,13 +54,29 @@ matrix* matrix_add(matrix* u, matrix* v){
 }
 
 matrix* matrix_sub(matrix* u, matrix* v) {
-    /* to complete ... */
+    int i, j;
+    matrix* w = matrix_new(u->n, u->m);
+    for (i = 0; i < u->n; i++ )
+        for (j = 0; j < u->m; j++ )
+            matrix_set(i, j, matrix_get(i, j, u) - matrix_get(i, j, v), w);
+    return w;
 }
 
 matrix* matrix_mul(matrix* u, matrix* v){
-    /* to complete ... */
+    int i, j;
+    matrix* w = matrix_new(u->n, u->m);
+    for (i = 0; i < u->n; i++ )
+        for (j = 0; j < u->m; j++ )
+            matrix_set(i, j, matrix_get(i, j, u) * matrix_get(i, j, v), w);
+    return w;
 }
 
 matrix* matrix_trans(matrix* u){
-    /* to complete ... */
+    matrix* m = matrix_new(u->n, u->m);
+    for (int i = 0 ; i < u->m ; i++) {
+        for (int j = 0 ; j < u->n ; j++) {
+            matrix_set(j, i, matrix_get(i, j, u));
+        }
+    }
+    return m;
 }

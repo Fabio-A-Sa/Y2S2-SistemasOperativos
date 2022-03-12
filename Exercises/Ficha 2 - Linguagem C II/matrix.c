@@ -30,7 +30,7 @@ matrix* matrix_new_random(int n, int m, double min, double max) {
 void matrix_print(matrix* u) {
     for (int i = 0 ; i < u->m ; i++) {
         for (int j = 0 ; j < u->n ; j++) {
-            printf("%f", matrix_get(i, j, u));
+            printf("%f ", matrix_get(i, j, u));
         }
         printf("\n");
     }
@@ -72,10 +72,10 @@ matrix* matrix_mul(matrix* u, matrix* v){
 }
 
 matrix* matrix_trans(matrix* u){
-    matrix* m = matrix_new(u->n, u->m);
-    for (int i = 0 ; i < u->m ; i++) {
-        for (int j = 0 ; j < u->n ; j++) {
-            matrix_set(j, i, matrix_get(i, j, u));
+    matrix* m = matrix_new(u->m, u->n);
+    for (int i = 0 ; i < u->n ; i++) {
+        for (int j = 0 ; j < u->m ; j++) {
+            matrix_set(j, i, matrix_get(i, j, u), m);
         }
     }
     return m;

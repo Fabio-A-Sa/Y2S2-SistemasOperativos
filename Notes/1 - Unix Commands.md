@@ -63,5 +63,6 @@ $ gcc -S hello.c                                // Gera o c√≥digo assembly do c√
 $ gcc hello.c                                   // Compila para um ficheiro a.out
 $ gcc -o hello hello.c                          // O ficheiro compilado passa a ter o nome hello
 $ gcc -Wall -o hello hello.c                    // Permite ativar todos os warnings da consola
+$ gcc -w -o hello hello.c                       // Permite desativar todos os warnings da consola
 $ gdb hello                                     // Para obter o debugger na linha de comandos
 ````

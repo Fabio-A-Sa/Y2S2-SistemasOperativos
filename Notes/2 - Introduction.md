@@ -158,3 +158,12 @@ O sistema operativo proporciona um ambiente para interligação com os utilizado
 - Accounting, para ter controlo dos recursos usados em cada operação
 - Protection and security, proteção dos recursos usados e segurança em I/O devices externos
 
+### Interfaces
+
+#### 1 - CLI, Command Line Interface
+
+Permite comandos diretos, implementados ou no kernel ou nos programas de sistema. Por vezes implementados de diversos modos - diversas `shell`s, com comandos built-in.
+
+#### 2 - Graphical User Interface
+
+Mais amigável para o utilizador, tanto em modo desktop como em modo touchscreen. Existem icones, permitem gestos de vários tipos e dispositivos I/O para controlo da interface. 

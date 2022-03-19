@@ -10,6 +10,7 @@
 6. Proteção e Segurança
 7. Estruturas de dados do Kernel
 8. Ambientes de Computação
+9. Operating System Services
 
 ## 1 - O Sistema Operativo
 
@@ -80,12 +81,12 @@ Voláteis (1, 2, 3) e não voláteis (4, 5, 6, 7).
 ## 5 - Processamento
 
 Há sistemas com um ou mais processadores. Com mais processadores (cores/núcleos) aumenta a rapidez, confiabilidade e tolerância a erros. Existem dois tipos de processamento paralelo:
-1. Processamento assimétrico - quando cada processador/core executa uma tarefa em específico;
-2. Processamento simétrico - quando cada processador/core executa todas as tarefas;
+1. `Processamento assimétrico` - quando cada processador/core executa uma tarefa em específico;
+2. `Processamento simétrico` - quando cada processador/core executa todas as tarefas;
 
 Os sistemas de redes de computadores também podem adoptar esta técnica de multiprocessamento, usando uma SAN (Storage-Area Network) para manipular programas que foram já escritos para processamento paralelo e um DLM (Distributed Lock Manager) para evitar conflitos em operações concorrentes. Existem dois processos principais:
-1. Clustering assimétrico - uma máquina em modo de espera ativa;
-2. Clustering simétrico - tem várias máquinas em execução, monitorando-se mutuamente;
+1. `Clustering assimétrico` - uma máquina em modo hot-standby (orquestra, é a máquina principal que monitora as outras) e as outras rodam as aplicações;
+2. `Clustering simétrico` - tem várias máquinas em execução, monitorando-se mutuamente;
 
 Cada vez mais os processadores permitem um dual-mode entre o `user mode` (mode bit = 1) e o `kernel mode` (mode bit = 0) para proteção do sistema, como por exemplo loops infinitos. <br>
 O sistema operativo é responsável por criar, eliminar, suspender, sincronizar e comunicar com todos os processos.
@@ -139,3 +140,21 @@ Existem clouds públicas (acessíveis via Internet e gratuitas), privadas (para 
 ### 8.8 - Real Time Embedded Systems
 
 Sistemas embarcados, alguns executam tarefas sem terem mesmo um sistema operativo. Contém restrições e tempo bem delimitado para cada tarefa.
+
+## 9 - Operating System Services
+
+O sistema operativo proporciona um ambiente para interligação com os utilizadores. São exemplos:
+
+- User Iterfaces
+  1. CLI - Command Line Interface
+  2. GUI - Graphical User Interface
+  3. Batch 
+- Program Execution, ao fazer o load e a execução
+- Operações I/O, com diversos dispositivos
+- File-system manipulation, para ler e escrever ficheiros em diversos diretórios
+- Communications, transmissão de informação intra e intercomputadores
+- Error detection, tanto erros a nível de CPU e debuggers
+- Resource allocator, para múltiplos trabalhos
+- Accounting, para ter controlo dos recursos usados em cada operação
+- Protection and security, proteção dos recursos usados e segurança em I/O devices externos
+

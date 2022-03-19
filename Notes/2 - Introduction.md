@@ -11,6 +11,7 @@
 7. Estruturas de dados do Kernel
 8. Ambientes de Computação
 9. Operating System Services
+10. System Calls
 
 ## 1 - O Sistema Operativo
 
@@ -167,3 +168,6 @@ Permite comandos diretos, implementados ou no kernel ou nos programas de sistema
 #### 2 - Graphical User Interface
 
 Mais amigável para o utilizador, tanto em modo desktop como em modo touchscreen. Existem icones, permitem gestos de vários tipos e dispositivos I/O para controlo da interface. 
+
+## 10 - System Calls
+

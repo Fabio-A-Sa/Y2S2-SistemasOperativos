@@ -21,6 +21,8 @@
 Programa que é um intermediário entre o hardware do computador e do utilizador. É responsável por executar os programas do utilizador, resolver os seus problemas mais facilmente e usar o hardware de uma forma mais eficiente. <br>
 O único programa que roda o tempo todo é o `kernel`, e os outros ou são programas de sistema ou aplicações.
 
+A maior parte dos sistemas operativos atualmente não são modelos puros, mas sim uma mistura de vários, incluindo sistemas de microkernel, para melhorar a performence, a segurança e usabilidade.. São exemplos o MacOS, o iOS, o Android.
+
 ### Funções
 
 Depende do ponto de vista. Por um lado, a maioria dos utilizadores preferem a facilidade de utilização e uma boa performence e não querem saber da utilização de recursos. Mas há casos em que os computadores pertencem a servidores (mais recursos necessários), há computadores portáteis onde a bateria é importante e há sistemas sem GUI, como de alguns automóveis. Cada sistema operativo é adaptado para a sua função. <br>
@@ -222,3 +224,4 @@ Limitado pela funcionalidade do hardware. Consiste em duas partes separadas:
 
 ### MicroKernel System Structure
 
+Permite uma ligação entre os serviços (drivers, file servers, virtual memory...) e o client server. Assim, aproxima o kernel do client-server através de maior memória alocada, pelo que menos código está a ser executado do lado do kernel mode tradicional.

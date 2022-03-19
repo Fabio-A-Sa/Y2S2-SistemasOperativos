@@ -171,3 +171,15 @@ Mais amigável para o utilizador, tanto em modo desktop como em modo touchscreen
 
 ## 10 - System Calls
 
+Qualquer programa que necessite de aceder a conteúdos mais específicos, como memória principal ou hardware, precisa de criar uma System Call para que, por breves momentos, consiga o acesso, mundando do User Mode para o Kernel Mode, o modo mais previligiado. De facto, o User Mode é mais seguro uma vez que se acontecer algum erro não afeta o sistema todo, ao contrário do Kernel Mode. Geralmente estão disponíveis na linguagem C e C++ como chamadas de funções. Um exemplo:
+
+```c++
+#include <unistd.h>
+
+/* 
+ * fd -> descritor do ficheiro a ser lido
+ * buff -> buffer de onde a data será lida
+ * count -> o número de bytes máximo de leitura a partir do buffer
+ */ 
+ssize_t read (int fd, void *buff, size_t count);
+```

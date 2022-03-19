@@ -12,6 +12,7 @@
 8. Ambientes de Computação
 9. Operating System Services
 10. System Calls
+11. Estrutura
 
 ## 1 - O Sistema Operativo
 
@@ -198,4 +199,12 @@ ssize_t read (int fd, void *buff, size_t count);
 - Ver os atributos do processo, modificar os atributos do processo
 - Criar, modificar e eliminar ficheiros
 - Ler, escrever e repor dispositivos, entre outras
+
+## 11 - Estrutura
+
+### MS-DOS
+
+Escrito para permitir a maior parte das funcionalidades com o menor espaço. Não é divisível por módulos, pois estão muito interligados. 
+
+### Unix
 

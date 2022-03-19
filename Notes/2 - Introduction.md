@@ -171,7 +171,7 @@ Mais amigável para o utilizador, tanto em modo desktop como em modo touchscreen
 
 ## 10 - System Calls
 
-Qualquer programa que necessite de aceder a conteúdos mais específicos, como memória principal ou hardware, precisa de criar uma System Call para que, por breves momentos, consiga o acesso, mundando do User Mode para o Kernel Mode, o modo mais previligiado. De facto, o User Mode é mais seguro uma vez que se acontecer algum erro não afeta o sistema todo, ao contrário do Kernel Mode. Geralmente estão disponíveis na linguagem C e C++ como chamadas de funções. Um exemplo:
+Qualquer programa que necessite de aceder a conteúdos mais específicos, como memória principal ou hardware, precisa de criar uma System Call para que, por breves momentos, consiga o acesso, mundando do User Mode para o Kernel Mode, ao modo mais previligiado. É uma interface de transição. De facto, o User Mode é mais seguro uma vez que se acontecer algum erro não afeta o sistema todo, ao contrário do Kernel Mode. Geralmente estão disponíveis na linguagem C e C++ como chamadas de funções. Um exemplo:
 
 ```c++
 #include <unistd.h>
@@ -183,3 +183,19 @@ Qualquer programa que necessite de aceder a conteúdos mais específicos, como m
  */ 
 ssize_t read (int fd, void *buff, size_t count);
 ```
+
+#### Passagem de parâmetros
+
+1. Passando os parâmetros pelos registos - é o método mais simples, embora às vezes possa haver mais parâmetros do que registos disponíveis;
+2. Os parâmetros são colocados em bloco na memória, e o endereço do bloco é passado por parâmetro num registo - é o típico dos sistemas como Linux e Solaris, não limita o número de parâmetros passados na função;
+3. Os parâmetros são colocados na stack (pushed), e o sistema operativo retira-os conforme precisa (pop) - assim como o anterior, não limita o número de parâmetros passados na função;
+
+#### Tipos de system calls
+
+- Criar processo, abortar processo, terminar processo
+- Load de ficheiros, executar ficheiros
+- Esperar tempo, um sinal, um evento
+- Ver os atributos do processo, modificar os atributos do processo
+- Criar, modificar e eliminar ficheiros
+- Ler, escrever e repor dispositivos, entre outras
+

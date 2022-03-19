@@ -202,9 +202,19 @@ ssize_t read (int fd, void *buff, size_t count);
 
 ## 11 - Estrutura
 
-### MS-DOS
+### MS-DOS (Simple Structure)
 
-Escrito para permitir a maior parte das funcionalidades com o menor espaço. Não é divisível por módulos, pois estão muito interligados. 
+Escrito para permitir a maior parte das funcionalidades com o menor espaço. Não é divisível por módulos, pois estão muito interligados. É constituido por:
 
-### Unix
+- Application Programs;
+- Resident System Programs;
+- Device Drivers;
+- ROM BIOS device drivers;
 
+### Unix (Non Simple Structure - Monolithic Structure)
+
+Limitado pela funcionalidade do hardware. Consiste em duas partes separadas:
+
+1. Programas de sistema
+2. Kernel
+   - 

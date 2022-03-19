@@ -75,6 +75,8 @@ Por ordem crescente de tempo de acesso e de tamanho, por ordem decrescente de ba
 6. Optical Disk
 7. Magnetic Tapes
 
+Voláteis (1, 2, 3) e não voláteis (4, 5, 6, 7).
+
 ## 5 - Processamento
 
 Há sistemas com um ou mais processadores. Com mais processadores (cores/núcleos) aumenta a rapidez, confiabilidade e tolerância a erros. Existem dois tipos de processamento paralelo:

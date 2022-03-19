@@ -217,4 +217,8 @@ Limitado pela funcionalidade do hardware. Consiste em duas partes separadas:
 
 1. Programas de sistema
 2. Kernel
-   - 
+   - Consiste em tudo abaixo das operações de system call e acima do hardware físico;
+   - Permite o file system, o CPU scheduling, memory management e outras operações do sistema operativo;
+
+### MicroKernel System Structure
+

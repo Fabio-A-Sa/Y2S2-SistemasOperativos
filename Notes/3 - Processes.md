@@ -9,8 +9,17 @@ Um processo é um programa em execução que pode ter vários estados (new, runn
 5. Heap, contém a memória alocada dinamicamente
 
 <p align="center">
-<img src = "..\\Images\\Memory.png" alt = "memory sheme" title = "memory scheme" width = "400" height = "600">
+<img src = "..\\Images\\Memory.png" alt = "memory sheme" title = "memory scheme" width = "300" height = "400">
 </p>
 
 ### Process Control Block (PCB)
 
+Também conhecido como Task Control Block, contém a informação associada a cada processo. 
+
+<p align="center">
+<img src = "..\\Images\\Process Control Block.png" alt = "pcb" title = "pcb" width = "300" height = "400">
+</p>
+
+Legenda:
+
+-

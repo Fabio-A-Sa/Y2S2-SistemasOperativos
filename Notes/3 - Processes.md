@@ -134,3 +134,14 @@ Pode ter três capacidades:
 2. Capacidade finita - o sender deve esperar se a ligação estiver cheia;
 3. Capacidade infinita - o sender nunca espera;
 
+## Comunicação em sistemas Client-Server
+
+Através destes sistemas:
+
+### Sockets
+
+Um endpoint da comunicação. Resulta na concatenação entre um endereço `ip` e uma `port`. Exemplo: `161.25.19.8:1625`. <br>
+A comunicação é feita entre um par de *Sockets*.
+
+### Pipes
+

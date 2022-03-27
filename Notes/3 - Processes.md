@@ -85,7 +85,7 @@ int in = 0, out = 0;
 
 ### Communication link
 
-Através de implementações:
+Entre dois processos há um único link, normalmente bidirecional, e cuja ligação é feita automaticamente. Ocorrem através de implementações:
 
 1. Físicas
     - Memória partilhada;
@@ -95,3 +95,22 @@ Através de implementações:
     - Direct or indirect;
     - Sincronizada ou não sincronizada (tempo);
     - Com buffer automático ou explícito;
+
+#### Diretas
+
+Entre dois processos há um único link, normalmente bidirecional, e cuja ligação é feita automaticamente.
+
+```c
+send (P, *message*); <!-- send a message to process P -->
+receive (Q, *message*); <!-- receive a message from process Q -->
+```
+
+#### Indiretas
+
+Mensagens recebidas pelas portas (*ports* or *mailbox*), em que cada uma contém um id único onde os processos podem comunicar. Cada par de processos pode ter vários links, ao contrário da comunicação direta anteriormente descrita.
+
+#### Sincronizadas
+
+
+
+#### Não sincronizadas

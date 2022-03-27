@@ -65,7 +65,7 @@ Normalmente, quando um pai morre, morrem todos os filhos descendentes. Senão, o
 
 Os processos, embora independentes (porque não devem perturbar ou influenciar a execução de outros processos), devem comunicar para:
 
-- troca de informações;
+- troca de informações / mensagens;
 - partilha de zona de memória;
 - modularidade;
 - conveniência;
@@ -82,3 +82,4 @@ typedef struct {
 item buffer[BUFFER_SIZE];
 int in = 0, out = 0;
 ```
+

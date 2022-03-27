@@ -22,24 +22,31 @@ int main (int args, char* argv[]) {
     content[finish] = '\0';
 
     printf("Finish: %d\n", finish);
+    printf("Content: %s\n", content);
 
-    int index = 0, line = 0;
-    while (index != finish) {
-        
-        char currentLine[MAX_SIZE]; 
-        while (content[index] != '\n' && index <= finish) {
-            currentLine[index] = content[index];
-            index++;
-            printf("Index counter: %d\n", index);
+    char currentLine[MAX_SIZE];
+    int i = 0, line = 0;
+
+    for (int index = 0 ; index < finish ; index++) {
+
+        if (content[index] == '\n') {
+
+            currentLine[i] = '\0';
+            i = 0;
+            printf("Linha %d: %s\n", line, currentLine);
+            char* result = strstr(word, currentLine);
+            if (result != NULL) {
+                printf("Ocorre na linha %d\n", line);
+            } else printf("%s não ocorre na linha %d\n\n", word, line);
+
+            line++;
+
+        } else {
+            currentLine[i] = content[index];
+            i++;
         }
-        currentLine[index] = '\0';
-
-        if (strstr(word, currentLine) != NULL) {
-            printf("Ocorre na linha %d\n", line);
-        } else printf("Não ocorre na linha %d\n", line);
-
-        line++;
     }
 
+    printf("Lines: %d\n", line);
     return 0;
 }

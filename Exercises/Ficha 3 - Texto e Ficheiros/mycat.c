@@ -1,23 +1,30 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void singleFile(char* argv[]) {
+void showFile(char* fileName) {
 
-    char* file = argv[1];
-    printf("Single file called %s!\n", file);
-}
+    FILE* file = fopen(fileName, "r");
+    const int MAX_SIZE = 100;
+    char content[MAX_SIZE];
+    fseek(file, 0, SEEK_SET);
+    fread(content, sizeof(char) * MAX_SIZE, MAX_SIZE, file);
 
-void twoFiles(char* argv[]) {
-
-    char* file1 = argv[1];
-    char* file2 = argv[2];
-    printf("Double file called %s and %s!\n", file1, file2);
+    int i = 0;
+    while (*(content + i) != '\0' && *(content + i) != NULL) {
+        printf("%c", *(content + i));
+        i++;
+    }
+    printf("\n");
+    fclose(file);
 }
 
 int main (int argc, char* argv[]) {
 
-    if (argv[2] != NULL) twoFiles(argv); 
-    else singleFile(argv);
+    int i = 1;
+    while (argv[i] != NULL) {
+        showFile(argv[i]);
+        i++;
+    }
 
     return 0;
 }

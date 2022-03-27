@@ -109,8 +109,28 @@ receive (Q, *message*); <!-- receive a message from process Q -->
 
 Mensagens recebidas pelas portas (*ports* or *mailbox*), em que cada uma contém um id único onde os processos podem comunicar. Cada par de processos pode ter vários links, ao contrário da comunicação direta anteriormente descrita.
 
+```c
+send (A, *message*); <!-- send a message to mailbox A -->
+receive (A, *message*); <!-- receive a message from mailbox A -->
+```
+
 #### Sincronizadas
 
-
+Mensagens trocadas em modo `blocking`:
+- Blocking send: o processo que envia fica bloqueado até que a mensagem seja recebida por outro processo;
+- Blocking receive: o processo que está a receber fica bloqueado até que a mensagem esteja disponível; 
 
 #### Não sincronizadas
+
+Mensagens trocadas em modo `non-blocking`:
+- Non blocking send: o processo que envia, envia a mensagem e continua em execução;
+- Non blocking receive: o processo que recebe, ou recebe uma mensagem válida ou nula;
+
+#### Buferring
+
+Pode ter três capacidades:
+
+1. Capacidade zero - o sender deve esperar pelo processo que irá receber;
+2. Capacidade finita - o sender deve esperar se a ligação estiver cheia;
+3. Capacidade infinita - o sender nunca espera;
+

@@ -1,6 +1,14 @@
 # 3 - Processes
 
-Um processo é um programa em execução que pode ter vários estados (new, running, waiting, ready, terminated). Enquanto que um programa é passivo, é somente um ficheiro executável, o processo é ativo pois há a execução propriamente dita. Existem várias partes usadas nos processos:
+Um processo é um programa em execução que pode ter vários estados (new, running, waiting, ready, terminated). Enquanto que um programa é passivo, é somente um ficheiro executável, o processo é ativo pois há a execução propriamente dita. <br>
+
+Um processo pode ser descrito de duas formas distintas:
+
+1. `I/0-bound process` - dispende mais tempo a fazer operações input ou output do que computações, usando pouco tempo do CPU de cada vez;
+
+2. `CUP-bound process` - dispende mais tempo a fazer computações, leva mais tempo do CPU do que operações input/output;
+
+Existem várias partes usadas nos processos:
 
 1. Text section, onde está o código do programa
 2. Program counter e os registos do processador
@@ -31,5 +39,17 @@ Legenda:
 
 ### Threads
 
-Cada thread do processador consegue executar um processo de cada vez. Com mais threads é possível maximizar o número de tarefas efetuadas por segundo, como se tivessemos vários Process Control Block e múltiplos Program Counters.
+Cada thread do processador consegue executar um processo de cada vez. Com mais threads é possível maximizar o número de tarefas efetuadas por segundo, como se tivessemos vários Process Control Block e múltiplos Program Counters. O Process sheduling (agendamento de processos), trata de organizar os processos por ordem preferencial.
+
+#### 1 - Short-term sheduler / CPU sheduler
+
+Seleciona que processo pode ser executado a seguir e alocado no CPU. Às vezes só há este sheduler no sistema. Este é invocado frequentemente, em milisegundos, pois tem de ser rápido.
+
+#### 2 - Long-term sheduler / job sheduler
+
+Seleciona que processo deve ser trazido para a fila de processos prontos a executar, executado com pouca frequência (segundos ou minutos), pois deve ser lento.
+
+## Process Creation
+
+O processo Pai cria um processo filho que, ao criar outro processo, forma uma árvore de processos. Em Unix, o pai de todos é o `init` com pid (process identifier) = 1. A partir daí saem todos os outros do sistema.
 

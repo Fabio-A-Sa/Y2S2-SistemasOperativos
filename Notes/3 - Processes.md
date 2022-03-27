@@ -1,6 +1,6 @@
 # 3 - Processes
 
-Um processo é um programa em execução que pode ter vários estados (new, running, waiting, ready, terminated). Enquanto que um programa é passivo, é somente um ficheiro executável, o processo é ativo pois há a execução propriamente dita. <br>
+Um processo é um programa em execução que pode ter vários estados (new, running, waiting, ready, terminated). Enquanto que um programa é passivo, é somente um ficheiro executável, o processo é ativo pois há a execução propriamente dita. Todos os processos de um sistema devem ser independentes e cooperativos entre si. <br>
 
 Um processo pode ser descrito de duas formas distintas:
 
@@ -53,7 +53,11 @@ Seleciona que processo deve ser trazido para a fila de processos prontos a execu
 
 O processo Pai cria um processo filho que, ao criar outro processo, forma uma árvore de processos. Em Unix, o pai de todos é o `init` com pid (process identifier) = 1. A partir daí saem todos os outros do sistema. Ou o pai deixa o filho terminar, ou então entram em concorrência de execução (competição por tempo de CPU e ciclos de relógio).
 
-- `fork()` para criar um child
-- `exec()` para executar o processo criado
-- `exit()` para terminar o processo criado e dar merge no pai que o criou
+- `fork()` para criar um child;
+- `exec()` para executar o processo criado;
+- `exit()` para terminar o processo criado e dar merge no pai que o criou;
+- `abort()` para o pai matar o filho (por excesso de recursos usados, por não necessitar mais, pelo pai também estar quase a morrer);
+- `wait()` para o pai esperar pelo processo do filho;
+
+Normalmente, quando um pai morre, morrem todos os filhos descendentes. Senão, os filhos são considerados `process zombi` quando nenhum pai está a esperá-lo (e obviamente não fez o wait()) ou `process orphan`, se o pai morreu sem invocar o wait().
 

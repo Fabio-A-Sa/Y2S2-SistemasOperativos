@@ -23,8 +23,13 @@ Também conhecido como Task Control Block, contém a informação associada a ca
 Legenda:
 
 - Process state: running, waiting, new, ready, terminated
-- Process number: 
-- Program counter:
-- Registers:
-- Memory limits:
-- List of open files:
+- Process number: número do processo
+- Program counter: localização das instruções para executar a seguir
+- Registers: conteúdo de todo o processo, X0 até X31
+- Memory limits: memória alocada para o processo
+- List of open files
+
+### Threads
+
+Cada thread do processador consegue executar um processo de cada vez. Com mais threads é possível maximizar o número de tarefas efetuadas por segundo, como se tivessemos vários Process Control Block e múltiplos Program Counters.
+

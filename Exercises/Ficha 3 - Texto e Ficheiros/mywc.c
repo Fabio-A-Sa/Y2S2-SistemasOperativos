@@ -40,7 +40,7 @@ int main (int arg, char* argv[]) {
         answer = finish;
     }
 
-    printf("Content: %s\n", content);
+    printf("Content:\n%s\n", content);
     printf("Result: %d\n", answer);
 
     return 0;

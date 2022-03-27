@@ -8,9 +8,17 @@ void createFile (char* fileName) {
     fclose(file);
 }
 
-void copyFiles (char* file1, char* file2) {
+void copyFiles (char* fileName1, char* fileName2) {
 
+    FILE* file1 = fopen(fileName1, "a");
+    FILE* file2 = fopen(fileName2, "r");
 
+    char* content[100];
+    fread(content, sizeof(content), sizeof(char), file1);
+    fwrite(content, sizeof(content), sizeof(char), file2);
+
+    fclose(file1);
+    fclose(file2);
 }
 
 int main (int arg, char* argv[]) {

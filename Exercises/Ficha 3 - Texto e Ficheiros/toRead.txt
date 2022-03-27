@@ -1,0 +1,4 @@
+texto simples para ver
+se é capaz de contar numero de palavras
+numero de letras e numero de
+caracteres

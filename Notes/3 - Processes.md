@@ -83,3 +83,15 @@ item buffer[BUFFER_SIZE];
 int in = 0, out = 0;
 ```
 
+### Communication link
+
+Através de implementações:
+
+1. Físicas
+    - Memória partilhada;
+    - Hardware bus;
+    - Network;
+2. Logical
+    - Direct or indirect;
+    - Sincronizada ou não sincronizada (tempo);
+    - Com buffer automático ou explícito;

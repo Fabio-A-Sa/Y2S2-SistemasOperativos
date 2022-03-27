@@ -12,7 +12,7 @@ int upperCase(char* fileName) {
     fread(content, sizeof(char) * MAX_SIZE, MAX_SIZE, file);
 
     int i = 0;
-    while (*(content + i) != '\0' && *(content + i) != NULL) {
+    while (*(content + i) != '\0') {
         printf("%c", toupper( (unsigned char) *(content+i)));
         i++;
     }
@@ -31,7 +31,7 @@ int lowerCase(char* fileName) {
     fread(content, sizeof(char) * MAX_SIZE, MAX_SIZE, file);
 
     int i = 0;
-    while (*(content + i) != '\0' && *(content + i) != NULL) {
+    while (*(content + i) != '\0') {
         printf("%c", tolower( (unsigned char) *(content+i)));
         i++;
     }

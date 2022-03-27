@@ -10,12 +10,17 @@ void createFile (char* fileName) {
 
 void copyFiles (char* fileName1, char* fileName2) {
 
-    FILE* file1 = fopen(fileName1, "a");
-    FILE* file2 = fopen(fileName2, "r");
+    FILE* file1 = fopen(fileName1, "r");
+    FILE* file2 = fopen(fileName2, "w");
 
     char* content[100];
     fread(content, sizeof(content), sizeof(char), file1);
-    fwrite(content, sizeof(content), sizeof(char), file2);
+
+    int i = 0;
+    while (*(content + i) != NULL && *(content + i) != '\0') {
+        fwrite(*(content+i), sizeof(char), sizeof(char), file2);
+        i++;
+    }
 
     fclose(file1);
     fclose(file2);

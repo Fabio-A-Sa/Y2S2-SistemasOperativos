@@ -5,54 +5,41 @@
 
 #define MAX_SIZE 100
 
-char* extractContent(char* fileName) {
-
-    FILE* file = fopen(fileName, "r");
-    char* content[MAX_SIZE];
-    fread(content, MAX_SIZE * sizeof(char), sizeof(char), file);
-    fclose(file);
-    return *content;
-}
-
-int lines (char* content) {
-
-    int total = 0;
-    
-    return total;
-
-}
-
-int words (char* content) {
-
-    int total = 0;
-    
-    return total;
-
-}
-
-int characters (char* content) {
-
-    int total = 0;
-
-    return total;
-
-}
-
 int main (int arg, char* argv[]) {
 
-    int comparation, answer;
+    int comparation, answer = 0;
     char* fileName = argv[1];
     char* mode = argv[2];
 
-    char* content = extractContent(fileName);
+    if (mode == NULL) {
+        printf("Input error!\n");
+        return -1;
+    }
+
+    char content[MAX_SIZE];
+
+    FILE* file = fopen(fileName, "r");
+    int finish = fread(content, 1, sizeof(content), file);
+    content[finish] = '\0';
+    fclose(file);
+
+    comparation = strcmp(mode, "-l");
+    if (comparation == 0) {
+
+        answer = 20;
+
+    }
 
     comparation = strcmp(mode, "-w");
-    if (comparation == 0) answer = lines(content);
-    comparation = strcmp(mode, "-l");
-    if (comparation == 0) answer = words(content);
-    else answer = characters(content);
+    if (comparation == 0) {
+        
+        answer = 10;
 
+    } else {
 
+        answer = 45;
+
+    }
 
     printf("Result: %d\n", answer);
 

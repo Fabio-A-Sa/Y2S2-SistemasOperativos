@@ -51,5 +51,9 @@ Seleciona que processo deve ser trazido para a fila de processos prontos a execu
 
 ## Process Creation
 
-O processo Pai cria um processo filho que, ao criar outro processo, forma uma árvore de processos. Em Unix, o pai de todos é o `init` com pid (process identifier) = 1. A partir daí saem todos os outros do sistema.
+O processo Pai cria um processo filho que, ao criar outro processo, forma uma árvore de processos. Em Unix, o pai de todos é o `init` com pid (process identifier) = 1. A partir daí saem todos os outros do sistema. Ou o pai deixa o filho terminar, ou então entram em concorrência de execução (competição por tempo de CPU e ciclos de relógio).
+
+- `fork()` para criar um child
+- `exec()` para executar o processo criado
+- `exit()` para terminar o processo criado e dar merge no pai que o criou
 

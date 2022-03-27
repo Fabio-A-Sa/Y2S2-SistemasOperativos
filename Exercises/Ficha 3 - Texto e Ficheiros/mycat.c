@@ -14,9 +14,10 @@ void twoFiles(char* argv[]) {
     printf("Double file called %s and %s!\n", file1, file2);
 }
 
-
 int main (int argc, char* argv[]) {
 
-    if (argv[2] != NULL) twoFiles(argv); else singleFile(argv);
+    if (argv[2] != NULL) twoFiles(argv); 
+    else singleFile(argv);
+
     return 0;
 }

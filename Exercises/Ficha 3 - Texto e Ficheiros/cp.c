@@ -13,14 +13,11 @@ void copyFiles (char* fileName1, char* fileName2) {
     FILE* file1 = fopen(fileName1, "r");
     FILE* file2 = fopen(fileName2, "w");
 
-    char* content[100];
+    char* content[9];
     fread(content, sizeof(content), sizeof(char), file1);
-
-    int i = 0;
-    while (*(content + i) != NULL && *(content + i) != '\0') {
-        fwrite(*(content+i), sizeof(char), sizeof(char), file2);
-        i++;
-    }
+    fseek(file1, 0, SEEK_SET);
+    fseek(file2, 0, SEEK_SET);
+    fwrite(content, sizeof(content) + 1, sizeof(char), file2);
 
     fclose(file1);
     fclose(file2);

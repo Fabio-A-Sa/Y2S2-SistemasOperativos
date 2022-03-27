@@ -3,7 +3,7 @@
 #include <ctype.h>
 #include <string.h>
 
-void upperCase(char* fileName) {
+int upperCase(char* fileName) {
 
     FILE* file = fopen(fileName, "r");
     const int MAX_SIZE = 100;
@@ -18,9 +18,11 @@ void upperCase(char* fileName) {
     }
     printf("\n");
     fclose(file);
+
+    return 0;
 }
 
-void lowerCase(char* fileName) {
+int lowerCase(char* fileName) {
 
     FILE* file = fopen(fileName, "r");
     const int MAX_SIZE = 100;
@@ -35,6 +37,8 @@ void lowerCase(char* fileName) {
     }
     printf("\n");
     fclose(file);
+
+    return 0;
 }
 
 int main (int arg, char* argv[]) {
@@ -44,9 +48,9 @@ int main (int arg, char* argv[]) {
     char* mode = argv[2];
 
     comparation = strcmp(mode, "-u");
-    if (comparation == 0) upperCase(fileName);
+    if (comparation == 0) return upperCase(fileName);
     comparation = strcmp(mode, "-l");
-    if (comparation == 0) lowerCase(fileName);
+    if (comparation == 0) return lowerCase(fileName);
     else printf("Input error!\n");
 
     return 0;

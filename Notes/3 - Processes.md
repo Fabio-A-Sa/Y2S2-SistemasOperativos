@@ -22,4 +22,9 @@ Também conhecido como Task Control Block, contém a informação associada a ca
 
 Legenda:
 
--
+- Process state: running, waiting, new, ready, terminated
+- Process number: 
+- Program counter:
+- Registers:
+- Memory limits:
+- List of open files:

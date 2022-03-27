@@ -4,8 +4,8 @@
 #include <ctype.h>
 
 void createFile (char* fileName) {
-
-
+    FILE* file = fopen(fileName, "w");
+    fclose(file);
 }
 
 void copyFiles (char* file1, char* file2) {
@@ -21,7 +21,7 @@ int main (int arg, char* argv[]) {
     if (file1 == NULL) {
         printf(" $ ./a.out <file1> [file2]\n");
     } else if (file2 == NULL) {
-        char* newName = "file2";
+        char* newName = "copy.txt";
         createFile(newName);
         file2 = newName;
     }

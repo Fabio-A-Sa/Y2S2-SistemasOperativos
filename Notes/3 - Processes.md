@@ -61,3 +61,24 @@ O processo Pai cria um processo filho que, ao criar outro processo, forma uma á
 
 Normalmente, quando um pai morre, morrem todos os filhos descendentes. Senão, os filhos são considerados `process zombi` quando nenhum pai está a esperá-lo (e obviamente não fez o wait()) ou `process orphan`, se o pai morreu sem invocar o wait().
 
+## Comunicação entre processos
+
+Os processos, embora independentes (porque não devem perturbar ou influenciar a execução de outros processos), devem comunicar para:
+
+- troca de informações;
+- partilha de zona de memória;
+- modularidade;
+- conveniência;
+
+Principal problema: acaba por existir um processo que cria a informação para que outro processo (o consumidor) o utilize. Pelo que a utilização de um buffer (seja ele `unbounded-buffer` ou `bouder-buffer`).
+
+```c
+/* bounder - buffer example */
+#define BUFFER_SIZE 10
+typedef struct {
+    int *values[];
+} item;
+
+item buffer[BUFFER_SIZE];
+int in = 0, out = 0;
+```

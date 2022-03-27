@@ -17,7 +17,6 @@ void copyFiles (char* fileName1, char* fileName2) {
 
     char content[MAX_SIZE];
     int final = fread(content, sizeof(char), MAX_SIZE, file1);
-    char toWrite[final];
     
     fwrite(content, final, sizeof(char), file2);
 

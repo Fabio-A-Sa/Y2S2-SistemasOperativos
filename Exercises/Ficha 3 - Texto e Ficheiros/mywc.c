@@ -3,11 +3,11 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-#define MAX_SIZE 100
+#define MAX_SIZE 1024
 
 int main (int arg, char* argv[]) {
 
-    int comparation, answer = 0;
+    int answer = 0, index = 0;
     char* fileName = argv[1];
     char* mode = argv[2];
 
@@ -20,27 +20,27 @@ int main (int arg, char* argv[]) {
 
     FILE* file = fopen(fileName, "r");
     int finish = fread(content, 1, sizeof(content), file);
-    content[finish] = '\0';
     fclose(file);
 
-    comparation = strcmp(mode, "-l");
-    if (comparation == 0) {
+    if (strcmp(mode, "-l") == 0) {
 
-        answer = 20;
+        while (index != finish) {
+            if (content[index] == '\n') answer++;
+            index++;
+        }
 
-    }
-
-    comparation = strcmp(mode, "-w");
-    if (comparation == 0) {
+    } else if (strcmp(mode, "-w") == 0) {
         
-        answer = 10;
+        while (index != finish) {
+            if (content[index] == ' ' || content[index] == '\n') answer++;
+            index++;
+        } answer++;
 
     } else {
-
-        answer = 45;
-
+        answer = finish;
     }
 
+    printf("Content: %s\n", content);
     printf("Result: %d\n", answer);
 
     return 0;

@@ -9,5 +9,5 @@ Um processo é um programa em execução. Enquanto que um programa é passivo, �
 5. Heap, contém a memória alocada dinamicamente
 
 <p align="center">
-<img src = "..\\Images\\Memory.png" alt = "memory sheme" title = "memory scheme" width = "200" height = "300">
+<img src = "..\\Images\\Memory.png" alt = "memory sheme" title = "memory scheme" width = "400" height = "600">
 </p>

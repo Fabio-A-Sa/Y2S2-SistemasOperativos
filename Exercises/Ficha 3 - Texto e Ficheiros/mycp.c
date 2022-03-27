@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <ctype.h>
 
+#define MAX_SIZE 100
+
 void createFile (char* fileName) {
     FILE* file = fopen(fileName, "w");
     fclose(file);
@@ -11,13 +13,13 @@ void createFile (char* fileName) {
 void copyFiles (char* fileName1, char* fileName2) {
 
     FILE* file1 = fopen(fileName1, "r");
-    FILE* file2 = fopen(fileName2, "w");
+    FILE* file2 = fopen(fileName2, "a");
 
-    char* content[9];
-    fread(content, sizeof(content), sizeof(char), file1);
-    fseek(file1, 0, SEEK_SET);
-    fseek(file2, 0, SEEK_SET);
-    fwrite(content, sizeof(content) + 1, sizeof(char), file2);
+    char content[MAX_SIZE];
+    int final = fread(content, sizeof(char), MAX_SIZE, file1);
+    char toWrite[final];
+    
+    fwrite(content, final, sizeof(char), file2);
 
     fclose(file1);
     fclose(file2);

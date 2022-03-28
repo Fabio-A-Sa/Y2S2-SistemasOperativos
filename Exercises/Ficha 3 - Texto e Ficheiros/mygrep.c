@@ -21,23 +21,32 @@ int main (int args, char* argv[]) {
     fclose(file);
     content[finish] = '\0';
 
+    /* Output
     printf("Finish: %d\n", finish);
     printf("Content: %s\n", content);
+    */
 
     char currentLine[MAX_SIZE];
     int i = 0, line = 0;
 
-    for (int index = 0 ; index < finish ; index++) {
+    for (int index = 0 ; index <= finish ; index++) {
 
         if (content[index] == '\n') {
 
             currentLine[i] = '\0';
             i = 0;
+            char* result = strstr(currentLine, word);
+
+            /* Output
             printf("Linha %d: %s\n", line, currentLine);
-            char* result = strstr(word, currentLine);
             if (result != NULL) {
-                printf("Ocorre na linha %d\n", line);
+                printf("%s ocorre na linha %d\n\n", word, line);
             } else printf("%s não ocorre na linha %d\n\n", word, line);
+            */
+
+            if (result != NULL) {
+                printf("[%d:%d]\n", line, index);
+            }
 
             line++;
 
@@ -47,6 +56,5 @@ int main (int args, char* argv[]) {
         }
     }
 
-    printf("Lines: %d\n", line);
     return 0;
 }

@@ -1,6 +1,7 @@
 # 3 - Processes
 
 Um processo é um programa em execução que pode ter vários estados (new, running, waiting, ready, terminated). Enquanto que um programa é passivo, é somente um ficheiro executável, o processo é ativo pois há a execução propriamente dita. Todos os processos de um sistema devem ser independentes e cooperativos entre si. <br>
+Uma thread é uma unidade de processamento do processo. Assim, cada processo pode ser comportado por uma ou mais threads.
 
 Um processo pode ser descrito de duas formas distintas:
 

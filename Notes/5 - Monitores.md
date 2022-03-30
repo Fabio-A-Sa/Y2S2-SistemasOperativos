@@ -48,10 +48,10 @@ monitor Semaphore {
 }
 ```
 
-`signall()`, acorda mais do que um processo no wait(), sempre que as condições o permitam (mais dados disponíveis e quantidade suficiente de threads à espera);
+`signalAll()`, acorda mais do que um processo no wait(), sempre que as condições o permitam (mais dados disponíveis e quantidade suficiente de threads à espera). Encontram-se nos monitores modernos, como em Java.
 
 ### Prioridades nos Monitores clássicos:
-- W,  os que estão parados no wait();
+- W, os que estão parados no wait();
 - S, os que fizeram signal(), pois estão em exclusão múltipla;
 - E, os outros processos todos;
 
@@ -59,4 +59,36 @@ monitor Semaphore {
 - S, continua o processo que faz signal();
 - E, W, continua os que estão parados no wait() ou novos processos;
 
-exemplo dos readers writers
+#### Implementação do problema clássico de escritores e leitores
+
+```c++
+monitorRWLock { // E = W < S
+
+    int readers = 0, writers = 0, wantWrite = 0; 
+    condition OKread, OKwrite;
+
+    readLock() { /* Se ainda existirem leitores ou alguém quer ler, então wait() */
+        while (writers != 0 || wantWrite > 0) wait(OKread); 
+        readers++;
+        signal(OKread);
+    }
+
+    readUnlock() { /* Liberta um reader, se ficar a zero então podem escrever */
+        readers--;
+        if (readers == 0) signal(OKwrite); 
+    }
+
+    writeLock() { /* Passa de querer escrever para escritor, se não houver mais ninguém */
+        wantWrite++;
+        while (writers != 0 || readers != 0) wait(OKwrite); 
+        wantWrite--; 
+        writers++;
+    }
+
+    writeUnlock() { /* Acaba a escrita, sinaliza que podem entrar ou vários leitores ou um escritor */
+        writers--; 
+        signal(OKread); 
+        signal(OKwrite);
+    } 
+}
+```

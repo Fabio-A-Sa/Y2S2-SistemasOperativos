@@ -132,4 +132,7 @@ Tem de existir zonas livres para albergar os processos e garantir que os process
 
 #### 2. Readers-Writers Problem
 
-Os escritores podem ler e escrever e os leitores só podem ler.
+Os escritores podem ler e escrever e os leitores só podem ler. #TODO
+
+#### 3. Dining-Philosophers Problem
+

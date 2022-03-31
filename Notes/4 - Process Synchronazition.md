@@ -100,3 +100,36 @@ A exclusão múltipla só é usada para casos onde a secção crítica é pequen
 ### Semaphore
 
 Formas mais sofisticadas de colocar processos à espera. Um semáforo que só contenha dois valores (0, 1) torna-se binário (*binary semaphores* != *counting semaphores*) e semelhante aos exemplos anteriores -> continua a existir espera ativa.
+
+#### Implementação sem espera ativa
+
+```c++
+list<semaphore> all = {};
+wait (semaphore *S) {
+    S->value--;
+    if (S->value < 0) {
+        all.push_back(S);
+        block();
+    }
+}
+
+signal(semaphore *S) {
+    S->value++;
+    if (S->value <= 0) {
+        semaphore P = all.pop(); // considerando ordenação da lista por prioridade
+        wakeup(P);
+    }
+}
+```
+
+Sempre que há locks em *threads*, todos devem pegar nos recursos pela mesma ordem (inibe a possibilidade da maior espera ativa).
+
+### Problemas de sincronização
+
+#### 1. Bounded buffer Problem
+
+Tem de existir zonas livres para albergar os processos e garantir que os processos não se sobreponham. Características de produtor-consumidor (push() e pop() concorrentes, read() e write() concorrentes, por exemplo).
+
+#### 2. Readers-Writers Problem
+
+Os escritores podem ler e escrever e os leitores só podem ler.

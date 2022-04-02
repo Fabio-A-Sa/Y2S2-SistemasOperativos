@@ -160,7 +160,7 @@ Um processo pode nunca ser removido da fila de semáforos em que está suspenso
 
 #### Priority Invertion
 
-
+Problema de agendamento em que o 
 
 ### Problemas de sincronização
 

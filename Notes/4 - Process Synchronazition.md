@@ -124,7 +124,8 @@ do {
 
 ### Semaphore
 
-Formas mais sofisticadas de colocar processos à espera. Um semáforo que só contenha dois valores (0, 1) torna-se binário (*binary semaphores* != *counting semaphores*) e semelhante aos exemplos anteriores -> continua a existir espera ativa.
+Formas mais sofisticadas de colocar processos à espera. Um semáforo que só contenha dois valores (0, 1) torna-se binário (*binary semaphores* != *counting semaphores*) e semelhante aos exemplos anteriores -> continua a existir espera ativa. <br>
+As operações da implementação `wait()` e `signal` têm de ser atómicas.
 
 #### Implementação sem espera ativa
 

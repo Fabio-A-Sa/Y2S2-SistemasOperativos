@@ -101,7 +101,26 @@ Cada processo i que sai da exclusão múltipla, vai escolher um outro processo j
 
 ## Mutex locks
 
-A exclusão múltipla só é usada para casos onde a secção crítica é pequena (por exemplo, não realizam operações I/O de ficheiros), ou seja, a espera ativa dos outros processos não representa um grande número de ciclos de relógio gastos.
+A exclusão múltipla só é usada para casos onde a secção crítica é pequena (por exemplo, não realizam operações I/O de ficheiros), ou seja, a espera ativa dos outros processos não representa um grande número de ciclos de relógio gastos. <br>
+Em casos maiores, é necessário usar o `aquire()` para receber receber a secção crítica fechada e `release()` para libertá-la.
+
+```c++
+void aquire() {
+    while (!available); // espera até que outro processo saia da secção crítica
+    available = false;
+}
+
+void release() {
+    available = true;
+}
+
+do {
+    aquire();
+    /* Secção crítica */
+    release();
+    /* Outras funções sem usar a secção crítica */
+} while (true);
+```
 
 ### Semaphore
 

@@ -12,6 +12,7 @@ Por exemplo, com incremento e decremento de contadores (secção crítica). Solu
 
 - `Bounded Waiting`: um processo não pode ser permanentemente ultrapassado por outros que usem o tópico anterior;
 
+#### O Kernel pode ter duas atitudes: 
 
 1. Preemptive – permite entrada na zona crítica quando está em kernel mode;
 2. Non-preemptive – executa até sair do kernel model ou até voluntariamente. Geralmente sem neEssentially free of race conditions in kernel mode
@@ -21,6 +22,7 @@ Por exemplo, com incremento e decremento de contadores (secção crítica). Solu
 Solução que serve para dois processos concorrentes:
 
 ```c++
+/* i só entra na secção crítica se j não estiver ativo ou turn = i*/
 bool flag[2];
 do {
     flag[i] = true;
@@ -31,6 +33,10 @@ do {
 ```
 
 Só entra na zona crítica um dos dois processos, a *mutual exclusion* é assegurada, e o outro processo está em espera ativa.
+
+### Instruções de harware atómicas
+
+Quando a instrução não tem qualquer interrupção. Ou testa a zona de memória e define o seu valor ou troca o conteúdo das duas zonas de memória (*control word*).
 
 ## Solução usando test_and_set
 

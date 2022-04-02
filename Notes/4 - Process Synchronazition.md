@@ -160,7 +160,7 @@ Um processo pode nunca ser removido da fila de semáforos em que está suspenso
 
 #### Priority Invertion
 
-Problema de agendamento em que o 
+Problema de agendamento em que o processo de prioridade mais baixa mantém o bloqueio necessário para o processo de prioridade mais alta. É resolvido com o protocolo de herança de prioridade.
 
 ### Problemas de sincronização
 

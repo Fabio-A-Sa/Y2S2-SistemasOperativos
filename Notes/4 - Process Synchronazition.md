@@ -148,7 +148,19 @@ signal(semaphore *S) {
 }
 ```
 
-Sempre que há locks em *threads*, todos devem pegar nos recursos pela mesma ordem (inibe a possibilidade da maior espera ativa).
+Sempre que há locks em *threads*, todos devem pegar nos recursos pela mesma ordem (inibe a possibilidade da maior espera ativa). Noções importantes:
+
+#### DeadLock
+
+Quando dois ou mais processos estão continuamente à espera por um evento que só pode ser causado por um único processo à espera.
+
+#### Starvation / Indefinite blocking
+
+Um processo pode nunca ser removido da fila de semáforos em que está suspenso
+
+#### Priority Invertion
+
+
 
 ### Problemas de sincronização
 

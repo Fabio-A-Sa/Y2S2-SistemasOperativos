@@ -174,3 +174,4 @@ Os escritores podem ler e escrever e os leitores só podem ler. Sempre que exist
 
 #### 3. Dining-Philosophers Problem
 
+Só permite que cada filósofo (processo) pegue nos dados (os dois pauzinhos) somente se os dois estiverem disponíveis ao mesmo tempo. Os filósofos de número ímpar pegam primeiro no pauzinho esquerdo e só depois o direito, os de número par pegam no pauzinho direito e só depois o esquero. Assim alguns ficam sempre à espera e outros ficam sempre com todos os dados que necessitam.

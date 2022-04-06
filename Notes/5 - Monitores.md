@@ -35,7 +35,8 @@ monitor Semaphore {
     condition notZero;
 
     acquire() {
-        if (v == 0) // para melhor controlo sobre o código, usar while()
+        if (v == 0) // para melhor controlo sobre o código, usar while() e termos sempre que voltar
+                    // a testar o predicado
             wait(notZero); // bloqueia e liberta a exclusão múltipla
         v = v - 1;
     }
@@ -47,6 +48,8 @@ monitor Semaphore {
 }
 ```
 
+`signall()`, acorda mais do que um processo no wait(), sempre que as condições o permitam (mais dados disponíveis e quantidade suficiente de threads à espera);
+
 ### Prioridades nos Monitores clássicos:
 - W,  os que estão parados no wait();
 - S, os que fizeram signal(), pois estão em exclusão múltipla;
@@ -56,5 +59,4 @@ monitor Semaphore {
 - S, continua o processo que faz signal();
 - E, W, continua os que estão parados no wait() ou novos processos;
 
-signall() -> acorda mais do que um processo no wait(), sempre que as condições o permitam (mais dados disponíveis e quantidade suficiente de threads à espera);
-
+exemplo dos readers writers

@@ -1,6 +1,20 @@
 # 4 - Sincronização de Processos
 
-Os processos podem ser interrompidos a qualquer momento (execução concorrente), tornando a sequ~encia de processos ativos não deterministica. Exemplo: incremento e decremento de contadores (*race condition*).
+### Formação e interrupção de processos via linguagem C:
+
+```c++
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+int main () {
+    printf("PID = %d\n", getpid());             // system call
+    char * args[] = {"Hello", "World", NULL};
+    execv("./another", args);                   // system call    
+    return 0;
+}
+```
+
+Os processos podem ser interrompidos a qualquer momento (execução concorrente), tornando a sequência de processos ativos não deterministica. Exemplo: incremento e decremento de contadores (*race condition*).
 
 ### Critical Section
 

@@ -11,8 +11,8 @@ void getFileStatus(char *fileName) {
         return;
     }
 
-    printf("%s size: %d bytes, disk_blocks: %d\n",
-            fileName, (int)info.st_size, (int)info.st_blocks);
+    printf("%s size: %d bytes, disk_blocks: %d, last edit: %d-%d, owner: %s\n",
+            fileName, (int)info.st_size, (int)info.st_blocks, info.st_mtimespec.tv_sec, info.st_mtimespec.tv_nsec, info.st_gid);
 }
 
 int main(int argc, char* argv[]) {

@@ -26,7 +26,7 @@ int main(int argc, char* argv[]) {
         case 4: newperms |= S_IRUSR; break;
         case 5: newperms |= S_IRUSR | S_IXUSR; break;
         case 6: newperms |= S_IRUSR | S_IWUSR; break;
-        case 7: newperms |= S_IRGRP | S_IWUSR | S_IXUSR; break;
+        case 7: newperms |= S_IRUSR | S_IWUSR | S_IXUSR; break;
         default:
             (void)fprintf(stderr, "%s: illegal permission value\n", argv[0]);
             return EXIT_SUCCESS;

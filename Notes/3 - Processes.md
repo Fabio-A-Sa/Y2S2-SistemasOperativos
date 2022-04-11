@@ -146,7 +146,7 @@ A comunicação é feita entre um par de *Sockets*.
 
 ### Pipes
 
-Atua como um canal de comunicação entre dois processos. Existem as :
+Atua como um canal de comunicação entre dois processos. Existem as:
 
  - `ordinary pipes`, que não podem ser acedidas externamente ao processo que a criou (normalmente o processo pai cria um ordinary pipe para comunicar com o processo filho que criou). São unidirecionais, pelo que a escrita é feita na ponta *write-end* e o receive na parte *read-end*.
  - `named pipes`, que podem ser acedidas sem uma relação pai-filho. São mais poderosas que as *ordinary pipes*, onde a comunicação é bidirecional e vários processos podem usar a mesma *pipe* para comunicação. Existe em sistemas Windows e Unix.

@@ -19,18 +19,18 @@ Os processos podem ser interrompidos a qualquer momento (execução concorrente)
 
 ### Critical Section
 
-Por exemplo, com incremento e decremento de contadores (secção crítica). Solução: <br>
+Zona crítica é qualquer pedaço de código que, usando a share-memory, modifica algum ficheiro, ou variável, ou memória. Por exemplo, com incremento e decremento de contadores (secção crítica). Solução: <br>
 
 - `Mutual Exclusion`: se um processo está a executar a secção crítica, então mais nenhum está a executar ao mesmo tempo;
 
 - `Progress`: um processo que terá de aceder à secção crítica de outro processo, tem prioridade em relação ao outros;
 
-- `Bounded Waiting`: um processo não pode ser permanentemente ultrapassado por outros que usem o tópico anterior;
+- `Bounded Waiting`: Existe um limite do número de vezes que um processo é ultrapassado. Um processo não pode ser permanentemente ultrapassado por outros que usem os tópicos anteriores;
 
 #### O Kernel pode ter duas atitudes: 
 
-1. Preemptive – permite entrada na zona crítica quando está em kernel mode;
-2. Non-preemptive – executa até sair do kernel model ou até voluntariamente. Geralmente sem neEssentially free of race conditions in kernel mode
+1. `Preemptive` – permite entrada na zona crítica quando está em kernel mode;
+2. `Non-preemptive` – executa até sair do kernel model ou até voluntariamente. Geralmente sem neEssentially free of race conditions in kernel mode
 
 ## Peterson's Solution
 
@@ -39,8 +39,9 @@ Solução que serve para dois processos concorrentes:
 ```c++
 /* i só entra na secção crítica se j não estiver ativo ou turn = i*/
 bool flag[2];
+int turn;
 do {
-    flag[i] = true;
+    flag[i] = true; // o i fica preparado para entrar na secção crítica
     turn = j;
     while (flag[j] && turn == j); // critial section, espera ativa
     flag[i] = false;
@@ -60,7 +61,7 @@ Solução atómica (só um dos processos é que consegue mudar o target alocado 
 ```c++
 /**
  * Informa o que está na memória e muda para o valor para true
- * Instrução do processador
+ * Instrução do processador -> instrução atómica
  */
 bool test_and_set (bool *target) {
 
@@ -69,10 +70,15 @@ bool test_and_set (bool *target) {
     return returnValue;
 }
 
+do {
+    while (test_and_set(&lock)); // critial section com espera ativa
+    lock = 0; // tempo restante
+} while (true);
+
 /**
  * Informa o que está na memória e muda para um novo valor
  * Instrução do processador
- */
+ **/
 int compare_and_swap (int *value, int expected, int newValue) {
     int temp = *value;
     if (*value == expected) *value = newValue;
@@ -80,7 +86,6 @@ int compare_and_swap (int *value, int expected, int newValue) {
 }
 
 do {
-    while (test_and_set(&lock)); // critial section com espera ativa
     while (compare_and_swap(&lock, 0, 1)) // critical section com espera ativa
     lock = 0; // tempo restante
 } while (true);
@@ -137,10 +142,23 @@ do {
 } while (true);
 ```
 
-### Semaphore
+### Semaphore 
 
 Formas mais sofisticadas de colocar processos à espera. Um semáforo que só contenha dois valores (0, 1) torna-se binário (*binary semaphores* != *counting semaphores*) e semelhante aos exemplos anteriores -> continua a existir espera ativa. <br>
 As operações da implementação `wait()` e `signal` têm de ser atómicas.
+
+#### Implementação com espera ativa
+
+```c++
+wait (semaphore *S) {
+    while (S <= 0);
+    S--;
+}
+
+signal (semaphore *S) {
+    S++;
+}
+```
 
 #### Implementação sem espera ativa
 

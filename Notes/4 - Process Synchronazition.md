@@ -9,7 +9,8 @@
 int main () {
     printf("PID = %d\n", getpid());             // system call
     char * args[] = {"Hello", "World", NULL};
-    execv("./another", args);                   // system call    
+    execv("./another", args);                   // system call -> replace the entire process
+    printf("This line will never be printed!");    
     return 0;
 }
 ```

@@ -207,9 +207,9 @@ Os escritores podem ler e escrever e os leitores só podem ler. Sempre que exist
 
 #### 3. Dining-Philosophers Problem
 
-Só permite que cada filósofo (processo) pegue nos dados (os dois pauzinhos) somente se os dois estiverem disponíveis ao mesmo tempo. Os filósofos de número ímpar pegam primeiro no pauzinho esquerdo e só depois o direito, os de número par pegam no pauzinho direito e só depois o esquero. Assim alguns ficam sempre à espera e outros ficam sempre com todos os dados que necessitam.
+Só permite que cada filósofo (processo) pegue nos dados (os dois pauzinhos) somente se os dois estiverem disponíveis ao mesmo tempo. Os filósofos de número ímpar pegam primeiro no pauzinho esquerdo e só depois o direito, os de número par pegam no pauzinho direito e só depois o esquero. Assim alguns ficam sempre à espera e outros ficam sempre com todos os dados que necessitam. <br>
 
-# 5 - Monitores
+# Monitores
 
 Controlo de concorrência, ligada a OOP por encapsulamento de atributos privados (o status do monitor). Cada instância só tem um *thread* em cada método. Cada método pode ser sincronizado ou não, com exclusão múltipla.
 

@@ -19,5 +19,6 @@ int main(int argc, char* argv[]) {
     v = fork();
     if (v == 0) printf("Child: %d\n", getpid());
 
+    // Total = 8 processes (2^3)
     return EXIT_SUCCESS;
 }

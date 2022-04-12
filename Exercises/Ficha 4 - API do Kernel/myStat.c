@@ -1,6 +1,7 @@
 #include <sys/stat.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 void getFileStatus(char *fileName) {
 
@@ -11,8 +12,8 @@ void getFileStatus(char *fileName) {
         return;
     }
 
-    printf("%s size: %d bytes, disk_blocks: %d, last edit: %d-%d, owner: %s\n",
-            fileName, (int)info.st_size, (int)info.st_blocks, info.st_mtimespec.tv_sec, info.st_mtimespec.tv_nsec, info.st_gid);
+    printf("%s\nsize: %d bytes\ndisk_blocks: %d\nlast edit: %sowner: %d\n",
+            fileName, (int)info.st_size, (int)info.st_blocks, ctime(&info.st_mtime), info.st_gid);
 }
 
 int main(int argc, char* argv[]) {

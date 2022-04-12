@@ -14,7 +14,7 @@ int main(int argc, char* argv[]) {
     fprintf(stdout, "$ ");
     if((command = fgets(buf, sizeof(buf), stdin)) == NULL)
       break;
-    command[strlen(buf) - 1] = ’\0’;
+    command[strlen(buf) - 1] = '\0';
     /* call fork and check return value */
     if((pid = fork()) == -1) {
       fprintf(stderr, "%s: can’t fork command: %s\n",

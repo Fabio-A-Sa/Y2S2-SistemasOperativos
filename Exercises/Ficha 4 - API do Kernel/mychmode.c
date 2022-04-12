@@ -64,5 +64,4 @@ int main(int argc, char* argv[]) {
         (void)fprintf(stderr, "%s: cannot chmod %s\n", argv[0], argv[2]);
         return EXIT_FAILURE;
     }
-    /* ... */
 }

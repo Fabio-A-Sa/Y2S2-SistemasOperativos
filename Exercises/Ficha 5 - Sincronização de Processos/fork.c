@@ -4,14 +4,20 @@
 
 int main(int argc, char* argv[]) {
 
+    int v;
+    printf("Initial process: %d\n", getpid());
+
     /* fork a child process */
-    fork();
+    v = fork();
+    if (v == 0) printf("Child: %d\n", getpid());
 
     /* fork another child process */
-    fork();
+    v = fork();
+    if (v == 0) printf("Child: %d\n", getpid());
 
     /* and fork another */
-    fork();
-    
+    v = fork();
+    if (v == 0) printf("Child: %d\n", getpid());
+
     return EXIT_SUCCESS;
 }

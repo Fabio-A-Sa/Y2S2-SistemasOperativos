@@ -1230,3 +1230,15 @@ int main (int argc, char** argv) {
 
     return EXIT_SUCCESS;
 }
+
+#define MAX_SIZE 1024
+
+int main (int args, char* argv[]) {
+
+    char buffer[MAX_SIZE];
+    getcwd(buffer, MAX_SIZE);
+    printf("Current Directory: %s\n", buffer);
+
+    return EXIT_SUCCESS;
+}
+

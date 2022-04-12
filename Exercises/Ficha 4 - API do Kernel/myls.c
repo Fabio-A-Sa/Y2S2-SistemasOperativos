@@ -1,18 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <dirent.h>
+#include <time.h>
 #include <sys/stat.h>
 
 void printFile(char* fileName) {
 
-    struct stat st;
+    struct stat info;
 
-    if (lstat(fileName, &st) == -1) {
+    if (lstat(fileName, &info) == -1) {
         printf("Error!\n");
         return;
     }
 
-    mode_t m = st.st_mode;
+    mode_t m = info.st_mode;
 
     putchar('d');
     putchar( m & S_IRUSR ? 'r' : '-');
@@ -25,10 +26,7 @@ void printFile(char* fileName) {
     putchar( m & S_IWOTH ? 'w' : '-');
     putchar( m & S_IXOTH ? 'x' : '-');
 
-    printf("   %s", fileName);
-
-
-
+    printf(" 1 %d\t%s\t%s", info.st_gid, fileName, ctime(&info.st_mtime));
 }
 
 int main (int argc, char** argv) {
@@ -48,7 +46,6 @@ int main (int argc, char** argv) {
     struct dirent *p = readdir(q);
     while (p != NULL) {
         printFile(p->d_name);
-        printf("\n");
         p = readdir(q);
     }
 

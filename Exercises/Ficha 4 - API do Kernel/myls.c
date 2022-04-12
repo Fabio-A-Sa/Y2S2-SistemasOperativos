@@ -1,6 +1,35 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <dirent.h>
+#include <sys/stat.h>
+
+void printFile(char* fileName) {
+
+    struct stat st;
+
+    if (lstat(fileName, &st) == -1) {
+        printf("Error!\n");
+        return;
+    }
+
+    mode_t m = st.st_mode;
+
+    putchar('d');
+    putchar( m & S_IRUSR ? 'r' : '-');
+    putchar( m & S_IWUSR ? 'w' : '-');
+    putchar( m & S_IXUSR ? 'x' : '-');
+    putchar( m & S_IRGRP ? 'r' : '-');
+    putchar( m & S_IWGRP ? 'w' : '-');
+    putchar( m & S_IXGRP ? 'x' : '-');
+    putchar( m & S_IROTH ? 'r' : '-');
+    putchar( m & S_IWOTH ? 'w' : '-');
+    putchar( m & S_IXOTH ? 'x' : '-');
+
+    printf("   %s", fileName);
+
+
+
+}
 
 int main (int argc, char** argv) {
 
@@ -18,7 +47,8 @@ int main (int argc, char** argv) {
     printf ("%s/\n", argv[1]);
     struct dirent *p = readdir(q);
     while (p != NULL) {
-        printf ("\t%s\n", p->d_name);
+        printFile(p->d_name);
+        printf("\n");
         p = readdir(q);
     }
 

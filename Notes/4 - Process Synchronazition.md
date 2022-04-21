@@ -1,21 +1,36 @@
 # 4 - Sincronização de Processos
 
-Os processos podem ser interrompidos a qualquer momento (execução concorrente), tornando a sequ~encia de processos ativos não deterministica. Exemplo: incremento e decremento de contadores (*race condition*).
+### Formação e interrupção de processos via linguagem C:
+
+```c++
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+int main () {
+    printf("PID = %d\n", getpid());             // system call
+    char * args[] = {"Hello", "World", NULL};
+    execv("./another", args);                   // system call -> replace the entire process
+    printf("This line will never be printed!");    
+    return 0;
+}
+```
+
+Os processos podem ser interrompidos a qualquer momento (execução concorrente), tornando a sequência de processos ativos não deterministica. Exemplo: incremento e decremento de contadores (*race condition*).
 
 ### Critical Section
 
-Por exemplo, com incremento e decremento de contadores (secção crítica). Solução: <br>
+Zona crítica é qualquer pedaço de código que, usando a share-memory, modifica algum ficheiro, ou variável, ou memória. Por exemplo, com incremento e decremento de contadores (secção crítica). Solução: <br>
 
 - `Mutual Exclusion`: se um processo está a executar a secção crítica, então mais nenhum está a executar ao mesmo tempo;
 
 - `Progress`: um processo que terá de aceder à secção crítica de outro processo, tem prioridade em relação ao outros;
 
-- `Bounded Waiting`: um processo não pode ser permanentemente ultrapassado por outros que usem o tópico anterior;
+- `Bounded Waiting`: Existe um limite do número de vezes que um processo é ultrapassado. Um processo não pode ser permanentemente ultrapassado por outros que usem os tópicos anteriores;
 
 #### O Kernel pode ter duas atitudes: 
 
-1. Preemptive – permite entrada na zona crítica quando está em kernel mode;
-2. Non-preemptive – executa até sair do kernel model ou até voluntariamente. Geralmente sem neEssentially free of race conditions in kernel mode
+1. `Preemptive` – permite entrada na zona crítica quando está em kernel mode;
+2. `Non-preemptive` – executa até sair do kernel model ou até voluntariamente. Geralmente sem neEssentially free of race conditions in kernel mode
 
 ## Peterson's Solution
 
@@ -24,8 +39,9 @@ Solução que serve para dois processos concorrentes:
 ```c++
 /* i só entra na secção crítica se j não estiver ativo ou turn = i*/
 bool flag[2];
+int turn;
 do {
-    flag[i] = true;
+    flag[i] = true; // o i fica preparado para entrar na secção crítica
     turn = j;
     while (flag[j] && turn == j); // critial section, espera ativa
     flag[i] = false;
@@ -45,7 +61,7 @@ Solução atómica (só um dos processos é que consegue mudar o target alocado 
 ```c++
 /**
  * Informa o que está na memória e muda para o valor para true
- * Instrução do processador
+ * Instrução do processador -> instrução atómica
  */
 bool test_and_set (bool *target) {
 
@@ -54,10 +70,15 @@ bool test_and_set (bool *target) {
     return returnValue;
 }
 
+do {
+    while (test_and_set(&lock)); // critial section com espera ativa
+    lock = 0; // tempo restante
+} while (true);
+
 /**
  * Informa o que está na memória e muda para um novo valor
  * Instrução do processador
- */
+ **/
 int compare_and_swap (int *value, int expected, int newValue) {
     int temp = *value;
     if (*value == expected) *value = newValue;
@@ -65,7 +86,6 @@ int compare_and_swap (int *value, int expected, int newValue) {
 }
 
 do {
-    while (test_and_set(&lock)); // critial section com espera ativa
     while (compare_and_swap(&lock, 0, 1)) // critical section com espera ativa
     lock = 0; // tempo restante
 } while (true);
@@ -122,10 +142,23 @@ do {
 } while (true);
 ```
 
-### Semaphore
+### Semaphore 
 
 Formas mais sofisticadas de colocar processos à espera. Um semáforo que só contenha dois valores (0, 1) torna-se binário (*binary semaphores* != *counting semaphores*) e semelhante aos exemplos anteriores -> continua a existir espera ativa. <br>
 As operações da implementação `wait()` e `signal` têm de ser atómicas.
+
+#### Implementação com espera ativa
+
+```c++
+wait (semaphore *S) {
+    while (S <= 0);
+    S--;
+}
+
+signal (semaphore *S) {
+    S++;
+}
+```
 
 #### Implementação sem espera ativa
 
@@ -152,7 +185,7 @@ Sempre que há locks em *threads*, todos devem pegar nos recursos pela mesma ord
 
 #### DeadLock
 
-Quando dois ou mais processos estão continuamente à espera por um evento que só pode ser causado por um único processo à espera.
+Quando dois ou mais processos estão continuamente à espera por um evento que só pode ser causado por um único processo à espera. Por exemplo o wait(Q) e wait(P) em dois processos: cada um está à espera do outro para poder continuar.
 
 #### Starvation / Indefinite blocking
 
@@ -174,4 +207,99 @@ Os escritores podem ler e escrever e os leitores só podem ler. Sempre que exist
 
 #### 3. Dining-Philosophers Problem
 
-Só permite que cada filósofo (processo) pegue nos dados (os dois pauzinhos) somente se os dois estiverem disponíveis ao mesmo tempo. Os filósofos de número ímpar pegam primeiro no pauzinho esquerdo e só depois o direito, os de número par pegam no pauzinho direito e só depois o esquero. Assim alguns ficam sempre à espera e outros ficam sempre com todos os dados que necessitam.
+Só permite que cada filósofo (processo) pegue nos dados (os dois pauzinhos) somente se os dois estiverem disponíveis ao mesmo tempo. Os filósofos de número ímpar pegam primeiro no pauzinho esquerdo e só depois o direito, os de número par pegam no pauzinho direito e só depois o esquero. Assim alguns ficam sempre à espera e outros ficam sempre com todos os dados que necessitam. <br>
+
+# Monitores
+
+Controlo de concorrência, ligada a OOP por encapsulamento de atributos privados (o status do monitor). Cada instância só tem um *thread* em cada método. Cada método pode ser sincronizado ou não, com exclusão múltipla.
+
+```c++
+monitor Buffer {
+
+    int status[N];
+
+    int take() { // exclusão múltipla em relação ao objecto todo
+        // lock()
+        // unlock()
+        return x;
+    }
+
+    void put(int x) {
+        // lock()
+        // unlock()
+    }
+}
+```
+
+## Variáveis de condição - flags
+
+São declaradas explicitamente ou implicitamento (mutex).
+
+- `wait()` para adormecer e libertar a exclusão múltipla. Pode acontecer num método de um monitor sempre que não tiver dados para poder avançar. Exemplo: falta de variáveis, buffer vazio, buffer cheio... 
+
+- `signal()` para enviar um sinal a possíveis threads que estejam em wait(), guardadas em filas, de forma a continuar com a exclusão múltipla.
+
+```c++
+monitor Semaphore {
+
+    int v;
+    condition notZero;
+
+    acquire() {
+        if (v == 0) // para melhor controlo sobre o código, usar while() e termos sempre que voltar
+                    // a testar o predicado
+            wait(notZero); // bloqueia e liberta a exclusão múltipla
+        v = v - 1;
+    }
+
+    release() {
+        v = v + 1;
+        signal(notZero); // avisa que já não está a zero, o acquire() pode continuar
+    }
+}
+```
+
+`signalAll()`, acorda mais do que um processo no wait(), sempre que as condições o permitam (mais dados disponíveis e quantidade suficiente de threads à espera). Encontram-se nos monitores modernos, como em Java.
+
+### Prioridades nos Monitores clássicos:
+- W, os que estão parados no wait();
+- S, os que fizeram signal(), pois estão em exclusão múltipla;
+- E, os outros processos todos;
+
+### Prioridades nos Monitores modernos:
+- S, continua o processo que faz signal();
+- E, W, continua os que estão parados no wait() ou novos processos;
+
+#### Implementação do problema clássico de escritores e leitores
+
+```c++
+monitorRWLock { // E = W < S
+
+    int readers = 0, writers = 0, wantWrite = 0; 
+    condition OKread, OKwrite;
+
+    readLock() { /* Se ainda existirem leitores ou alguém quer ler, então wait() */
+        while (writers != 0 || wantWrite > 0) wait(OKread); 
+        readers++;
+        signal(OKread);
+    }
+
+    readUnlock() { /* Liberta um reader, se ficar a zero então podem escrever */
+        readers--;
+        if (readers == 0) signal(OKwrite); 
+    }
+
+    writeLock() { /* Passa de querer escrever para escritor, se não houver mais ninguém */
+        wantWrite++;
+        while (writers != 0 || readers != 0) wait(OKwrite); 
+        wantWrite--; 
+        writers++;
+    }
+
+    writeUnlock() { /* Acaba a escrita, sinaliza que podem entrar ou vários leitores ou um escritor */
+        writers--; 
+        signal(OKread); 
+        signal(OKwrite);
+    } 
+}
+```

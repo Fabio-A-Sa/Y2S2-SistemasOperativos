@@ -1,6 +1,7 @@
 # 3 - Processes
 
 Um processo é um programa em execução que pode ter vários estados (new, running, waiting, ready, terminated). Enquanto que um programa é passivo, é somente um ficheiro executável, o processo é ativo pois há a execução propriamente dita. Todos os processos de um sistema devem ser independentes e cooperativos entre si. <br>
+Uma thread é uma unidade de processamento do processo. Assim, cada processo pode ser comportado por uma ou mais threads.
 
 Um processo pode ser descrito de duas formas distintas:
 
@@ -30,10 +31,10 @@ Também conhecido como Task Control Block, contém a informação associada a ca
 
 Legenda:
 
-- Process state: running, waiting, new, ready, terminated
-- Process number: número do processo
-- Program counter: localização das instruções para executar a seguir
-- Registers: conteúdo de todo o processo, X0 até X31
+- Process state: running, waiting, new, ready, terminated;
+- Process number: número do processo;
+- Program counter: localização das instruções para executar a seguir ao processo selecionado;
+- CPU Registers: conteúdo de todo o processo, X0 até X31;
 - Memory limits: memória alocada para o processo
 - List of open files
 
@@ -53,7 +54,7 @@ Seleciona que processo deve ser trazido para a fila de processos prontos a execu
 
 O processo Pai cria um processo filho que, ao criar outro processo, forma uma árvore de processos. Em Unix, o pai de todos é o `init` com pid (process identifier) = 1. A partir daí saem todos os outros do sistema. Ou o pai deixa o filho terminar, ou então entram em concorrência de execução (competição por tempo de CPU e ciclos de relógio).
 
-- `fork()` para criar um child;
+- `fork()` para criar um child. Retorna um inteiro que é igual a zero se for um novo processo;
 - `exec()` para executar o processo criado;
 - `exit()` para terminar o processo criado e dar merge no pai que o criou;
 - `abort()` para o pai matar o filho (por excesso de recursos usados, por não necessitar mais, pelo pai também estar quase a morrer);
@@ -70,7 +71,7 @@ Os processos, embora independentes (porque não devem perturbar ou influenciar a
 - modularidade;
 - conveniência;
 
-Principal problema: acaba por existir um processo que cria a informação para que outro processo (o consumidor) o utilize. Pelo que a utilização de um buffer (seja ele `unbounded-buffer` ou `bouder-buffer`).
+Principal problema: acaba por existir um processo que cria a informação para que outro processo (o consumidor) o utilize. Pelo que a utilização de um buffer (seja ele `unbounded-buffer` ou `bouder-buffer`). Solução: usar um shared-memory buffer.
 
 ```c
 /* bounder - buffer example */
@@ -101,8 +102,8 @@ Entre dois processos há um único link, normalmente bidirecional, e cuja ligaç
 Entre dois processos há um único link, normalmente bidirecional, e cuja ligação é feita automaticamente.
 
 ```c
-send (P, *message*); <!-- send a message to process P -->
-receive (Q, *message*); <!-- receive a message from process Q -->
+send (P, *message*);        <!-- send a message to process P -->
+receive (Q, *message*);     <!-- receive a message from process Q -->
 ```
 
 #### Indiretas
@@ -110,8 +111,8 @@ receive (Q, *message*); <!-- receive a message from process Q -->
 Mensagens recebidas pelas portas (*ports* or *mailbox*), em que cada uma contém um id único onde os processos podem comunicar. Cada par de processos pode ter vários links, ao contrário da comunicação direta anteriormente descrita.
 
 ```c
-send (A, *message*); <!-- send a message to mailbox A -->
-receive (A, *message*); <!-- receive a message from mailbox A -->
+send (A, *message*);        <!-- send a message to mailbox A -->
+receive (A, *message*);     <!-- receive a message from mailbox A -->
 ```
 
 #### Sincronizadas
@@ -145,7 +146,7 @@ A comunicação é feita entre um par de *Sockets*.
 
 ### Pipes
 
-Atua como um canal de comunicação entre dois processos. Existem as :
+Atua como um canal de comunicação entre dois processos. Existem as:
 
  - `ordinary pipes`, que não podem ser acedidas externamente ao processo que a criou (normalmente o processo pai cria um ordinary pipe para comunicar com o processo filho que criou). São unidirecionais, pelo que a escrita é feita na ponta *write-end* e o receive na parte *read-end*.
  - `named pipes`, que podem ser acedidas sem uma relação pai-filho. São mais poderosas que as *ordinary pipes*, onde a comunicação é bidirecional e vários processos podem usar a mesma *pipe* para comunicação. Existe em sistemas Windows e Unix.

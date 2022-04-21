@@ -1069,3 +1069,420 @@ int main(int argc, char* argv[]) {
         printf("result = %d\n", f(argv[1]));
     return EXIT_SUCCESS;
 }
+
+#define BUFFER_SIZE 1024
+
+int next_block_size(int count, int buffer_size) {
+    return (count >= buffer_size) ? buffer_size : count;
+}
+
+int readFile(char* fileName) {
+
+    /* check if file can be opened and is readable */
+    int fd = open(fileName, O_RDONLY);
+    if (fd == -1) {
+        printf("error: cannot open %s\n", fileName);
+        return EXIT_FAILURE;
+    }
+
+    /* get the file size */
+    struct stat info;
+    int ret = lstat(fileName, &info);
+    if (ret == -1) {
+        printf("error: cannot stat %s\n", fileName);
+        return EXIT_FAILURE;
+    }
+
+    /* print the contents in blocks */
+    int count = info.st_size;
+    char buffer[BUFFER_SIZE];
+    while (count != 0) {
+        int bytesin = read(fd, buffer, next_block_size(count, BUFFER_SIZE));
+        count -= bytesin;
+        write(STDOUT_FILENO, buffer, bytesin);
+    }
+
+    /* close file */
+    close(fd);
+    return 0;
+}
+
+int main(int argc, char* argv[]) {
+
+    int i = 1;
+    while (argv[i] != NULL) {
+        readFile(argv[i]);
+        i++;
+    }
+    
+    return EXIT_SUCCESS;
+
+int main(int argc, char* argv[]) {
+
+    if (argc != 3) {
+        (void)fprintf(stderr, "usage: %s perms file\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    int perms  = atoi(argv[1]);
+    int operms = perms % 10;
+    perms = perms / 10;
+    int gperms = perms % 10;
+    perms = perms / 10;
+    int uperms = perms;
+    mode_t newperms = (mode_t)0;
+
+    switch (uperms) {
+        case 0: break;
+        case 1: newperms |= S_IXUSR; break;
+        case 2: newperms |= S_IWUSR; break;
+        case 3: newperms |= S_IWUSR | S_IXUSR; break;
+        case 4: newperms |= S_IRUSR; break;
+        case 5: newperms |= S_IRUSR | S_IXUSR; break;
+        case 6: newperms |= S_IRUSR | S_IWUSR; break;
+        case 7: newperms |= S_IRUSR | S_IWUSR | S_IXUSR; break;
+        default:
+            (void)fprintf(stderr, "%s: illegal permission value\n", argv[0]);
+            return EXIT_SUCCESS;
+    }
+
+    switch (gperms) {
+        case 0: break;
+        case 1: newperms |= S_IXGRP; break;
+        case 2: newperms |= S_IWGRP; break;
+        case 3: newperms |= S_IWGRP | S_IXGRP; break;
+        case 4: newperms |= S_IRGRP; break;
+        case 5: newperms |= S_IRGRP | S_IXGRP; break;
+        case 6: newperms |= S_IRGRP | S_IWGRP; break;
+        case 7: newperms |= S_IRGRP | S_IWGRP | S_IXGRP; break;
+        default:
+            (void)fprintf(stderr, "%s: illegal permission value\n", argv[0]);
+            return EXIT_FAILURE;
+    }
+    
+    switch (operms) {
+        case 0: break;
+        case 1: newperms |= S_IXOTH; break;
+        case 2: newperms |= S_IWOTH; break;
+        case 3: newperms |= S_IWOTH | S_IXOTH; break;
+        case 4: newperms |= S_IRGRP; break;
+        case 5: newperms |= S_IROTH | S_IXOTH; break;
+        case 6: newperms |= S_IROTH | S_IWOTH; break;
+        case 7: newperms |= S_IROTH | S_IWOTH | S_IXOTH; break;
+        default:
+            (void)fprintf(stderr, "%s: illegal permission value\n", argv[0]);
+            return EXIT_FAILURE;
+    }
+
+    if (chmod(argv[2], newperms) == -1) {
+        (void)fprintf(stderr, "%s: cannot chmod %s\n", argv[0], argv[2]);
+        return EXIT_FAILURE;
+    }
+    /* ... */
+}
+
+void printFile(char* fileName) {
+
+    struct stat info;
+
+    if (lstat(fileName, &info) == -1) {
+        printf("Error!\n");
+        return;
+    }
+
+    mode_t m = info.st_mode;
+
+    putchar('d');
+    putchar( m & S_IRUSR ? 'r' : '-');
+    putchar( m & S_IWUSR ? 'w' : '-');
+    putchar( m & S_IXUSR ? 'x' : '-');
+    putchar( m & S_IRGRP ? 'r' : '-');
+    putchar( m & S_IWGRP ? 'w' : '-');
+    putchar( m & S_IXGRP ? 'x' : '-');
+    putchar( m & S_IROTH ? 'r' : '-');
+    putchar( m & S_IWOTH ? 'w' : '-');
+    putchar( m & S_IXOTH ? 'x' : '-');
+
+    printf(" 1 %d\t%s\t%s", info.st_gid, fileName, ctime(&info.st_mtime));
+}
+
+int main (int argc, char** argv) {
+
+    if (argc != 2) {
+        fprintf (stderr, "usage: %s dirname\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    DIR *q = opendir (argv[1]);
+    if (q == NULL) {
+        fprintf (stderr, "%s: Cannot open directory ’%s’\n", argv[0], argv[1]);
+        return EXIT_FAILURE;
+    }
+
+    printf ("%s/\n", argv[1]);
+    struct dirent *p = readdir(q);
+    while (p != NULL) {
+        printFile(p->d_name);
+        p = readdir(q);
+    }
+
+    closedir (q);
+
+    return EXIT_SUCCESS;
+}
+
+#define MAX_SIZE 1024
+
+int main (int args, char* argv[]) {
+
+    char buffer[MAX_SIZE];
+    getcwd(buffer, MAX_SIZE);
+    printf("Current Directory: %s\n", buffer);
+
+    return EXIT_SUCCESS;
+}
+
+void getFileStatus(char *fileName) {
+
+    struct stat info;
+
+    if (lstat(fileName, &info) == -1) {
+        fprintf(stderr, "fsize: Can’t stat %s\n", fileName);
+        return;
+    }
+
+    printf("%s\nsize: %d bytes\ndisk_blocks: %d\nlast edit: %sowner: %d\n",
+            fileName, (int)info.st_size, (int)info.st_blocks, ctime(&info.st_mtime), info.st_gid);
+}
+
+int main(int argc, char* argv[]) {
+
+    if (argc < 2) {
+        fprintf(stderr, "usage: %s file\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    int i = 1;
+    while (argv[i] != NULL) {
+        getFileStatus(argv[i]);
+        i++;
+    }
+
+    return EXIT_SUCCESS;
+}
+
+#define NEW_PERMISSION 644 // rw,r,r
+
+void touch(char* fileName) {
+
+    FILE* file = fopen(fileName, "w");
+    if (chmod(fileName, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH) != 0) {
+        printf("unable to change permissions in %s file!\n", fileName);
+    }
+    fclose(file);
+}
+
+int main(int argc, char *argv[]) {
+
+    if (argc < 2) {
+        fprintf(stderr, "usage: %s <FILENAME>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    int i = 1;
+    while (argv[i] != NULL) {
+        touch(argv[i]);
+        i++;
+    }
+
+    return EXIT_SUCCESS;
+}
+
+int main(int argc, char* argv[]) {
+
+    int v;
+    printf("Initial process: %d\n", getpid());
+
+    /* fork a child process */
+    v = fork();
+    if (v == 0) printf("Child: %d\n", getpid());
+
+    /* fork another child process */
+    v = fork();
+    if (v == 0) printf("Child: %d\n", getpid());
+
+    /* and fork another */
+    v = fork();
+    if (v == 0) printf("Child: %d\n", getpid());
+
+    // Total = 8 processes (2^3)
+    return EXIT_SUCCESS;
+}
+
+int main(int argc, char* argv[]) {
+
+    int v;
+    printf("Initial process: %d\n", getpid());
+
+    for (int i = 0; i < 4; i++) {
+        v = fork();
+        if (v == 0) printf("New process %d: %d\n", i, getpid());
+    }
+
+    // Total = 16 processes (2^4)
+    return EXIT_SUCCESS;
+}
+
+int main(int argc, char* argv[]) {
+
+    pid_t pid;
+    int value = 0;
+    if ((pid = fork()) == -1) {
+        perror("fork");
+        return EXIT_FAILURE;
+    }
+    else if (pid == 0) {
+        /* child process */
+        value = 1;
+        printf("CHILD: value = %d, addr = %p\n", value, &value);
+    }
+    else {
+        /* parent process */
+        if (waitpid(pid, NULL, 0) == -1) {
+            perror("wait");
+            return EXIT_FAILURE;
+        }
+        printf("PARENT: value = %d, addr = %p\n", value, &value);
+    }
+
+    /*  Apesar de terem o mesmo endereço, a memória modificada pelo filho 
+        Não é a mesma que o pai conhece                                         */
+
+    // CHILD: value = 1, addr = 0x16f21f688
+    // PARENT: value = 0, addr = 0x16f21f688
+    return EXIT_SUCCESS;
+}
+
+int main(int argc, char* argv[]) {
+
+    pid_t pid;
+
+    /* fork a child process */
+    if ((pid = fork()) == -1) {
+        perror("fork");
+        return EXIT_FAILURE;
+
+    } else if (pid == 0) {
+        /* child process */
+        if (execlp(argv[1], argv[1], NULL) == -1) {
+            perror("execlp");
+            return EXIT_FAILURE;
+        }
+
+    } else {
+        /* parent process */
+        if (waitpid(pid, NULL, 0) == -1) {
+            perror("waitpid");
+            return EXIT_FAILURE;
+        }
+        printf("child exited\n");
+    }
+
+    /*  A system call 'execlp' faz com que o processo filho seja chamado para o código especificado em argv[1]
+        Quando termina, retorna e o processo pai é avisado através da system call wait()                           */
+    return EXIT_SUCCESS;
+}
+
+int main(int argc, char* argv[]) {
+
+    char  buf[1024];
+    char* command;
+    pid_t pid;
+
+    /* do this until you get a ^C or a ^D */
+    for( ; ; ) {
+
+        /* give prompt, read command and null terminate it */
+        fprintf(stdout, "$ ");
+        if((command = fgets(buf, sizeof(buf), stdin)) == NULL) break;
+        command[strlen(buf) - 1] = '\0';
+
+        /* call fork and check return value */
+        if((pid = fork()) == -1) {
+            fprintf(stderr, "%s: can’t fork command: %s\n", argv[0], strerror(errno));
+            continue;
+            
+        } else if(pid == 0) {
+
+            /* child */
+            execlp(command, command, (char *)0);
+
+            /* if I get here "execlp" failed */
+            fprintf(stderr, "%s: couldn’t exec %s: %s\n", argv[0], buf, strerror(errno));
+
+            /* terminate with error to be caught by parent */
+            exit(EXIT_FAILURE);
+        } 
+
+        /* shell waits for command to finish before giving prompt again */
+        if ((pid = waitpid(pid, NULL, 0)) < 0)
+            fprintf(stderr, "%s: waitpid error: %s\n", argv[0], strerror(errno));
+    }
+
+    /**
+     * Ocorre um erro quando argumentos são passados nos comandos da shell
+     * uma vez que o programa só está preparado para receber argv[0], com argc == 1
+     */
+    exit(EXIT_SUCCESS);
+}
+
+#define MAX_HISTORY_SIZE 10
+
+int main(int argc, char* argv[]) {
+
+    char  buf[1024];
+    char* command;
+    pid_t pid;
+    static char *history[MAX_HISTORY_SIZE];
+    int index = 0;
+
+    for( ; ; ) {
+
+        fprintf(stdout, "$ ");
+        if((command = fgets(buf, sizeof(buf), stdin)) == NULL) break;
+        command[strlen(buf) - 1] = '\0';
+
+        if((pid = fork()) == -1) {
+            fprintf(stderr, "%s: can't fork command: %s\n", argv[0], strerror(errno));
+            continue;
+            
+        } else if (pid == 0) {
+
+            char* result;
+            char *stop = "exit";
+            char *getHistory = "history";
+
+            history[(index % MAX_HISTORY_SIZE)] = command;
+            index++;
+
+            if ((result = strstr(stop, command)) != NULL) {
+                printf("Exit!\n");
+                return 0;
+            } else if ((result = strstr(getHistory, command)) != NULL) {
+                for (int i = 0 ; i < MAX_HISTORY_SIZE ; i++) {
+                    if (history[i] != NULL) printf("%s\n", history[i]);
+                }
+            } else {
+                execlp(command, command, (char *)0); 
+                fprintf(stderr, "%s: couldn't exec %s: %s\n", argv[0], buf, strerror(errno));
+                exit(EXIT_FAILURE);
+            }
+            exit(EXIT_FAILURE);
+        } 
+
+        if ((pid = waitpid(pid, NULL, 0)) < 0)
+            fprintf(stderr, "%s: waitpid error: %s\n", argv[0], strerror(errno));
+    }
+
+    exit(EXIT_SUCCESS);
+}

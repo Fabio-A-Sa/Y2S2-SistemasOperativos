@@ -26,7 +26,7 @@ int main(int argc, char* argv[]) {
         case 4: newperms |= S_IRUSR; break;
         case 5: newperms |= S_IRUSR | S_IXUSR; break;
         case 6: newperms |= S_IRUSR | S_IWUSR; break;
-        case 7: newperms |= S_IRGRP | S_IWUSR | S_IXUSR; break;
+        case 7: newperms |= S_IRUSR | S_IWUSR | S_IXUSR; break;
         default:
             (void)fprintf(stderr, "%s: illegal permission value\n", argv[0]);
             return EXIT_SUCCESS;
@@ -37,11 +37,12 @@ int main(int argc, char* argv[]) {
         case 1: newperms |= S_IXGRP; break;
         case 2: newperms |= S_IWGRP; break;
         case 3: newperms |= S_IWGRP | S_IXGRP; break;
-        case 4: /* ... */
-        case 5: /* ... */
+        case 4: newperms |= S_IRGRP; break;
+        case 5: newperms |= S_IRGRP | S_IXGRP; break;
         case 6: newperms |= S_IRGRP | S_IWGRP; break;
         case 7: newperms |= S_IRGRP | S_IWGRP | S_IXGRP; break;
         default:
+            (void)fprintf(stderr, "%s: illegal permission value\n", argv[0]);
             return EXIT_FAILURE;
     }
     
@@ -49,12 +50,11 @@ int main(int argc, char* argv[]) {
         case 0: break;
         case 1: newperms |= S_IXOTH; break;
         case 2: newperms |= S_IWOTH; break;
-        case 3: /* ... */
-        case 4: newperms |= S_IROTH; break;
+        case 3: newperms |= S_IWOTH | S_IXOTH; break;
+        case 4: newperms |= S_IRGRP; break;
         case 5: newperms |= S_IROTH | S_IXOTH; break;
-        case 6: /* ... */
-        case 7: /* ... */
-
+        case 6: newperms |= S_IROTH | S_IWOTH; break;
+        case 7: newperms |= S_IROTH | S_IWOTH | S_IXOTH; break;
         default:
             (void)fprintf(stderr, "%s: illegal permission value\n", argv[0]);
             return EXIT_FAILURE;
@@ -64,5 +64,4 @@ int main(int argc, char* argv[]) {
         (void)fprintf(stderr, "%s: cannot chmod %s\n", argv[0], argv[2]);
         return EXIT_FAILURE;
     }
-    /* ... */
 }

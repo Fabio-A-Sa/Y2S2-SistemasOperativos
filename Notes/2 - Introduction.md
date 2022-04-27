@@ -89,11 +89,19 @@ Há sistemas com um ou mais processadores. Com mais processadores (cores/núcleo
 2. `Processamento simétrico` - quando cada processador/core executa todas as tarefas;
 
 Os sistemas de redes de computadores também podem adoptar esta técnica de multiprocessamento, usando uma SAN (Storage-Area Network) para manipular programas que foram já escritos para processamento paralelo e um DLM (Distributed Lock Manager) para evitar conflitos em operações concorrentes. Existem dois processos principais:
-1. `Clustering assimétrico` - uma máquina em modo hot-standby (orquestra, é a máquina principal que monitora as outras) e as outras rodam as aplicações;
+1. `Clustering assimétrico` - uma máquina em modo hot-standby (orquestra, é a máquina principal que monitora as outras) e as outras rodam as aplicações. Se uma máquina falhar, a que está em hot-standby toma o seu lugar;
 2. `Clustering simétrico` - tem várias máquinas em execução, monitorando-se mutuamente;
 
 Cada vez mais os processadores permitem um dual-mode entre o `user mode` (mode bit = 1) e o `kernel mode` (mode bit = 0) para proteção do sistema, como por exemplo loops infinitos. <br>
 O sistema operativo é responsável por criar, eliminar, suspender, sincronizar e comunicar com todos os processos.
+
+### 5.2 - Multiprogramming
+
+Organiza os trabalhos de forma a que o CPU tenha sempre algo a executar. Apenas uma parte dos trabalhos está colocado na memória. Não permite uma interação com o utilizador.
+
+### 5.3 - TimeSharing / Multitasking
+
+O próprio CPU muda de trabalho. Como a mudança é tão frequente, então o utilizador consegue interagir com o programa. 
 
 ## 6 - Proteção e Segurança
 

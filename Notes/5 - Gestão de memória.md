@@ -70,13 +70,25 @@ Há duas formas:
 
 Divide o processo numa perspectiva funcional. Todos os processos podem ser divido em:
 
-1. Text - Binário do programa
+1. Text - Binário do código do programa
 2. Data - Binário das variáveis globais inicializadas (double x = 2.45;)
 3. Bss - Binário das variáveis globais não inicializadas (double y;)
 4. Heap - Zona de memória usada para alocar espaço (com malloc() por exemplo)
-5. Stack
+5. Stack - para guardar as chamadas de funções e variáveis a usar
 
-1, 2 e 3 formam o ficheiro binário `a.out`, zona estática
-4 e 5 formam a zona dinâmica, só existe informação lá enquanto o programa está em execução
+1, 2 e 3 formam o ficheiro binário `a.out`, zona estática <br>
+4 e 5 formam a zona dinâmica, só existe informação lá enquanto o programa está em execução <br>
+
+Cada bloco é alocado na memória física por uma qualquer ordem. Cada bloco tem de guardar a sua base e o tamanho. Assim é necessário guardar, para N segmentos, 2N números para transformar os endereços virtuais em endereços físicos.
+Para N segmentos, existe uma estrutura de dados (tabela) que guarda todos os dados:
+
+| index | base | tamanho | valid | permissões |
+| --- | --- | --- | --- | --- |
+| 0 | b0 | t0 | 1 | R |
+| 1 | ? | ? | 0 | ? |
+| 2 | b2 | t2 | 1 | RW |
+| N | ? | ? | ? | ? |
+
+No código das funções, a permissão é só de leitura `R` (escrita em cima das instruções leva a erros). Na "data", no "bss" na "heap" e na "stack" já é possível ler e escrever `RW`. Isto garante uma camada de proteção à memória.
 
 ### 2. Técnica de Paginação

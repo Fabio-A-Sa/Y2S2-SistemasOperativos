@@ -79,8 +79,8 @@ Divide o processo numa perspectiva funcional. Todos os processos podem ser divid
 1, 2 e 3 formam o ficheiro binário `a.out`, zona estática <br>
 4 e 5 formam a zona dinâmica, só existe informação lá enquanto o programa está em execução <br>
 
-Cada bloco é alocado na memória física por uma qualquer ordem. Cada bloco tem de guardar a sua base e o tamanho. Assim é necessário guardar, para N segmentos, 2N números para transformar os endereços virtuais em endereços físicos.
-Para N segmentos, existe uma estrutura de dados (tabela) que guarda todos os dados:
+Cada bloco é alocado na memória física por uma qualquer ordem. Cada bloco tem de guardar a sua base e o tamanho. Assim é necessário guardar, para N segmentos, 2N números para transformar os endereços virtuais em endereços físicos. <br>
+Cada processo P pode ter N segmentos, e existe uma estrutura de dados (tabela de segmentos) que guarda todos os dados de cada segmento. A tabela está guardada na memória física associada ao kernel do sistema operativo. O processo deixa assim de guardar em PCB dois registos, um para a base e outro para o tamanho, e passa a guardar dois registos: um STBR (segment table base register, que aponta para a zona de memória física onde a sua tabela está) e um STLR (que indica o número de segmentos presentes na tabela).
 
 | index | base | tamanho | valid | permissões |
 | --- | --- | --- | --- | --- |
@@ -90,5 +90,19 @@ Para N segmentos, existe uma estrutura de dados (tabela) que guarda todos os dad
 | N | ? | ? | ? | ? |
 
 No código das funções, a permissão é só de leitura `R` (escrita em cima das instruções leva a erros). Na "data", no "bss" na "heap" e na "stack" já é possível ler e escrever `RW`. Isto garante uma camada de proteção à memória.
+
+A tabela pode ser imaginada segundo esta estrutura de dados:
+
+```c++
+typedef unsigned long uint;
+typedef struct {
+    bool valid;
+    uint base;
+    uint tamanho;
+    uint permissões;
+} entry;
+int number_segments;
+entry segmentTable[number_segments];
+```
 
 ### 2. Técnica de Paginação

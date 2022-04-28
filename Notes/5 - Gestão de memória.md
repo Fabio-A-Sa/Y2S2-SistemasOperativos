@@ -1,4 +1,4 @@
-# 6 - Kernel - Gestão de Memória
+# 5 - Kernel - Gestão de Memória
 
 ## Tópicos
 
@@ -20,6 +20,7 @@ Tempo que demora entre o pedido da informação e a recepção dessa mesma infor
 
 ### Instruction Fetch, Load e Store
 
+Instruction fecth -> buscar um novo processo para a memória <br>
 Quando o CPU vai buscar à memória a nova instrução a executar, ou leitura de registos ou escrita em registos. Aqui a latência anda na ordem das dezenas de ciclos de relógio. Em disco, a latência é muito superior.
 
 ## Gestão de memória eficiente
@@ -40,12 +41,42 @@ Base = distância entre a posição inicial 0 e o início do espaço de endereç
 Se endereço virtual for menor que o endereço limite do processo:
     - Endereço físico = Endereço virtual + base
 Else:
-    - Erro
+    - Memory error
 
 ```c++
 char *p;
 int x = *p; // erro -> endereço virtual fora do espaço de endereçamento
 ```
 
-A base e o limite são fixos, e são guardados em dois registos no PCB.
+A base e o limite são fixos, e são guardados em dois registos no PCB. Só mudam se o CPU trocar a zona onde estão, e nesse caso atualiza os dados do PCB de acordo com a nova localização.
 A tradução de endereços virtuais para endereços físicos ocorre dentro do CPU, onde há verificações de limites segundo a equação de cima e se não houver erro retorna o endereço físico. O circuito chama-se `MMU`, a Memory Management Unit. Gera o endereço no momento imediatamente anterior à saída do endereço.
+
+### Custos da transição de memória virtual para memória física
+
+Para cada processo:
+
+- Guardar a base e o limite em registos (unsigned int ou unsigned long);
+- Um teste;
+- Uma soma;
+
+## Divisão de processos
+
+Para que possam exitir mais processos prontos a executar na memória, sem necessidade de 
+Há duas formas:
+- Segmentação;
+- Paginação;
+
+### 1. Técnica de Segmentação
+
+Divide o processo numa perspectiva funcional. Todos os processos podem ser divido em:
+
+1. Text - Binário do programa
+2. Data - Binário das variáveis globais inicializadas (double x = 2.45;)
+3. Bss - Binário das variáveis globais não inicializadas (double y;)
+4. Heap - Zona de memória usada para alocar espaço (com malloc() por exemplo)
+5. Stack
+
+1, 2 e 3 formam o ficheiro binário `a.out`, zona estática
+4 e 5 formam a zona dinâmica, só existe informação lá enquanto o programa está em execução
+
+### 2. Técnica de Paginação

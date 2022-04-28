@@ -105,4 +105,16 @@ int number_segments;
 entry segmentTable[number_segments];
 ```
 
+### Tradução de endereços físicos na tabela para endereços virtuais no processo
+
+Dada a configuração do sistema operativo com N bits que gera endereços virtuais de N bits, N-X bits determinam o número do segmento e X bits determinam o offset desse mesmo segmento. Assim o máximo número de bits de tamanho de um segmento é dado por 2^X.
+- `Teste da linha na tabela` -> com o endereço da tabela na memória conhecido do processo e a primeira parte do endereço virtual. Erro não fatal, significa que o segmento não está na memória e nesse caso o CPU vai buscar;
+- `Teste do offset` -> com o offset do segmento e a informação da base na tabela. Dá erro fatal caso o endereço seja fora do segmento;
+
+#### Penalização desta técnica de segmentação:
+
+- Ir buscar à tabela os dados de cada segmento de cada processo na memória alocada pelo kernel. Implica acessos à memória física;
+- 2 testes;
+- Adição;
+
 ### 2. Técnica de Paginação

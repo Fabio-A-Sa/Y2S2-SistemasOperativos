@@ -5,7 +5,7 @@
 1. Definição de sistema operativo e funções;
 2. Partes e funcionamento do computador;
 3. Hierarquia de Memória;
-4. Tipos de processamentos;
+4. Tipos de processamentos. Multiprograming vs. Multitasking;
 5. Ambientes de computação
 6. ...
 
@@ -27,4 +27,20 @@ Do mais caro / mais rápido / menor para o maior: registos, cache, memória prin
 ## 4 - Tipos de processamento
 
 - Entre processadores: processamento assimétrico (cada processador tem a sua tarefa) e processamento simétrico (todos os processadores fazem todas as tarefas);
-- Entre sistemas: clustering assimétrico () e clustering simétrico (várias máquinas em execução, monitorando-se mutuamente);
+- Entre sistemas: clustering assimétrico (cada máquina tem a sua tarefa, há uma máquina master em hot-standby que monitora as outras e substitui caso alguma falhe) e clustering simétrico (várias máquinas em execução, monitorando-se mutuamente);
+
+Para o segundo caso, existem:
+1. SAN (Storage-Area Network) - manipula programas para processamento paralelo;
+2. DLM (Distributed Lock Manager) - evita conflitos em operações concorrentes; 
+
+### Multiprograming vs. Multitasking/Timesharing
+
+Enquanto que no primeiro caso, no segundo.
+
+## 5 - Ambientes de Computação
+
+1. 
+2. 
+3. 
+4. 
+5. 

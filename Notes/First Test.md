@@ -6,8 +6,9 @@
 2. Partes e funcionamento do computador;
 3. Hierarquia de Memória;
 4. Tipos de processamentos. Multiprograming vs. Multitasking;
-5. Ambientes de computação
-6. ...
+5. Ambientes de computação;
+6. Estrutura;
+7. ....
 
 ## 1 - Sistema Operativo
 
@@ -35,12 +36,18 @@ Para o segundo caso, existem:
 
 ### Multiprograming vs. Multitasking/Timesharing
 
-Enquanto que no primeiro caso, no segundo.
+Enquanto que no primeiro caso organiza as tarefas para que o CPU tenha sempre algo que fazer (mas apenas uma parte dos trabalhos está colocada na memória), no segundo a transição entre tarefas é tão rápida que dá para o utilizador interagir com o programa. A segunda é melhor.
 
 ## 5 - Ambientes de Computação
 
-1. 
-2. 
-3. 
-4. 
-5. 
+1. Tradicional - uso geral;
+2. Mobile - telemóveis, tablets;
+3. Distributed - networks, como se fosse um único sistema;
+4. Client-Server - respondem às exigências do utilizador, com interfaces, bd, retirar e colocar arquivos;
+5. Peer-to-Peer - não há distinção entre clientes e servidores, através do protocolo discovery;
+6. Virtualization - como nas virtual machines;
+7. Cloud computing - públicas, privadas e na sua maioria híbridas;
+8. Real time embedded systems - executam tarefas sem terem o mesmo sistema operativo. Restrições e tempo bem delimitado para cada tarefa;
+
+## 6 - Estrutura
+

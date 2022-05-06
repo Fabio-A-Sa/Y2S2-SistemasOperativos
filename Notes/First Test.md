@@ -51,3 +51,8 @@ Enquanto que no primeiro caso organiza as tarefas para que o CPU tenha sempre al
 
 ## 6 - Estrutura
 
+1. MS-DOS (Simple Structure) - funcionalidades num menor espaço. não divisível por módulos (estão muito interligados) e formado por: application programs, resident system programs, device drivers, ROM BIOS device drivers;
+
+2. Unix (Non Simple Structure - Monolithic) - limitado pelo harware. Duas partes: system programs e kernel (acima do hardware, abaixo das system calls, permite o file system, CPU scheduling, memory management);
+
+3. MicroKernel - ligação entre serviços (drivers, file drivers, virtual memory) e o client server, com maior memória alocada -> menos código está a ser executado em kernel mode (bit = 0) e mais em user mode (bit = 1)

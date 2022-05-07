@@ -8,7 +8,8 @@
 4. Tipos de processamentos. Multiprograming vs. Multitasking;
 5. Ambientes de computação;
 6. Estrutura;
-7. ....
+7. System Calls e passagem de Parâmetros;
+8. ...
 
 ## 1 - Sistema Operativo
 
@@ -40,7 +41,7 @@ Enquanto que no primeiro caso organiza as tarefas para que o CPU tenha sempre al
 
 ## 5 - Ambientes de Computação
 
-1. Tradicional - uso geral;
+1. Tradicional - uso geral. Um CLI (command line) e um GUI (graphical user interface);
 2. Mobile - telemóveis, tablets;
 3. Distributed - networks, como se fosse um único sistema;
 4. Client-Server - respondem às exigências do utilizador, com interfaces, bd, retirar e colocar arquivos;
@@ -56,3 +57,11 @@ Enquanto que no primeiro caso organiza as tarefas para que o CPU tenha sempre al
 2. Unix (Non Simple Structure - Monolithic) - limitado pelo harware. Duas partes: system programs e kernel (acima do hardware, abaixo das system calls, permite o file system, CPU scheduling, memory management);
 
 3. MicroKernel - ligação entre serviços (drivers, file drivers, virtual memory) e o client server, com maior memória alocada -> menos código está a ser executado em kernel mode (bit = 0) e mais em user mode (bit = 1)
+
+## 7 - System Calls e passagem de Parâmetros
+
+Para aceder a memória ou harware (conteúdo restrito, previligiado), o processo transita de User Mode para Kernel Mode (menos seguro, se ocorrer um erro afeta o sistema todo). Há três tipos de passagem de parâmetros:
+
+1. Pelos registos. Pode não haver tantos registos como parâmetros. Limita.
+2. Passados em bloco na memória. O endereço do bloco é passado num registo. Não limita.
+3. Colocados numa stack (pushed) e o sistema operativo faz (pop) quando necessário. Não limita.

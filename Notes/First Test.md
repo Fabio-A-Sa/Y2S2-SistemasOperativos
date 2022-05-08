@@ -2,7 +2,7 @@
 
 ## Tópicos:
 
-1. Definição de sistema operativo e funções;
+1. Definição de sistema operativo, funções e serviços;
 2. Partes e funcionamento do computador;
 3. Hierarquia de Memória;
 4. Tipos de processamentos. Multiprograming vs. Multitasking;
@@ -17,6 +17,10 @@ Intermediário entre o harware e o utilizador, para ser mais acessível e fácil
 1. Alocador de recursos - minimiza os conflitos entre hardware e software para uma melhor performence;
 2. Controlador de programas - previne erros entre programas e utilizações impróprias;
 3. Manipulador de dados - tanto ficheiros, como diretórios e a própria memória;
+
+### Serviços do sistema operativo
+
+Execução de programas, operações I/O, manipulador de ficheiros de sistema, detector de erros, comunicação, protetor de recursos e segurança em operações I/O.
 
 ## 2 - Funcionamento do Computador
 

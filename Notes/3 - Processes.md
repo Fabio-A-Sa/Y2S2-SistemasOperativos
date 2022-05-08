@@ -7,7 +7,7 @@ Um processo pode ser descrito de duas formas distintas:
 
 1. `I/0-bound process` - dispende mais tempo a fazer operações input ou output do que computações, usando pouco tempo do CPU de cada vez;
 
-2. `CUP-bound process` - dispende mais tempo a fazer computações, leva mais tempo do CPU do que operações input/output;
+2. `CPU-bound process` - dispende mais tempo a fazer computações, leva mais tempo do CPU do que operações input/output;
 
 Existem várias partes usadas nos processos:
 

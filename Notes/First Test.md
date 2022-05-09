@@ -70,3 +70,7 @@ Para aceder a memória ou harware (conteúdo restrito, previligiado), o processo
 1. Pelos registos. Pode não haver tantos registos como parâmetros. Limita.
 2. Passados em bloco na memória. O endereço do bloco é passado num registo. Não limita.
 3. Colocados numa stack (pushed) e o sistema operativo faz (pop) quando necessário. Não limita.
+
+## 8 - Processos
+
+Processos (ativos) são programas (passivos) em execução. Tem uma ou várias unidades de processamento (threads). Divisível em texto (código do programa), data (variáveis globais), current activity (program counter, processor registers), heap (memória dinamicamente alocada) e stack (registos de retorno, parêmetros, variáveis locais - memória temporária).

@@ -89,3 +89,4 @@ Cada processo tem um ID, um state (new, running, waiting, ready, terminated), e 
 
 ## 9 - Process Scheduling
 
+Escolhe processos para serem executados pelo CPU. 

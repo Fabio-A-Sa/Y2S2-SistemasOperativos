@@ -10,7 +10,8 @@
 6. Estrutura;
 7. System Calls e passagem de Parâmetros;
 8. Processos;
-9. ...
+9. Process Scheduling;
+10. ...
 
 ## 1 - Sistema Operativo
 
@@ -73,6 +74,18 @@ Para aceder a memória ou harware (conteúdo restrito, previligiado), o processo
 
 ## 8 - Processos
 
-Processos (ativos) são programas (passivos) em execução. Os programas podem ter vários processos, um processo pode ter várias unidades de processamento (threads). Divisível em texto (código do programa), data (variáveis globais), current activity (program counter, processor registers), heap (memória dinamicamente alocada) e stack (registos de retorno, parêmetros, variáveis locais - memória temporária).
+Processos (ativos) são programas (passivos) em execução. Os programas podem ter vários processos, um processo pode ter várias unidades de processamento (threads). Divisível em texto (código do programa), data (variáveis globais), current activity (program counter, processor registers), heap (memória dinamicamente alocada) e stack (registos de retorno, parêmetros, variáveis locais - memória temporária). Podem ser classificados como:
+1. I/O-bound process - mais I/O do que computações, não usa muito o CPU;
+2. CPU-bound process - mais computações, usa pouco os I/O;
 
-Cada processo tem um ID, um state (new, running, waiting, ready, terminated), 
+Cada processo tem um ID, um state (new, running, waiting, ready, terminated), e um PCB (Process Control Block). Este último tem:
+- o estado do processo;
+- o número do processo, pID;
+- program counter, local da próxima instrução a executar;
+- o conteúdo de todos os registos a usar;
+- CPU scheduling information (priorities);
+- limites de memória;
+- I/O, como lista de ficheiros abertos;
+
+## 9 - Process Scheduling
+

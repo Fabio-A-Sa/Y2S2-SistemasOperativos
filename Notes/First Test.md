@@ -12,7 +12,8 @@
 8. Processos;
 9. Process Scheduling;
 10. Criação e término de processos;
-11. ...
+11. Interprocess Comunication;
+12. ...
 
 ## 1 - Sistema Operativo
 
@@ -75,7 +76,7 @@ Para aceder a memória ou harware (conteúdo restrito, previligiado), o processo
 
 ## 8 - Processos
 
-Processos (ativos) são programas (passivos) em execução. Os programas podem ter vários processos, um processo pode ter várias unidades de processamento (threads). Divisível em texto (código do programa), data (variáveis globais), current activity (program counter, processor registers), heap (memória dinamicamente alocada) e stack (registos de retorno, parêmetros, variáveis locais - memória temporária). Podem ser classificados como:
+Processos (ativos) são programas (passivos) em execução, independentes mas cooperativos. Os programas podem ter vários processos, um processo pode ter várias unidades de processamento (threads). Divisível em texto (código do programa), data (variáveis globais), current activity (program counter, processor registers), heap (memória dinamicamente alocada) e stack (registos de retorno, parêmetros, variáveis locais - memória temporária). Podem ser classificados como:
 1. I/O-bound process - mais I/O do que computações, não usa muito o CPU;
 2. CPU-bound process - mais computações, usa pouco os I/O;
 
@@ -100,4 +101,18 @@ Escolhe processos para serem executados pelo CPU através de filas (job, todos, 
 ## 10 - Criação e término de processos
 
 O processo pai (process identifier, pid = 1, init) cria os outros usando uma system call fork(), formando uma tree de processos. Pai e filho podem partilhar todos os recursos, ou parte, ou nada, podem ser executados concorrentemente ou o pai espera até que o filho termine.
+
+- `fork()` para criar um child. Retorna um inteiro que é igual a zero se for um novo processo;
+- `exec()` para executar o processo criado;
+- `exit()` para terminar o processo criado e dar merge no pai que o criou;
+- `abort()` para o pai matar o filho (por excesso de recursos usados, por não necessitar mais, pelo pai também estar quase a morrer);
+- `wait()` para o pai esperar pelo processo do filho;
+
+Normalmente, quando um pai morre, morrem todos os filhos descendentes. Senão, os filhos são considerados `process zombi` quando nenhum pai está a esperá-lo (e obviamente não fez o wait()) ou `process orphan`, se o pai morreu sem invocar o wait().
+
+## 11 - IPC (Interproceess Communication)
+
+Para partilha de informação, melhorar a rapidez da computação, modularidade e conveniência, temos dois processos: Shared Memory e Message Passing. Daí resulta o paradigma do produtor-consumidor:
+
+
 

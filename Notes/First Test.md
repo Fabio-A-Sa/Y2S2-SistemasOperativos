@@ -73,4 +73,6 @@ Para aceder a memória ou harware (conteúdo restrito, previligiado), o processo
 
 ## 8 - Processos
 
-Processos (ativos) são programas (passivos) em execução. Tem uma ou várias unidades de processamento (threads). Divisível em texto (código do programa), data (variáveis globais), current activity (program counter, processor registers), heap (memória dinamicamente alocada) e stack (registos de retorno, parêmetros, variáveis locais - memória temporária).
+Processos (ativos) são programas (passivos) em execução. Os programas podem ter vários processos, um processo pode ter várias unidades de processamento (threads). Divisível em texto (código do programa), data (variáveis globais), current activity (program counter, processor registers), heap (memória dinamicamente alocada) e stack (registos de retorno, parêmetros, variáveis locais - memória temporária).
+
+Cada processo tem um ID, um state (new, running, waiting, ready, terminated), 

@@ -11,7 +11,8 @@
 7. System Calls e passagem de Parâmetros;
 8. Processos;
 9. Process Scheduling;
-10. ...
+10. Criação e término de processos;
+11. ...
 
 ## 1 - Sistema Operativo
 
@@ -87,6 +88,14 @@ Cada processo tem um ID, um state (new, running, waiting, ready, terminated), e 
 - limites de memória;
 - I/O, como lista de ficheiros abertos;
 
+Context Switch -> Ato de mudar entre processos. Ir ao PCB do processo gguardar o estado/contexto, pegar noutro PCB de outro processo e carregar as informações para o CPU. Não deve ser uma operação muito demorada, uma vez que nessa altura o CPU fica a consumir ciclos de relógio sem efetuar qualquer trabalho.
+
 ## 9 - Process Scheduling
 
-Escolhe processos para serem executados pelo CPU. 
+Escolhe processos para serem executados pelo CPU através de filas (job, todos, ready, na memória principal, device, estão à espera de I/O). Os Schedulers podem ser:
+1. Short-term / CPU scheduler - invocado frequentemente, milissegundos, seleciona o processo que deve ser executado a seguir, alocando-o no CPU;
+2. Long-term / job scheduler - invocado pouco, segundos ou minutos, controla o estado de multiprogramming. Coloca na queue o próximo processo pronto a executar (status == ready);
+3. Medium-term scheduler - se o grau de multiprogramming tiver de ser decrementado. Remove o processo da memória, coloca-o no disco, trás de volta ao disco para continuar a execução - processo de swapping;
+
+## 10 - Criação e término de processos
+

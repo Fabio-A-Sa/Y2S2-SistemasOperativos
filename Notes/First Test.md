@@ -14,7 +14,8 @@
 10. Criação e término de processos;
 11. Interprocess Comunication;
 12. Sockets and pipes;
-13. ...
+13. Sincronização de processos;
+14. ...
 
 ## 1 - Sistema Operativo
 
@@ -121,7 +122,7 @@ Ocorrem através de implementações Físicas (Memória partilhada, harware bus,
 
 1. Diretas - único link, normalmente bidirecional. send (P, *message*);
 2. Indiretas - por portas/mailbox, cada um com id, cada par de processos pode ter vários links. send (A, *message*);
-3. Sincronizadas - em modo c:
+3. Sincronizadas - em modo blocking:
     - send: o que envia fica bloqueado até que a mensagem seja recebida;
     - receive: o que recebe fica bloqueado até que a mensagem esteja disponível;
 4. Não sincronizadas - em modo non-blocking:
@@ -131,4 +132,11 @@ Ocorrem através de implementações Físicas (Memória partilhada, harware bus,
     - Capacidade zero - o sender deve esperar pelo processo que irá receber;
     - Capacidade finita - o sender deve esperar se a ligação estiver cheia;
     - Capacidade infinita - o sender nunca espera;
+
+## 12 - Sockets and Pipes
+
+1. Sockets - Ip + porta. A comunicação é feita entre um par de sockets.
+2. Pipes - Canal de comunicação entre dois processos. Podemos ter `ordinary pipes`, que não podem ser acedidas externamente ao processo que a criou (normalmente o processo pai cria um ordinary pipe para comunicar com o processo filho que criou). São unidirecionais, pelo que a escrita é feita na ponta *write-end* e o receive na parte *read-end*; e `named pipes`, que podem ser acedidas sem uma relação pai-filho. São mais poderosas que as *ordinary pipes*, onde a comunicação é bidirecional e vários processos podem usar a mesma *pipe* para comunicação. Existe em sistemas Windows e Unix.
+
+## 13 - Sincronização de processos
 

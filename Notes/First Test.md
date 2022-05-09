@@ -99,3 +99,5 @@ Escolhe processos para serem executados pelo CPU através de filas (job, todos, 
 
 ## 10 - Criação e término de processos
 
+O processo pai (process identifier, pid = 1, init) cria os outros usando uma system call fork(), formando uma tree de processos. Pai e filho podem partilhar todos os recursos, ou parte, ou nada, podem ser executados concorrentemente ou o pai espera até que o filho termine.
+

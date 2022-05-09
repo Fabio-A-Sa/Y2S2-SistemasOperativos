@@ -13,7 +13,8 @@
 9. Process Scheduling;
 10. Criação e término de processos;
 11. Interprocess Comunication;
-12. ...
+12. Sockets and pipes;
+13. ...
 
 ## 1 - Sistema Operativo
 
@@ -112,7 +113,22 @@ Normalmente, quando um pai morre, morrem todos os filhos descendentes. Senão, o
 
 ## 11 - IPC (Interproceess Communication)
 
-Para partilha de informação, melhorar a rapidez da computação, modularidade e conveniência, temos dois processos: Shared Memory e Message Passing. Daí resulta o paradigma do produtor-consumidor:
+Para partilha de informação, melhorar a rapidez da computação, modularidade e conveniência, temos dois processos: Shared Memory e Message Passing. Daí resulta o paradigma do produtor-consumidor (com bounded e unbounded buffer) no caso do shared memmory. Se for bounded, o produtor só coloca quando o index está vazio, o consumidor só consome quando o index não está vazio. Para o Message Passing, temos o send() e o receive(), através de um communication link.
 
+### Communication link
 
+Ocorrem através de implementações Físicas (Memória partilhada, harware bus, network) e lógicas (Direct or indirect, Sincronizada ou não sincronizada em tempo, buffer automático ou explícito);
+
+1. Diretas - único link, normalmente bidirecional. send (P, *message*);
+2. Indiretas - por portas/mailbox, cada um com id, cada par de processos pode ter vários links. send (A, *message*);
+3. Sincronizadas - em modo c:
+    - send: o que envia fica bloqueado até que a mensagem seja recebida;
+    - receive: o que recebe fica bloqueado até que a mensagem esteja disponível;
+4. Não sincronizadas - em modo non-blocking:
+    - send: o que envia continua em execução normal depois;
+    - receive: o que recebe, pode receber a mensagem válida ou nula;
+5. Buferring:
+    - Capacidade zero - o sender deve esperar pelo processo que irá receber;
+    - Capacidade finita - o sender deve esperar se a ligação estiver cheia;
+    - Capacidade infinita - o sender nunca espera;
 

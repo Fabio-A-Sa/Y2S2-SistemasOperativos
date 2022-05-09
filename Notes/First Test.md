@@ -140,3 +140,20 @@ Ocorrem através de implementações Físicas (Memória partilhada, harware bus,
 
 ## 13 - Sincronização de processos
 
+O Scheduling pode ser de dois tipos:
+1. `Preemptive` – permite entrada na zona crítica quando está em kernel mode. (Running | Waiting) -> Ready;
+2. `Non-preemptive` – executa até sair do kernel model ou até voluntariamente. Essencialmente livre do race condition. Running -> Waiting or Terminates.
+
+### 13.1 - Secção crítica
+
+Zona onde os processos podem mudar o conteúdo de variáveis, ficheiros. Sem cuidado resulta em race condition e leva a resultados inesperados. Os processos competem para chegar à secção crítica.
+
+Soluções:
+
+1. Mutual Exclusion - Se um processo está na secção crítica, outro não pode estar a ser executado;
+2. Progress - nenhum processo pode ser ultrapassado indefinidamente;
+3. Bounded Waiting - limite do número de esperas que um processo pode fazer em relação a outros que já tenham entrado na secção crítica;
+
+### 13.2 - Peterson's Solution
+
+

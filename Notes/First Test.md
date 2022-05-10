@@ -156,7 +156,8 @@ Soluções:
 
 ### 13.2 - Peterson's Solution
 
-Load e Store são instruções atómicas (não podem ser interrompidas por outro processo). O processo i só entra na zona crítica se flag[j] for false ou turn = i. O outro processo está em espera ativa.
+Load e Store são instruções atómicas (não podem ser interrompidas por outro processo). O processo i só entra na zona crítica se flag[j] for false ou turn = i. O outro processo está em espera ativa. <br>
+do {flag[i] = true; turn = j; while (flag[j] && turn == j); flag[i] = false;} while
 
 ### 13.3 - Test and Set
 

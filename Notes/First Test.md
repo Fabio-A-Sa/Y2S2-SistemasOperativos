@@ -182,7 +182,7 @@ Priority inversion quando processo de pequena prioridade travam o avanço de gra
 
 ### 13.7 - Monitores
 
-
+Controlam a concorrência. 
 
 ## 14 - Problemas clássicos de sincronização
 

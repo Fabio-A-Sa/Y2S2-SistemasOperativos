@@ -156,4 +156,10 @@ Soluções:
 
 ### 13.2 - Peterson's Solution
 
+Load e Store são instruções atómicas (não podem ser interrompidas por outro processo). O processo i só entra na zona crítica se flag[j] for false ou turn = i. O outro processo está em espera ativa.
 
+### 13.3 - Test and Set
+
+Retorna o valor do parâmetro e coloca-o como verdadeiro. Quem apanhar o lock aberto, pode fechá-lo, entrar na zona crítica, e no regresso abri-lo.
+
+### 13.4 - 

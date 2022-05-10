@@ -15,7 +15,7 @@
 11. Interprocess Comunication;
 12. Sockets and pipes;
 13. Sincronização de processos;
-14. ...
+14. Problemas clássicos de sincronização;
 
 ## 1 - Sistema Operativo
 
@@ -172,7 +172,15 @@ Parecido com o processo anterior. Somente se o lock tiver o valor esperado é qu
 
 Um semáforo é um inteiro não negativo. Se o inteiro variar entre 0 e 1, então é um semáforo binário. Decrementa sempre que uma. Serve para apanhar várias instâncias de zonas críticas. Cada função é uma operação atómica.s
 wait/P(int s) {while(s<=0);s--;}; signal/V(int s) {s++;}; <br>
-Problema principal: busy waiting: um processo que esteja à espera de entrar, não faz mais nada e gasta ciclos de relógio do CPU, gastando-o em vez de fazer algo de útil.
+Problema principal: busy waiting: um processo que esteja à espera de entrar, não faz mais nada e gasta ciclos de relógio do CPU, gastando-o em vez de fazer algo de útil. Para implementar sem busy waiting, recorrer a uma lista, adicionando-se se estiver encravado.
 
-### 13.6 - Monitores
+### 13.6 - Deadlock, Starvation, Priority Invertion
+
+Deadlock quando dois ou mais processos estão à espera do resultado de um processo que está à sua espera. Assim ficam eternamente bloqueados mutuamente. <br>
+Starvation quando um processo nunca é removido da lista de processos suspensos. <br>
+Priority inversion quando processo de pequena prioridade travam o avanço de grande prioridade. Resolvido com um protocolo de herança de prioridade. 
+
+### 13.7 - Monitores
+
+## 14 - Problemas clássicos de sincronização
 

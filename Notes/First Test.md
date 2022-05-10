@@ -196,6 +196,5 @@ Readers podem ler, Writers podem ler e escrever. Muitos readers, mas só um writ
 .
 ### 14.3 - Dining Philosophers Problem
 
-Um filósofo na mesa redonda só pode comer se tiver dois paus, pegando um por vez. Os pauzinhos são semáforos, inicializados a 1 uma vez que estão disponíveis: semaphores stick[n] = {1};
-
+Um filósofo na mesa redonda só pode comer se tiver dois paus, pegando um por vez. Os pauzinhos são semáforos, inicializados a 1 uma vez que estão disponíveis: semaphores stick[n] = {1}; Para o filósofo i, temos do {wait(stick[i]); wait(stick[(i+1) % n])}; //eat ; signal(stick[i]); signal(signal[(i+1) % n]) while (true);
 

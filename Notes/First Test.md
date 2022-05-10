@@ -194,6 +194,8 @@ Tem um mutex (semáforo binário), um full (0) e um empty (n). O produtor faz wa
 
 Readers podem ler, Writers podem ler e escrever. Muitos readers, mas só um writer por cada vez e sozinho (evita race condition). Se for o primeiro reader, pode apanhar o semáforo total de forma a que mais leitores possam estar. Se depois de decrementar o contador de leitores ficar a zero, então liberta o mutex de leitura e o mutex geral (assim um escritor pode entrar)
 .
-### 14.3 - 
+### 14.3 - Dining Philosophers Problem
+
+Um filósofo na mesa redonda só pode comer se tiver dois paus, pegando um por vez. Os pauzinhos são semáforos, inicializados a 1 uma vez que estão disponíveis: semaphores stick[n] = {1};
 
 

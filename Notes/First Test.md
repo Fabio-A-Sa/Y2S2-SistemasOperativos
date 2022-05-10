@@ -170,6 +170,8 @@ Parecido com o processo anterior. Somente se o lock tiver o valor esperado é qu
 
 ### 13.5 - Semaphores
 
-
+Um semáforo é um inteiro não negativo. Se o inteiro variar entre 0 e 1, então é um semáforo binário. Decrementa sempre que uma. Serve para apanhar várias instâncias de zonas críticas. Cada função é uma operação atómica.s
+wait/P(int s) {while(s<=0);s--;}; signal/V(int s) {s++;};
 
 ### 13.6 - Monitores
+

@@ -182,7 +182,18 @@ Priority inversion quando processo de pequena prioridade travam o avanço de gra
 
 ### 13.7 - Monitores
 
-Entidade passiva que controlam a concorrência através de estados. Exclusão múltipla obtida trivialmente, 
+Entidade passiva que controlam a concorrência através de estados. Exclusão múltipla obtida trivialmente. 
+
+`signalAll()`, acorda mais do que um processo no wait(), sempre que as condições o permitam (mais dados disponíveis e quantidade suficiente de threads à espera). Encontram-se nos monitores modernos, como em Java.
+
+#### Prioridades nos Monitores clássicos:
+- W, os que estão parados no wait();
+- S, os que fizeram signal(), pois estão em exclusão múltipla;
+- E, os outros processos todos;
+
+#### Prioridades nos Monitores modernos:
+- S, continua o processo que faz signal();
+- E, W, continua os que estão parados no wait() ou novos processos;
 
 ## 14 - Problemas clássicos de sincronização
 

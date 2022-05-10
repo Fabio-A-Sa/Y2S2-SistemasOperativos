@@ -171,7 +171,8 @@ Parecido com o processo anterior. Somente se o lock tiver o valor esperado é qu
 ### 13.5 - Semaphores
 
 Um semáforo é um inteiro não negativo. Se o inteiro variar entre 0 e 1, então é um semáforo binário. Decrementa sempre que uma. Serve para apanhar várias instâncias de zonas críticas. Cada função é uma operação atómica.s
-wait/P(int s) {while(s<=0);s--;}; signal/V(int s) {s++;};
+wait/P(int s) {while(s<=0);s--;}; signal/V(int s) {s++;}; <br>
+Problema principal: busy waiting: um processo que esteja à espera de entrar, não faz mais nada e gasta ciclos de relógio do CPU, gastando-o em vez de fazer algo de útil.
 
 ### 13.6 - Monitores
 

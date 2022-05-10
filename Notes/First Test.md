@@ -182,7 +182,7 @@ Priority inversion quando processo de pequena prioridade travam o avanço de gra
 
 ### 13.7 - Monitores
 
-Controlam a concorrência. 
+Entidade passiva que controlam a concorrência através de estados. Exclusão múltipla obtida trivialmente, 
 
 ## 14 - Problemas clássicos de sincronização
 

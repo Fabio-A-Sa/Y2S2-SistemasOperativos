@@ -184,3 +184,14 @@ Priority inversion quando processo de pequena prioridade travam o avanço de gra
 
 ## 14 - Problemas clássicos de sincronização
 
+### 14.1 - Bounded-buffer problem
+
+
+
+### 14.2 - 
+
+
+
+### 14.3 - 
+
+

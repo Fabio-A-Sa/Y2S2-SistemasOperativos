@@ -161,6 +161,15 @@ do {flag[i] = true; turn = j; while (flag[j] && turn == j); flag[i] = false;} wh
 
 ### 13.3 - Test and Set
 
-Retorna o valor do parâmetro e coloca-o como verdadeiro. Quem apanhar o lock aberto, pode fechá-lo, entrar na zona crítica, e no regresso abri-lo.
+Retorna o valor do parâmetro e coloca-o como verdadeiro. Quem apanhar o lock aberto, pode fechá-lo, entrar na zona crítica, e no regresso abri-lo. <br>
+bool testAndSet(bool *target) {boolean rv = *target; *target = true; return rv;}; do {while (testAndSet(&lock)); lock = false;} while (true);
 
-### 13.4 - 
+### 13.4 - Compare and Swap
+
+
+
+### 13.5 - Semaphores
+
+
+
+### 13.6 - Monitores

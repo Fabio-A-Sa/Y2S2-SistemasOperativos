@@ -182,13 +182,15 @@ Priority inversion quando processo de pequena prioridade travam o avanço de gra
 
 ### 13.7 - Monitores
 
+
+
 ## 14 - Problemas clássicos de sincronização
 
 ### 14.1 - Bounded-buffer problem
 
+Tem um mutex (semáforo binário), um full (0) e um empty (n). O produtor faz wait(empty) wait(mutex) signal(mutex) signal(full) e o consumidor faz wait(full) wait (mutex) signal(mutex) signal (empty).
 
-
-### 14.2 - 
+### 14.2 - Readers-Writers Problem
 
 
 

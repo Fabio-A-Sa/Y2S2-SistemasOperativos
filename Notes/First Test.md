@@ -161,12 +161,12 @@ do {flag[i] = true; turn = j; while (flag[j] && turn == j); flag[i] = false;} wh
 
 ### 13.3 - Test and Set
 
-Retorna o valor do parâmetro e coloca-o como verdadeiro. Quem apanhar o lock aberto, pode fechá-lo, entrar na zona crítica, e no regresso abri-lo. <br>
+Retorna o valor do parâmetro e coloca-o como verdadeiro. Quem apanhar o lock aberto (false), pode fechá-lo, entrar na zona crítica, e no regresso abri-lo. <br>
 bool testAndSet(bool *target) {boolean rv = *target; *target = true; return rv;}; do {while (testAndSet(&lock)); lock = false;} while (true);
 
 ### 13.4 - Compare and Swap
 
-
+Parecido com o processo anterior. Somente se o lock tiver o valor esperado é que troca. Pseudocódigo: cas(int *value, int expected, int new_value);
 
 ### 13.5 - Semaphores
 

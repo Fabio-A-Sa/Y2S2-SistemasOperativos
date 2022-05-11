@@ -8,6 +8,7 @@
     2. Espaço de endereçamentos;
     3. Segmentação;
     4. Paginação;
+    5. Swapping;
 2. Gestão de sistemas de ficheiros;
 3. Gestão de dispositivos I/O;
 
@@ -61,7 +62,18 @@ Implica dois acessos à memória, dois testes, uma soma. Fragmentação externa,
 
 ### 1.4 - Paginação
 
-Separa a memória e o processo em tamanhos (páginas/blocos) de igual tamanho e numa potência de dois. Existe fragmentação interna. 
+Separa a memória e o processo em tamanhos (páginas/blocos) de igual tamanho e numa potência de dois. Existe fragmentação interna. Quanto maior o tamanho da página, maior o desperdício e menor será o número de páginas em memória possível, mas assim evita troca frequente entre memória e disco (*swapping*)
+
+#### Tradução
+
+
+#### Vantagens
+
+
+#### Desvantagens
+
+
+### 1.5 - Swapping
 
 ## 2 - Gestão de sistemas de ficheiros
 

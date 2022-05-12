@@ -168,7 +168,9 @@ De modo a não aceder à memória para consultar a tabela de páginas. Guardar e
 
 #### Swapping
 
-Troca de páginas na memória física. Se dirty = 0, então faz swaping (a página, desde que está em memória, não foi modificada, alterada, reescrita), se dirty = 1, então antes de fazer swapping tem de reescrever a página na memória, para guardar as alterações. Swapping troca páginas entre a memória física e o disco (na parte de swap partition, que também está partida com o mesmo tamanho das páginas).
+Troca de páginas entre a memória física e o disco. O disco tem parte de swap partition, que está partida com o mesmo tamanho das páginas da memória. Outra abordagem é ter um swap file, que sabe se algo já foi escrito ou não no disco. Abordagens segundo uma *virtual memory*.
+
+Se dirty = 0, então faz swaping (a página, desde que está em memória, não foi modificada, alterada, reescrita), se dirty = 1, então antes de fazer swapping tem de reescrever a página na memória, para guardar as alterações.
 
 1. Random:
     - Rápido

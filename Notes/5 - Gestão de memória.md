@@ -126,9 +126,25 @@ Dada a configuração do sistema operativo com N bits que gera endereços virtua
 - 2 testes;
 - Adição;
 - Mais espaço para guardar toda a localização dos segmentos por registos;
-- O tamanho dos segmentos é diferente: a memória fica fragmentada em pouco tempo. Temos espaço suficiente para colocar um novo segmento, mas esse espaço está disperso. Solução: desfragmentar a memória: ir a todas as tabelas, alterar os apontadores e copiar todos os segmentos para ficarem mais próximos entre si;
+- O tamanho dos segmentos é diferente: a memória fica fragmentada (`Fragmentação externa`) em pouco tempo. Temos espaço suficiente para colocar um novo segmento, mas esse espaço está disperso. Solução: desfragmentar a memória: ir a todas as tabelas, alterar os apontadores e copiar todos os segmentos para ficarem mais próximos entre si;
 
 ### 2. Técnica de Paginação
 
 Separa o espaço de endereçamento em blocos/páginas de tamanho igual. O número de páginas é sempre uma potências de dois, porque o tamanho é dado por 2^k (com k muito inferior a n, n = número de bits de endereçamento).
+
+Pode haver `Fragmentação interna`: o tamanho do processo pode não ser múltiplo do tamanho de cada página, nesse caso arredonda para cima. Na generalidade, os sistema operativos usam o tamanho de (4, 16, 32) kb. No pior dos casos, desperdiçamos (tamanho da página - 1) bytes, e este espaço não pode ser usado por outro process. Desperdiça na ordem de 1% da memória toda, pelo que ainda é melhor do que a fragmentação externa da segmentação. 
+
+Quanto maior o tamanho da página, maior será o desperdício e menor será o número de páginas em memória possível, mas assim evita troca frequente entre memória e disco (*swapping*).
+
+A memória física tem slots, de tamanho exatamente iguais aos das páginas do proceso. Assim nunca há problemas de fragmentação externa.
+
+#### Tabela de páginas
+
+Cdaa processo tem uma tabela de páginas associada. A tabela tem 2^(n-k), com n = número de bits da arquitetura e k o número de bits da página, ou seja, o número de páginas do processo. Contém 3 entradas:
+
+- Base associada à página na memória física;
+- Bit de validade, se a página está carregada em memória
+- Dirty bit, se a página foi escrita enquanto estava na memória. Para instruções do programa (página 0, em .text), bit = 0 pois nunca se muda;
+
+Esta tabela não tem o limite pois as páginas têm todas o mesmo tamanho e qualquer endereço virtual gerado é válido (nunca ultrapassa a própria página).
 

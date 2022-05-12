@@ -146,5 +146,41 @@ Cdaa processo tem uma tabela de páginas associada. A tabela tem 2^(n-k), com n 
 - Bit de validade, se a página está carregada em memória
 - Dirty bit, se a página foi escrita enquanto estava na memória. Para instruções do programa (página 0, em .text), bit = 0 pois nunca se muda;
 
-Esta tabela não tem o limite pois as páginas têm todas o mesmo tamanho e qualquer endereço virtual gerado é válido (nunca ultrapassa a própria página).
+Esta tabela não tem o limite pois as páginas têm todas o mesmo tamanho e qualquer endereço virtual gerado é válido (nunca ultrapassa a própria página). Também não tem permissões, porque não é uma divisão a nível funcional, pelo que é possível haver páginas que contenham código Read-Only e Read-Write.
+
+Para uma arquitetura de 8 bits (n = 8) e com k = 5 (número de páginas), se virtual address = 10001101 (X1 + X2), então 100 representa o número da página e 01101 o offset dentro da página. Está localizado na página 4 a uma distância de 13 bytes do início.
+
+Com os primeiros X1 bits sabe o índex da tabela, consulta a tabela:
+- Se v = 0, retorna um page fault erro;
+- Se v = 1, retorna o endereço base dessa página e soma o offset contido em X2;
+
+O PCB do processo contém um registo com o endereço base da tabela: o PTBR.
+
+##### Desvantagens:
+
+- 2 acessos à memória (ir à tabela de páginas e depois ir ao endereço calculado) por cada N;
+- divisão do processo: nem pouco nem exagerado (ver acima);
+
+#### Otimização
+
+De modo a não aceder à memória para consultar a tabela de páginas. Guardar em "cache" o X1 dos endereços virtuais. Se nas próximas instruções tiverem na mesma página, então o X1 já é conhecido e escusa de ir à memória. No limite, o número de acessos à memória é exatamente igual ao número de páginas existentes no processo + acesso para cada instrução físico. A cache dentro do CPU é a Translation Lookaside Buffer -> fully associative cache, funciona como uma tabela em que se coloca o X1 e o endereço base retornado na memória.
+
+
+#### Swapping
+
+Troca de páginas na memória física. Se dirty = 0, então faz swaping (a página, desde que está em memória, não foi modificada, alterada, reescrita), se dirty = 1, então antes de fazer swapping tem de reescrever a página na memória, para guardar as alterações. Swapping troca páginas entre a memória física e o disco (na parte de swap partition, que também está partida com o mesmo tamanho das páginas).
+
+1. Random:
+    - Rápido
+    - Pode tirar uma página muito utilizada no sistema
+
+2. LRU Last Recently Used:
+    - Menos rápido;
+    - Resolve o problema do `random`;
+    - O SO tem de guardar, numa estrutura de dados adequada, a ordem das páginas menos frequentemente usadas. Faz swapping com aquela página que foi usada à mais tempo;
+
+3. LFU Least Frequently Used:
+    - Menos rápido;
+    - Resolve o probela do `random` e parecido com o LRU;
+    - Incrementa um contador em cada página em cada vez que ela é utilizada. Escolhe a página com menor quantidade para fazer swapping;
 

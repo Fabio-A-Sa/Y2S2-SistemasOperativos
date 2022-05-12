@@ -82,14 +82,16 @@ Divide o processo numa perspectiva funcional. Todos os processos podem ser divid
 Cada bloco é alocado na memória física por uma qualquer ordem. Cada bloco tem de guardar a sua base e o tamanho. Assim é necessário guardar, para N segmentos, 2N números para transformar os endereços virtuais em endereços físicos. <br>
 Cada processo P pode ter N segmentos, e existe uma estrutura de dados (tabela de segmentos) que guarda todos os dados de cada segmento. A tabela está guardada na memória física associada ao kernel do sistema operativo. O processo deixa assim de guardar em PCB dois registos, um para a base e outro para o tamanho, e passa a guardar dois registos: um STBR (segment table base register, que aponta para a zona de memória física onde a sua tabela está) e um STLR (que indica o número de segmentos presentes na tabela).
 
-| index | base | tamanho | valid | permissões |
-| --- | --- | --- | --- | --- |
-| 0 | b0 | t0 | 1 | R |
-| 1 | ? | ? | 0 | ? |
-| 2 | b2 | t2 | 1 | RW |
-| N | ? | ? | ? | ? |
+| index | base | tamanho | valid | permissões | dirty |
+| --- | --- | --- | --- | --- | --- |
+| 0 | b0 | t0 | 1 | R | 0 |
+| 1 | ? | ? | 0 | ? | 1 |
+| 2 | b2 | t2 | 1 | RW | 1 |
+| N | ? | ? | ? | ? | 1 |
 
 No código das funções, a permissão é só de leitura `R` (escrita em cima das instruções leva a erros). Na "data", no "bss" na "heap" e na "stack" já é possível ler e escrever `RW`. Isto garante uma camada de proteção à memória.
+
+Dirty bit está a zero se depois de copiado o segmento para memória não sofreu alterações (não precisa de ser novamente copiado - uma instrução pesada, que é de evitar).
 
 A tabela pode ser imaginada segundo esta estrutura de dados:
 
@@ -100,6 +102,7 @@ typedef struct {
     uint base;
     uint tamanho;
     uint permissões;
+    uint dirty;
 } entry;
 int number_segments;
 entry segmentTable[number_segments];
@@ -111,10 +114,21 @@ Dada a configuração do sistema operativo com N bits que gera endereços virtua
 - `Teste da linha na tabela` -> com o endereço da tabela na memória conhecido do processo e a primeira parte do endereço virtual. Erro não fatal, significa que o segmento não está na memória e nesse caso o CPU vai buscar;
 - `Teste do offset` -> com o offset do segmento e a informação da base na tabela. Dá erro fatal caso o endereço seja fora do segmento;
 
-#### Penalização desta técnica de segmentação:
+#### Vantagens:
 
-- Ir buscar à tabela os dados de cada segmento de cada processo na memória alocada pelo kernel. Implica acessos à memória física;
+- É uma forma natural de dividir o processo;
+- Não é necessário ter o processo todo colocado na memória ao mesmo tempo;
+- Preserva a localidade de referência espacial (bom para a memória cache -> as instruções estão na mesma zona de memória);
+
+#### Desvantagens:
+
+- Ir buscar à tabela os dados de cada segmento de cada processo na memória alocada pelo kernel. Implica dois acessos à memória;
 - 2 testes;
 - Adição;
+- Mais espaço para guardar toda a localização dos segmentos por registos;
+- O tamanho dos segmentos é diferente: a memória fica fragmentada em pouco tempo. Temos espaço suficiente para colocar um novo segmento, mas esse espaço está disperso. Solução: desfragmentar a memória: ir a todas as tabelas, alterar os apontadores e copiar todos os segmentos para ficarem mais próximos entre si;
 
 ### 2. Técnica de Paginação
+
+Separa o espaço de endereçamento em blocos/páginas de tamanho igual. O número de páginas é sempre uma potências de dois, porque o tamanho é dado por 2^k (com k muito inferior a n, n = número de bits de endereçamento).
+

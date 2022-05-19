@@ -41,10 +41,37 @@ Os ficheiros multimédia e as bibliotecas ocupam a maior parte do disco. O siste
 
 ## Constituição de um ficheiro
 
+- Nome. Pode ou não ter extensão;
 - Tamanho, geralmente em bytes;
 - Permissões, em formato RWX. Pode ser modificado com o comando `chmod`;
 - Informação de tempo (data de criação, data da última modificação, data do último acesso), desde 1 de janeiro de 1970;
 - Dono. Pode ser modificado com o comando `chown`;
-- Tipo, o formato do ficheiro;
+- Tipo, o formato do ficheiro. Não necessariamente de acordo com a extensão;
+- Localização dos blocos que contêm a informação do ficheiro;
 
+### File Control Block / Inode
+
+A system call `stat` retorna uma estrutura de dados `struct stat` que contém todas as informações acima.
+
+## Exemplos de File System
+
+- Unix:
+    - ufs, Unix File System, o original;
+- Linux:
+    - ext3;
+    - ext4, o mais usado;
+    - jfs (journaled file system, como um diário, parecido com o git);
+    - reiserfs;
+    - xfs, mais para datacenters;
+    - zfs, suporta ficheiros enormes;
+- macOS:
+    - APFS, Apple File System
+- Windows
+    - NTFS 
+    - FAT, File Allocation Table, forma eficiente para localizar ficheiros;
+    - FAT3;
+    - exFAT;
+    - LVM, Logical Volume Memory;
+- CD / DVD:
+    - ISO 9660;
 

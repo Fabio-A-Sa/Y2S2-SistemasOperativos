@@ -14,7 +14,7 @@ Em sistemas monolíticos (UNIX, por exemplo), as quatro partes constituem o Kern
 
 Composto por ficheiros (data, programs) e uma estrutura de diretórios, pastas, com estruturas de dados capazes de manipular os ficheiros pelos discos de memória. A organização dos ficheiros em sistemas Unix corresponde a uma árvore. Cada nó aponta para a informação colocada em disco e para os subdiretórios. O disco contém estas duas partes: a primeira com os algoritmos e a segunda, que é maior, com os ficheiros.
 
-A parte dos ficheiros é dividida em blocos com o mesmo tamanho (parecido com a técnica de paginação), normalmente 4kB. Se o ficheiro tiver tamanho maior que um bloco, há parte do seguinte que é desperdiçado: fragmentação interna, como a paginação.
+A parte dos ficheiros é dividida em blocos com o mesmo tamanho (parecido com a técnica de paginação), normalmente 4kB. Se o ficheiro tiver tamanho maior que um bloco, há parte do seguinte que é desperdiçado: fragmentação interna, como a paginação. Um tamanho menor nos blocos por um lado diminui o desperdicio de memória mas aumenta o tempo de busca de todas as porções pelo disco.
 
 ## Discos
 
@@ -74,4 +74,43 @@ A system call `stat` retorna uma estrutura de dados `struct stat` que contém to
     - LVM, Logical Volume Memory;
 - CD / DVD:
     - ISO 9660;
+
+## Directory Structure
+
+### 1 - Boot Control Block (BCB)
+
+No Unix original, chamava-se Boot Block, no Windows NT (NTFS) chamava-se Partition Boot Section. Contém informação sobre aquele sistema de ficheiros, nomeadamente indicação se aquela parte contém uma imagem do Kernel que seja bootable. Se tiver, então tem de ter também um boot loader, que sabe a localização do Kernel no file system e tem as instruções necessárias para carregá-lo na memória.
+No início, o sistema operativo é carregado na memória através da BIOS (Basic I/O System) que descobre quais são os Kernels presentes e transfere o controlo para o boot loader correspondente. Se tiver vários, o GRUB apresenta uma lista dos Kernels disponíveis. 
+
+### 2 - Volume Control Block (VCB)
+
+Contém as estatísticas gerais do file system (o tipo de file system, os bytes por bloco, capacidade máxima, número de blocos, quantos blocos estão a ser usados no momento ou livres, uma estrutura de dados (mapa por exemplo) que contém os endereços/localização dos blocos livres).
+No Unix original, chamava-se Super Block, no NTFS (file system do Windows NT) ao conjunto do VCB e Directory Structure chamava-se Master File Tables.
+
+### 3 - Directory Struture (DS)
+
+Conjunto de estruturas de dados e algoritmos que representam a informação de ficheiros individuais e a relação entre eles, ou seja, a sua organização. Uma árvore, por exemplo, com complexidade logarítmica para inserção, remoção e pesquisa, ou DAGS (Directed Acyclic Graphs).
+A system call `stat` retorna uma estrutura de dados `struct stat` que contém as informações sobre um ficheiro:
+- Tamanho de blocos;
+- Datas (de modificação, de última alteração, de execução);
+- Owner;
+- Permissões (RWX);
+- Tipo (ficheiro, diretório, link...);
+- Localização do ficheiro (apontadores para os blocos em memória);
+
+## DAGS e Links
+
+Os sistemas operativos na generalidade usam grafos dirigidos e acíclicos para representar as estruturas de ficheiros com base em `links`. Os links podem ser de dois tipos:
+
+### Links simbólicos
+
+Ficheiro que contém o caminho para o programa (atalhos no Desktop em Windows, por exemplo). Em Unix, usar o comando:
+
+```bash
+$ ln -s ./usr/fabio/Desktop/game game_shortcut      // para criar
+$ ls -l game_shortcut                               // para executar
+```
+
+### Hard Links 
+
 

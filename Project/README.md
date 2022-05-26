@@ -6,4 +6,3 @@
    - Inês Sá Pereira Estevão Gaspar (up202007210@fe.up.pt)
    - Lourenço Alexandre Correia Gonçalves (up202004816@fe.up.pt)
    - Marcos William Ferreira Pinto (up201800177@fe.up.pt)
-

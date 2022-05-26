@@ -24,7 +24,8 @@ Varied exercises of easy, medium and difficult level, about the subject taught i
 
 ### Project
 
-Pratical exercises done in group in three weeks. This project involved manipulating files, creating processes and strings comparation and modification based on system calls and standard C library.
+Pratical exercises done in group in three weeks. This project involved manipulating files, creating processes and strings comparation and modification based on system calls and standard C library. <br>
+All questions can be consulted [here](/Project/Enunciado.pdf).
 
 **@ Fábio Araújo de Sá** <br>
 **2021/2022**

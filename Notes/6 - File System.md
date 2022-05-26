@@ -113,4 +113,30 @@ $ ls -l game_shortcut                               // para executar
 
 ### Hard Links 
 
+Quando há duas referências a apontar para o mesmo ficheiro em duas localizações distintas. Não há cópia. Em Unix, usar o comando:
+
+```bash
+$ ln ./usr/fabio/Desktop/game game_hard             // para criar
+$ rm game                                           // elimina o link, mas não o ficheiro
+$ rm game_hard                                      // elimina o link. Se for o último, remove também o ficheiro
+```
+
+## Manipulação de ficheiros pelo sistema operativo
+
+Guarda a informação sobre os ficheiros abertos na memória, os ficheiros que estão a ser usados pelos processo ativos naquele momento. Usa dois tipos de tabela:
+
+### SWOFT - System Wide Open File Table
+
+Tabela que tem uma entrada para cada ficheiro aberto. Cada index tem uma cópia da `struct stat` que guarda as informações gerais de cada ficheiro. Só é guardado no disco quando é mesmo necessário, senão só no fecho do ficheiro.
+Só existe uma tabela desta no sistema.
+
+### PPOFT - Per Process Open File Table
+
+Em ficheiros manipulados por mais do que um processo, a informação na tabela SWOFT é insuficiente. Cada processo precisa de guardar a informação específica de como está a usá-los. Por exemplo, pode ter diferentes permissões para abrir os ficheiros, a posição de leitura dos dados.
+Cada processo tem uma PPOFT, que guarda as permissões, a posição de leitura e um link/apontador para a entrada de tabela correspondente na SWOFT. As primeiras 3 entradas da PPOFT são:
+- 0: stdin;
+- 1: stdout;
+- 2: stderror;
+
+A chamada `open` do kernel faz com que o sistema operativo descarregue para a memória a informação no disco correspondente ao ficheiro, adicione mais uma entrada na tabela SWOFT e mais uma entrada na PPOFT do processo que chamou a system call.
 

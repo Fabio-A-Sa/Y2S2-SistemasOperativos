@@ -140,3 +140,38 @@ Cada processo tem uma PPOFT, que guarda as permissões, a posição de leitura e
 
 A chamada `open` do kernel faz com que o sistema operativo descarregue para a memória a informação no disco correspondente ao ficheiro, adicione mais uma entrada na tabela SWOFT e mais uma entrada na PPOFT do processo que chamou a system call.
 
+## Localização de ficheiros
+
+Para implementar um file system é importante conhecer:
+
+1. A forma de aceder aos ficheiros:
+    - `Modo sequencial`: abrir o ficheiro, ler o ficheiro até ao fim. O mais comum;
+    - `Modo random`: como nas bases de dados, com índices internos;
+
+2. A distribuição do tamanho dos ficheiros, através de um histograma;
+
+## Métodos para localizar os blocos dos ficheiros
+
+### 1. Blocos contíguos
+
+Depois de saber o número de blocos necessários para alocar os X bytes do ficheiro (N = math.ceil(X / 4kb)), alocar os blocos seguidos.
+Assim é só necessário saber a localização do primeiro bloco e o tamanho do ficheiro. A struct stat só precisa de alocar dois inteiros. 
+
+#### Vantagens
+
+- É uma forma rápida de aceder ao ficheiro em HDDs, porque os sectores a ler são contínuos e estão na mesma pista, a cabeça mecânica praticamente não mexe;
+- Bom tanto para acesso sequencial como para acesso random;
+
+#### Desvantagens
+
+- Nem sempre há a quantidade necessária de blocos contínuos para alocar o ficheiro todo;
+
+### 2. Lista de blocos
+
+
+
+### 3. Lista de blocos num array (como o FAT - File Allocation Table)
+
+
+### 4. Indexed Allotation (inode , como os sistemas Unix)
+

@@ -191,11 +191,27 @@ FAT - File Allocation Table, idealizado pela Microsoft. Os blocos são colocados
 
 - A struct stat só precisa de saber o índex do primeiro bloco;
 - A informação na lista de blocos é colocada próxima, mais fácil de ler o conteúdo do array; 
+- A complexidade temporal da operação é O(n), com n = número de blocos dp fichero;
 
 #### Desvantagens
 
 - Para ser mais rápido, poderia colocar o array na RAM;
-- 
+- Se o ficheiro for grande, então necessitará de vários blocos e um array também grande;
 
-### 4. Indexed Allotation (inode , como os sistemas Unix)
+### 4. Indexed Allotation
 
+Usada originalmente na implementação dos Unix File Systems. Na struct stat (também chamada de inode em sistemas Unix ou FCB - File Control Block), além dos parâmetros habituais há uma zona (com N entradas) que contém apontadores directos para os blocos (não contínuos) usados pelo ficheiro na zona de memória.
+
+- Se o ficheiro não couber em N blocos (tamanho do ficheiro em bytes > 4kb * N), então a posição N da tabela em stat contém um apontador para outra tabela com N entradas. O tamanho do ficheiro poderá ser agora 2N.
+- Se o ficheiro não couber em 2N blocos (precisar de mais de 2N entradas para apontadores), então a posição N + 1 da tabela stat contém um apontador para uma tabela que tem N apontadores para tabelas de N entradas. O tamanho do ficheiro poderá ser agora N^2 + 2N.
+- Se o ficheiro não couber em N^2 + 2N blocos (precisar de mais de 2N + N^2 entradas para apontadores), então a posição N + 2 da tabela stat contém um apontador para uma tabela que tem N apontadores para tabelas que contém N entradas que contém apontadores para tabelas de N entradas. O tamanho do ficheiro poderá ser agora N^3 + N^2 + 2N. Este é o máximo tamanho que um ficheiro poderá ter.
+
+#### Vantagens
+
+- Para ficheiros pequenos a complexidade de aceder a um bloco é O(1) pois o apontador é direto;
+- Se o tamanho do ficheiro for grande, é só criar tabelas extra de N elementos;
+- As tabelas são normalmente copiadas também para memória, o que garante melhor performence;
+
+#### Desvantagens
+
+- Consumo de espaço extra para as tabelas;

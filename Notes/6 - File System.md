@@ -164,14 +164,38 @@ Assim é só necessário saber a localização do primeiro bloco e o tamanho do 
 
 #### Desvantagens
 
-- Nem sempre há a quantidade necessária de blocos contínuos para alocar o ficheiro todo;
+- Nem sempre há a quantidade necessária de blocos contínuos para alocar o ficheiro todo, devido à fragmentação externa. Uma solução é a desfragmentação, ou seja, organizar os blocos alocados no início do ficheiro para que os vazios fiquem juntos;
+- Mais difícil de encontrar um espaço para alocar todos os blocos do ficheiro. No pior cenário, procurar por todo o disco;
+- O aumento do ficheiro, e consequentemente do número de blocos necessários, provoca uma necessidade contínua de alocar outro local da memória e copiar tudo o que estava nas anteriores posições;
 
 ### 2. Lista de blocos
 
+A struct stat só guarda um apontador para o primeiro bloco. Cada bloco possui, no final, um apontador para o bloco seguinte. O último poderá apontar para NULL. Semelhante a uma lista ligada.
 
+#### Vantangens
 
-### 3. Lista de blocos num array (como o FAT - File Allocation Table)
+- Necessita apenas de guardar o endereço do primeiro bloco;
+- Não há fragmentação externa;
+- Fácil de aumentar o tamanho do ficheiro;
 
+#### Desvantagens
+
+- Acesso sequencial não é tão eficiente, em HDDs a cabeça mecânica terá de ser movida;
+- Acesso random é comprometido: por ser uma linked list, é necessário fazer sempre uma pesquisa sequencial até encontrar o bloco pretendido;
+
+### 3. Lista de blocos num array 
+
+FAT - File Allocation Table, idealizado pela Microsoft. Os blocos são colocados de forma não sequencial no disco, tal como no caso anterior, mas não existem apontadores. O array, com o mesmo número de blocos do disco, é colocado também no Directory Structure do File System. Em cada posição i do array, colocar a localização do próximo bloco.
+
+#### Vantagens
+
+- A struct stat só precisa de saber o índex do primeiro bloco;
+- A informação na lista de blocos é colocada próxima, mais fácil de ler o conteúdo do array; 
+
+#### Desvantagens
+
+- Para ser mais rápido, poderia colocar o array na RAM;
+- 
 
 ### 4. Indexed Allotation (inode , como os sistemas Unix)
 

@@ -57,6 +57,24 @@ Vantagem: além das operações, dá para saber o estado do dispositivo (buffer 
 
 Numa primeira fase, a fase de sincronização (`hand shaking`) onde têm a ateção um do outro, é necessária antes de qualquer comunicação. Pode ser de dois tipos:
 
-1. Polling: o CPU monitoriza o estado do dispositivo periodicamente e quando este estiver disponível manda a informação. Desvantagem: *busy waiting*, gasta ciclos de relógio, principalmente em dispositivos de baixa frequência de utilização.
+1. `Polling`: o CPU monitoriza o estado do dispositivo periodicamente e quando este estiver disponível manda a informação. Desvantagem: *busy waiting*, gasta ciclos de relógio, principalmente em dispositivos de baixa frequência de utilização.
 
-2. Interrupt: é o dispositivo que inicia a interação, quando este estiver disponível, enviando-lhe um sinal (um booleano por exemplo) através das `interrupt request lines`, linhas do Bus entre a motherboard e o CPU, assim como um número identificador: identifica tanto quem enviou a interrupção como o que exatamente aconteceu.
+2. `Interrupt`: é o dispositivo que inicia a interação, quando este estiver disponível, enviando-lhe um sinal (um booleano por exemplo) através das `interrupt request lines`, linhas do Bus entre a motherboard e o CPU, assim como um número identificador: identifica tanto quem enviou a interrupção como o que exatamente aconteceu (origem e causa do interrupt).
+
+#### Tratamento de interrupções
+
+Quando o CPU recebe uma interrupção, suspende o tratamento do processo que estava a calcular e guarda o seu estado em registos, sem o retirar do CPU. Só há um interrupt que retirar o processo corrente no CPU: o que indica final do tempo de execução. Passa de user para kernel mode. Depois, com o hook_id encontrado, vai a uma tabela do kernel, a `interrupt vector`, em que cada entrada da tabela corresponde a uma função que deve ser invocada para tratar do dispositivo (o `input handler`). 
+
+#### DMA
+
+Existe interrupção excessiva do CPU para transferência de ficheiros em disco. Uma solução é usar um controlador de DMA (Direct Memory Access). Está entre disco e o CPU. O CPU ao receber uma interrupção para transferência de bytes, ativa o DMA com os dados necessários (localização inicial, localização final, quantidade de informação a enviar) e deixa de ser interrompido. O DMA gera os endereços físicos, retorna os dados necessários do disco e retorna uma interrupção para notificar o CPU que a operação foi realizada com sucesso ou com erros.
+
+## Sistemas multitasking
+
+- Fazem uso intensivo de interrupções de dispositivos, com input e output;
+
+- Os interrupts, em certas circunstâncias, podem ser ignorados temporariamente: quando este está a executar código crítico / em kernel mode. Nesse caso, depois de regressar a user mode, trata do handler desse interrupt;
+
+- O CPU tem de determinar rapidamente a origem e a causa da interrupção;
+
+- Algumas interrupções têm prioridade sobre outros (`maskable interrupts`, dos dispositivos, e `unmaskable interrupts`, do sistema operativo). As interrupções gerados pelo sistema operativo têm prioridade face às interrupções geradas por interações com utilizadores, pois são necessárias para a integridade de todo o sistema. Existe uma linha de interrupts (*interrupt request lines*) para cada prioridade do sistema, implementados como fila de prioridades.

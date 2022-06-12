@@ -11,7 +11,6 @@
 2. Gestão de sistemas de ficheiros;
 3. Gestão de dispositivos I/O;
 
-
 ## 0 - Arquitetura de von Newmann
 
 Todo o computador é constituido por CPU (dados voláteis), Memória (volátil, RAM) e Dispositivos (como discos, com dados persistentes, ou controladores I/O)
@@ -32,6 +31,37 @@ O custo da tradução está associada à memória adicional para acoplar dois re
 ### 1.2 - Espaço de endereçamentos
 
 Para uma arquitetura de X bits, o endereço resultante em qualquer processo poderá ir de 0 até 2^X-1.
+
+### 1.3 - Segmentação
+
+Partir o processo em partes lógicas, sendo estas:
+
+1. Text - Binário do código do programa
+2. Data - Binário das variáveis globais inicializadas (double x = 2.45;)
+3. Bss - Binário das variáveis globais não inicializadas (double y;)
+4. Heap - Zona de memória usada para alocar espaço (com malloc() por exemplo)
+5. Stack - para guardar as chamadas de funções e variáveis a usar
+
+1, 2 e 3 formam o ficheiro binário `a.out`, zona estática e 4 e 5 formam a zona dinâmica, só existe informação lá enquanto o programa está em execução.
+
+O PCB do processo guarda o STBR (segment table base register, que aponta para a zona de memória física onde a sua tabela está) e um STLR (que indica o número de segmentos presentes na tabela).
+A tabela contém o index, base, tamanho, se é valido, as permissões e dirty para cada segmento.
+
+#### Tradução
+
+Os primeiros bits determinam o index do segmento, os restantes determinam o offset dentro desse segmento. Existe duas idas à memória: uma para ir buscar o segmento (erro não fatal) e outra para com o offset buscar a parte necessária (erro fatal se estiver fora do intervalo).
+
+#### Vantagens
+
+Forma natural de divisão, sem necessidade de ter o processo todo na memória, bom para caches pois as instruções estão na mesma zona.
+
+#### Desvantagens
+
+Implica dois acessos à memória, dois testes, uma soma. Fragmentação externa, necessário desfragmentação.
+
+### 1.4 - Paginação
+
+Separa a memória e o processo em tamanhos (páginas/blocos) de igual tamanho e numa potência de dois. Existe fragmentação interna. 
 
 ## 2 - Gestão de sistemas de ficheiros
 

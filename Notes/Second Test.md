@@ -168,12 +168,14 @@ Usada nos UNIX File Systems. Na struct stat (inode), além dos parâmetros habit
 
 ## 3.1 - Definições
 
-- Porta:
-- Bus:
-- Controlador:
-- Device driver:
-- Dispositovos
+- Porta: encaixe que permite ligar dispositivos ao computador;
+- Bus: Linhas de hardware por onde é transferida a informação. A largura é a quantidade de bytes de informação que são transferidos por unidade de tempo;
+- Controlador: Circuito interno ou externo que controla as trocas de informação entre o dispositivo e o CPU e memórias;
+- Device driver: Dispositivos que fornecem uma interface de interligação entre o CPU/kernel e dispositivos. Tradução de comandos;
+- Dispositivos: podem ser de storage, networking (placas ethernet, wifi, bluethooth), de user interface (teclado, rato, monitor) e outros (sensores, estações meteorológicas, acessórios para jogos).
 
 ## 3.2 - Ligação entre dispositivos
+
+A parte que liga o CPU à memória e memória cache é a mais rápida de todo o computador. O microprocessador `north bridge` controla a ligação entre o bus do processador e os dispositivos de entrada e saída, ligado por um Socket. Pode ser do tipo ISA, EISA, SCSI, PCI, PCI Express. Para dispositivos de mais baixa velocidade, existe o `south bridge`. Ao bus de dispositivos de entrada liga-se também um socket PCI Express que se conecta à placa gráfica e/ou ao monitor.
 
 ## 3.3 - Interações CPU / Dispositovos

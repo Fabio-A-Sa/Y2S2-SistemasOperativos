@@ -159,6 +159,7 @@ Usado pelo FAT (File Allocator Table) da Microsoft. Blocos colocados de forma n�
 
 ### 2.7.4 - Indexed Allocation
 
-
+Usada nos UNIX File Systems. Na struct stat (inode), além dos parâmetros habituais há uma tabela de N entradas que contém apontadores para blocos não contínuos. Pode haver até 3 camadas (N^3 + N^2 + 2N blocos de um ficheiro, no máximo). Por um lado em ficheiros pequenos a complexidade de busca é pequena, se for grande é só criar outra tabela e as tabelas são copiadas para memória para melhor performence. Por outro lado as tabelas gastam muito espaço.
 
 ## 3 - Gestão de dispositivos I/O
+

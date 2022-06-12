@@ -190,11 +190,13 @@ Havendo o hand-shaking (sincronização entre dispositivos), a comunicação pod
 
 #### 3.4.1 - Polling
 
-
+O CPU monitoriza o estado do dispositivo periodicamente para ver se este está disponível, gastando assim ciclos de relógio (*busy waiting*). É crítico quando é um dispositivo pouco usado. 
 
 #### 3.4.2 - Interrupts
 
-
+É o dispositivo que inicia a interação, suspende o processo periodicamente (a menos que seja crítico), e guarda o estado do processo sem o retirar completamente. Trata a interrupção (como o bit enviado sabe qual é o dispositivo e qual é o objectivo deste) e assim passa de user mode para kernel mode. Existe um `interrupt vector`, em que cada entrada da tabela corresponde a uma chamada ao handler do input.
 
 ### 3.5 - DMA (Direct Memory Access)
+
+Chamada quando o dispositivo faz uso intensivo de operações com a memória. O CPU manda o comando e só volta a ser interrompido quando tudo estiver copiado ou se houver entretanto um erro. Algumas interrupções são `maskable` e outras são `unmaskable`. As interrupções geradas pelo sistema operativo tem prioridade face às geradas pelas aplicações do utilizador. Existe uma linha de interrupts (*interrupt request lines*) para cada prioridade do sistema, implementados como fila de prioridades.
 

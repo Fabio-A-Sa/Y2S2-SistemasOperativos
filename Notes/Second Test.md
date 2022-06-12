@@ -11,7 +11,9 @@
     5. Swapping;
 2. Gestão de sistemas de ficheiros;
     1. Monolítico e microkernel;
-    2. 
+    2. File System;
+    3. Ficheiros;
+    4. Directory Structure;
 3. Gestão de dispositivos I/O;
 
 ## 0 - Arquitetura de von Newmann
@@ -98,6 +100,14 @@ UNIX é um sistema monolítico (CPU, memória, file system e I/O devices), enqua
 
 ## 2.2 - File system
 
-Para resgus
+Para resguardar os ficheiros, temos Hard Disk Drive e Solid State Disks (com memórias Flash / NAND, constituido por partes semicondutoras e imóveis - os chips).
+
+O File System é constituído por ficheiros e uma estrutura de dados e algoritmos (árvore, uma DAG). Cada nó aponta para um ficheiro colocado em disco.
+
+## 2.3 - Ficheiros
+
+Os ficheiros (multimédia, documentos, executáveis, bibliotecas, arquivos) podem ser manipulados (criar, elimiar, abrir, procura sequencial ou não, ler, escrever, fechar, guardar) e são constituidos, de acordo com a *struct stat* em nome, tamanho, permissões, dono, tempo (datas de modificação, criação, execução), tipo, e a localização dos blocos que contém a informação do ficheiro. 
+
+## 2.4 - Directory Structure
 
 ## 3 - Gestão de dispositivos I/O

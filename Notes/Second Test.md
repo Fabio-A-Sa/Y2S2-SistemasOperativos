@@ -21,6 +21,8 @@
     1. Definições;
     2. Ligações entre dispositivos;
     3. Interações CPU / Dispositivos;
+    4. Polling vs. Interrupts;
+    5. DMA;
 
 ## 0 - Arquitetura de von Newmann
 
@@ -179,3 +181,8 @@ Usada nos UNIX File Systems. Na struct stat (inode), além dos parâmetros habit
 A parte que liga o CPU à memória e memória cache é a mais rápida de todo o computador. O microprocessador `north bridge` controla a ligação entre o bus do processador e os dispositivos de entrada e saída, ligado por um Socket. Pode ser do tipo ISA, EISA, SCSI, PCI, PCI Express. Para dispositivos de mais baixa velocidade, existe o `south bridge`. Ao bus de dispositivos de entrada liga-se também um socket PCI Express que se conecta à placa gráfica e/ou ao monitor.
 
 ## 3.3 - Interações CPU / Dispositovos
+
+## 3.4 - Polling vs. Interrupts
+
+## 3.5 - DMA (Direct Memory Access)
+

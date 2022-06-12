@@ -121,11 +121,19 @@ Boot Block em Unix, Partition Block em Windows. Contém informação sobre aquel
 
 Super Block em Unix, Master File Tables, em Windows NTFS. Estatísticas gerais do File System (tipo, bytes por bloco, capacidade máxima, número de blocos, número de blocos vazios, um map que contém a localização dos blocos livres)
 
-### 2.4.3 - Directory Structure (DS)
+### 2.4.3 - File Control Block (FCB)
 
 Estruturas de dados e algoritmos que representam a informação de ficheiros e a relação entre eles. Uma árvore ou um DAG, de complexidade logarítimica para a pesquisa, remoção e inserção. 
 
 ## 2.5 - Links
+
+Apontadores para um ficheiro existente. Podem ser soft/simbólicos, como atalhos, e hard, que são uma cópia do ficheiro em si e quando apagados (se existir somente um hard link) apagam o ficheiro também.
+
+## 2.6 - Manipulação de ficheiros
+
+
+
+## 2.7 - Localização de ficheiros
 
 
 

@@ -18,6 +18,9 @@
     6. Manipulação de ficheiros;
     7. Localização de ficheiros;
 3. Gestão de dispositivos I/O;
+    1. Definições;
+    2. Ligações entre dispositivos;
+    3. Interações CPU / Dispositivos;
 
 ## 0 - Arquitetura de von Newmann
 
@@ -163,3 +166,14 @@ Usada nos UNIX File Systems. Na struct stat (inode), além dos parâmetros habit
 
 ## 3 - Gestão de dispositivos I/O
 
+## 3.1 - Definições
+
+- Porta:
+- Bus:
+- Controlador:
+- Device driver:
+- Dispositovos
+
+## 3.2 - Ligação entre dispositivos
+
+## 3.3 - Interações CPU / Dispositovos

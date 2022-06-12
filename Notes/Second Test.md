@@ -80,6 +80,16 @@ Necessita de dois acessos à memória e há desvantagens/vantagens em cada taman
 
 ### 1.5 - Swapping
 
+Troca de páginas / segmentos entre a memória e o disco, operação de evitar dada a latência. O disco tem uma parte de swap partition, que está partida com o mesmo número de bytes das páginas dos processos. Se dirty = 0, então faz swapping (a página desde que está na memória não foi reescrita, podemos usar) senão antes de tudo vai reescrever a página na memória para guardar as alterações.
+
+#### Troca de páginas na memória:
+
+1. Random (rápido, mas pode tirar uma página muito utilizada no sistema)
+2. LRU Last Recently Used (menos rápido, resolve o problema do random, o SO guarda numa estrutura a ordem de utilização das páginas. Faz swapping com a página que foi usada à mais tempo)
+3. LFU Least Frequently Used (parecido com a anterior, tem um contadore faz swapping com a que menos frequentemente é usada)
+
 ## 2 - Gestão de sistemas de ficheiros
+
+
 
 ## 3 - Gestão de dispositivos I/O

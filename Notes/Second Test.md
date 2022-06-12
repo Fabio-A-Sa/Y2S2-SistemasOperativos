@@ -147,15 +147,15 @@ Para ficheiros manipulados em mais do que um processo, a informação da tabela 
 
 ### 2.7.1 - Blocos contíguos
 
-
+Aloca os blocos seguidos na memória. É só necessário saber a localização do primeiro bloco e o número de blocos. Por um lado é uma forma rápida em HDDs, para acesso sequencial e random. Mas por outro nem sempre há espaço seguido (usa a desfragmentação para combater a fragmentação externa) e o aumento do ficheiro provoca a alocação de todos os blocos desde o início.
 
 ### 2.7.2 - Lista de blocos
 
-
+A struct star guarda um apontador para o primeiro bloco. Cada bloco aponta para o seguinte, até que no fim aponta para NULL. Pouco espaço de implementação, sem fragmentação externa e fácil de aumentar o tamanho ocupado pelo ficheiro. Por outro lado o acesso sequencial / random não é tão eficiente (em HDDs a cabeça é movida).
 
 ### 2.7.3 - Lista de blocos num array
 
-
+Usado pelo FAT (File Allocator Table) da Microsoft. Blocos colocados de forma não sequencial sem apontadores. Existe um array, de tamanho igual à quantidade de blocos do ficheiro, que para cada entrada colocar a posição do próximo bloco. Por um lado só precisa saber o index do primeiro bloco, a complexidade temporal é boa, a informação é próxima. Por outro lado para ser ainda mais rápida colocar o array na memória RAM, se o ficheiro for grande necessita de vários blocos e um array também grande.
 
 ### 2.7.4 - Indexed Allocation
 

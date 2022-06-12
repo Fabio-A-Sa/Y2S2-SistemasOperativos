@@ -168,7 +168,7 @@ Usada nos UNIX File Systems. Na struct stat (inode), além dos parâmetros habit
 
 ## 3 - Gestão de dispositivos I/O
 
-## 3.1 - Definições
+### 3.1 - Definições
 
 - Porta: encaixe que permite ligar dispositivos ao computador;
 - Bus: Linhas de hardware por onde é transferida a informação. A largura é a quantidade de bytes de informação que são transferidos por unidade de tempo;
@@ -176,15 +176,25 @@ Usada nos UNIX File Systems. Na struct stat (inode), além dos parâmetros habit
 - Device driver: Dispositivos que fornecem uma interface de interligação entre o CPU/kernel e dispositivos. Tradução de comandos;
 - Dispositivos: podem ser de storage, networking (placas ethernet, wifi, bluethooth), de user interface (teclado, rato, monitor) e outros (sensores, estações meteorológicas, acessórios para jogos).
 
-## 3.2 - Ligação entre dispositivos
+### 3.2 - Ligação entre dispositivos
 
 A parte que liga o CPU à memória e memória cache é a mais rápida de todo o computador. O microprocessador `north bridge` controla a ligação entre o bus do processador e os dispositivos de entrada e saída, ligado por um Socket. Pode ser do tipo ISA, EISA, SCSI, PCI, PCI Express. Para dispositivos de mais baixa velocidade, existe o `south bridge`. Ao bus de dispositivos de entrada liga-se também um socket PCI Express que se conecta à placa gráfica e/ou ao monitor.
 
-## 3.3 - Interações CPU / Dispositivos
+### 3.3 - Interações CPU / Dispositivos
+
+Podem ser através de comandos diretos kernel - device driver ou por memory-mapped I/O, parecido com LCOM, onde o input e output são mapeados em memória. Assim dá para saber o estado do dispositivo, que é mais rápido.
+
+### 3.4 - Polling vs. Interrupts
+
+Havendo o hand-shaking (sincronização entre dispositivos), a comunicação pode ser feita por:
+
+#### 3.4.1 - Polling
 
 
 
-## 3.4 - Polling vs. Interrupts
+#### 3.4.2 - Interrupts
 
-## 3.5 - DMA (Direct Memory Access)
+
+
+### 3.5 - DMA (Direct Memory Access)
 

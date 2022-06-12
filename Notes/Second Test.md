@@ -66,12 +66,17 @@ Separa a memória e o processo em tamanhos (páginas/blocos) de igual tamanho e 
 
 #### Tradução
 
+Cada processo tem uma tabela de páginas com 2^K entradas. Logo, para um endereço virtual de X bits dependendo da arquitetura, os primeiros K bits são para determinar o índex e os restantes, X-K, para determinar o offset dentro da página.
+
+O PCB contém somente o Page-table base register (PTBR) e o Page-table length register (PTLR). Necessita de duas idas à memória: uma para determinar o índex da entrada e a segunda para calcular o offset, com a verificação tanto do limite como do bit de validade (caso contrário, tem de fazer uma instruction fetch ao disco).
 
 #### Vantagens
 
+A memória cache (Translation Lookaside Buffer) guarda a primeira parte do endereço virtual e o endereço retornado da memória, assim evita de ir ao disco buscar. 
 
 #### Desvantagens
 
+Necessita de dois acessos à memória e há desvantagens/vantagens em cada tamanho do bloco escolhido para a partição.
 
 ### 1.5 - Swapping
 

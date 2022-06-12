@@ -102,7 +102,7 @@ UNIX é um sistema monolítico (CPU, memória, file system e I/O devices), enqua
 
 Para resguardar os ficheiros, temos Hard Disk Drive e Solid State Disks (com memórias Flash / NAND, constituido por partes semicondutoras e imóveis - os chips).
 
-O File System é constituído por ficheiros e uma estrutura de dados e algoritmos (árvore, uma DAG). Cada nó aponta para um ficheiro colocado em disco.
+O File System é constituído por ficheiros e uma estrutura de dados e algoritmos (árvore, uma DAG). Cada nó aponta para um ficheiro colocado em disco. Unix (ufs, Unix File System), Linux (ext3, ext4, jfs, reiserfs, xfs, zfs, suporta ficheiros enormes), macOS (APFS, apple file system), Windows (NTFS, FAT File Alocator Table, FAT3, exFAT, LVM, logical volume memory), CD/DVD (ISO 9660).
 
 ## 2.3 - Ficheiros
 

@@ -110,4 +110,18 @@ Os ficheiros (multimédia, documentos, executáveis, bibliotecas, arquivos) pode
 
 ## 2.4 - Directory Structure
 
+Constituido por 3 partes principais:
+
+### 2.4.1 - Boot Control Block (BCB)
+
+
+
+### 2.4.2 - Volume Control Block (VCB)
+
+
+
+### 2.4.3 - Directory Structure (DS)
+
+
+
 ## 3 - Gestão de dispositivos I/O

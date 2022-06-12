@@ -14,6 +14,7 @@
     2. File System;
     3. Ficheiros;
     4. Directory Structure;
+    5. Links;
 3. Gestão de dispositivos I/O;
 
 ## 0 - Arquitetura de von Newmann
@@ -114,13 +115,17 @@ Constituido por 3 partes principais:
 
 ### 2.4.1 - Boot Control Block (BCB)
 
-
+Boot Block em Unix, Partition Block em Windows. Contém informação sobre aqueles ficheiros, se existe uma imagem do kernel bootable. Se tiver, tem também um boot loader, com as instruções para o carregar na memória. No início, o SO é carregado através da BIOS (Basic I/O System) que depois transfere o controlo para o boot loader correspondente. Se tiver vários kernel, usar o GRUB.
 
 ### 2.4.2 - Volume Control Block (VCB)
 
-
+Super Block em Unix, Master File Tables, em Windows NTFS. Estatísticas gerais do File System (tipo, bytes por bloco, capacidade máxima, número de blocos, número de blocos vazios, um map que contém a localização dos blocos livres)
 
 ### 2.4.3 - Directory Structure (DS)
+
+Estruturas de dados e algoritmos que representam a informação de ficheiros e a relação entre eles. Uma árvore ou um DAG, de complexidade logarítimica para a pesquisa, remoção e inserção. 
+
+## 2.5 - Links
 
 
 

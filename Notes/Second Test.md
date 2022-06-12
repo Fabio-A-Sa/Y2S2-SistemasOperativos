@@ -2,11 +2,19 @@
 
 ## Tópicos:
 
+0. Arquitetura de von Newmann;
 1. Gestão de memória;
     1. Tradução de endereços;
     2. Espaço de endereçamentos;
+    3. Segmentação;
+    4. Paginação;
 2. Gestão de sistemas de ficheiros;
 3. Gestão de dispositivos I/O;
+
+
+## 0 - Arquitetura de von Newmann
+
+Todo o computador é constituido por CPU (dados voláteis), Memória (volátil, RAM) e Dispositivos (como discos, com dados persistentes, ou controladores I/O)
 
 ## 1 - Gestão de memória
 

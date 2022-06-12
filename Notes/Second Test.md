@@ -10,6 +10,8 @@
     4. Paginação;
     5. Swapping;
 2. Gestão de sistemas de ficheiros;
+    1. Monolítico e microkernel;
+    2. 
 3. Gestão de dispositivos I/O;
 
 ## 0 - Arquitetura de von Newmann
@@ -90,6 +92,12 @@ Troca de páginas / segmentos entre a memória e o disco, operação de evitar d
 
 ## 2 - Gestão de sistemas de ficheiros
 
+## 2.1 - Sistemas Monolíticos e Microkernel
 
+UNIX é um sistema monolítico (CPU, memória, file system e I/O devices), enquanto que o Darwin é de microkernel (CPU, memória, I/O devices) e o User Space contém o file system.
+
+## 2.2 - File system
+
+Para resgus
 
 ## 3 - Gestão de dispositivos I/O

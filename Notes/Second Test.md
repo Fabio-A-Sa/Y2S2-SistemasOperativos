@@ -103,7 +103,7 @@ UNIX é um sistema monolítico (CPU, memória, file system e I/O devices), enqua
 
 ## 2.2 - File system
 
-Para resguardar os ficheiros, temos Hard Disk Drive e Solid State Disks (com memórias Flash / NAND, constituido por partes semicondutoras e imóveis - os chips).
+Para resguardar os ficheiros, temos Hard Disk Drive e Solid State Disks (com memórias Flash / NAND, constituido por partes semicondutoras e imóveis - os chips). Para implementar um é importante conhecer a distribuição dos ficheiros a armazenar (se são grandes ou não) e a forma de aceder ao conteúdo (se é sequencial ou não, como o caso das bases de dados).
 
 O File System é constituído por ficheiros e uma estrutura de dados e algoritmos (árvore, uma DAG). Cada nó aponta para um ficheiro colocado em disco. Unix (ufs, Unix File System), Linux (ext3, ext4, jfs, reiserfs, xfs, zfs, suporta ficheiros enormes), macOS (APFS, apple file system), Windows (NTFS, FAT File Alocator Table, FAT3, exFAT, LVM, logical volume memory), CD/DVD (ISO 9660).
 
@@ -133,9 +133,31 @@ Apontadores para um ficheiro existente. Podem ser soft/simbólicos, como atalhos
 
 ## 2.6 - Manipulação de ficheiros
 
+O SO guarda a informação dos ficheiros abertos em tabelas. Estas podem ser:
 
+### 2.6.1 - SWOFT (System Wide Open File Table)
+
+Tem entrada para cada ficheiro aberto e uma cópia, em cada index, da struct stat. Só guarda as modificações do ficheiro no disco só quando é mesmo necessário, caso contrário só no fecho. Só existe uma tabela desta no sistema.
+
+### 2.6.2 - PPOFT (Per Process Open File Table)
+
+Para ficheiros manipulados em mais do que um processo, a informação da tabela SWOFT é insuficiente, pois há necessidade de guardar para cada processo como este está a usá-lo, a posição de leitura, permissões e um apontador para o ficheiro manipulado na SWOFT. As primeiras entradas são 0, stdin, 1, stdout, 2, stderror. A system call open() carrega a SWOFT e mais uma linha na PPOFT do processo.
 
 ## 2.7 - Localização de ficheiros
+
+### 2.7.1 - Blocos contíguos
+
+
+
+### 2.7.2 - Lista de blocos
+
+
+
+### 2.7.3 - Lista de blocos num array
+
+
+
+### 2.7.4 - Indexed Allocation
 
 
 

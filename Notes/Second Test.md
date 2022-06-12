@@ -15,6 +15,8 @@
     3. Ficheiros;
     4. Directory Structure;
     5. Links;
+    6. Manipulação de ficheiros;
+    7. Localização de ficheiros;
 3. Gestão de dispositivos I/O;
 
 ## 0 - Arquitetura de von Newmann

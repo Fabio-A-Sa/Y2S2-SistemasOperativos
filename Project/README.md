@@ -1,5 +1,7 @@
 # SO Project 21/22
 
+# Final Grade: 19.7/20
+
 ## Members:
 
    - Fábio Araújo de Sá (up202007658@fe.up.pt)

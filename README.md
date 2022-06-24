@@ -22,10 +22,16 @@ Notes that I take during theoretical lectures, in `.c` files or Markdown <br>
 ### Exercises
 Varied exercises of easy, medium and difficult level, about the subject taught in the present week. They complement the weekly work developed during the practical classes. <br>
 
-### Project
+### Project (Grade: 19.7/20)
 
 Pratical exercises done in group in three weeks. This project involved manipulating files, creating processes and strings comparation and modification based on system calls and standard C library. <br>
 All questions can be consulted [here](/Project/Enunciado.pdf).
+
+Members:
+- [x] Fábio Sá, up202007658 
+- [x] Inês Gaspar, up202007210 
+- [x] Lourenço Gonçalves, up202004816 
+- [x] Marcos Pinto, up201800177
 
 **@ Fábio Araújo de Sá** <br>
 **2021/2022**

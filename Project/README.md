@@ -1,4 +1,4 @@
-# SO Project 21/22
+# SO Project
 
 # Final Grade: 19.7/20
 
